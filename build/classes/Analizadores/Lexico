@@ -42,7 +42,7 @@ COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 %%
 "program"   {listaTokens.add(new Tokens(yytext(), "PR_PROGRAM", yyline+"", yychar+""));     return new Symbol(sym.PR_PROGRAM, yyline, yychar, yytext()); }
 "end"       {listaTokens.add(new Tokens(yytext(), "PR_END", yyline+"", yychar+""));         return new Symbol(sym.PR_END, yyline, yychar, yytext()); }
-"var"       {listaTokens.add(new Tokens(yytext(), "PR_VAR", yyline+"", yychar+""));         return new Symbol(sym.PR_VOID, yyline, yychar, yytext()); }
+"var"       {listaTokens.add(new Tokens(yytext(), "PR_VAR", yyline+"", yychar+""));         return new Symbol(sym.PR_VAR, yyline, yychar, yytext()); }
 "double"    {listaTokens.add(new Tokens(yytext(), "PR_DOUBLE", yyline+"", yychar+""));      return new Symbol(sym.PR_DOUBLE, yyline, yychar, yytext()); }
 "char"      {listaTokens.add(new Tokens(yytext(), "PR_CHAR", yyline+"", yychar+""));        return new Symbol(sym.PR_CHAR, yyline, yychar, yytext()); }
 "arr"       {listaTokens.add(new Tokens(yytext(), "PR_ARR", yyline+"", yychar+""));         return new Symbol(sym.PR_ARR, yyline, yychar, yytext()); }
@@ -83,6 +83,7 @@ COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 "]"         {listaTokens.add(new Tokens(yytext(), "COR_DER", yyline+"", yychar+""));       return new Symbol(sym.COR_DER, yyline, yychar, yytext()); }
 "@"         {listaTokens.add(new Tokens(yytext(), "ARROBA", yyline+"", yychar+""));        return new Symbol(sym.ARROBA, yyline, yychar, yytext()); }
 "="         {listaTokens.add(new Tokens(yytext(), "IGUAL", yyline+"", yychar+""));         return new Symbol(sym.IGUAL, yyline, yychar, yytext()); }
+"-"         {listaTokens.add(new Tokens(yytext(), "MENOS", yyline+"", yychar+""));         return new Symbol(sym.MENOS, yyline, yychar, yytext()); }
 ">"         {listaTokens.add(new Tokens(yytext(), "MAYOR_QUE", yyline+"", yychar+""));     return new Symbol(sym.MAYOR_QUE, yyline, yychar, yytext()); }
 "<"         {listaTokens.add(new Tokens(yytext(), "MENOR_QUE", yyline+"", yychar+""));     return new Symbol(sym.MENOR_QUE, yyline, yychar, yytext()); }
 ";"         {listaTokens.add(new Tokens(yytext(), "PTCOMA", yyline+"", yychar+""));        return new Symbol(sym.PTCOMA, yyline, yychar, yytext()); }

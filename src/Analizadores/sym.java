@@ -9,59 +9,60 @@ package Analizadores;
 public class sym {
   /* terminals */
   public static final int PAR_DER = 9;
-  public static final int DOSPUNTOS = 20;
+  public static final int DOSPUNTOS = 21;
   public static final int CHAR = 6;
-  public static final int PR_COLUMN = 41;
-  public static final int PR_TITULO = 47;
-  public static final int PR_MODA = 35;
+  public static final int PR_COLUMN = 42;
+  public static final int PR_TITULO = 48;
+  public static final int PR_MODA = 36;
   public static final int ENTERO = 3;
-  public static final int PR_VOID = 24;
   public static final int COR_DER = 13;
-  public static final int PR_TITULOY = 51;
-  public static final int PR_DIV = 31;
-  public static final int PR_TITULOX = 50;
-  public static final int PR_VARIANZA = 36;
-  public static final int PR_VALUES = 52;
-  public static final int PR_MIN = 38;
+  public static final int PR_TITULOY = 52;
+  public static final int PR_DIV = 32;
+  public static final int PR_TITULOX = 51;
+  public static final int PR_VARIANZA = 37;
+  public static final int PR_VALUES = 53;
+  public static final int PR_MIN = 39;
   public static final int IGUAL = 15;
   public static final int ARROBA = 14;
-  public static final int PR_MEDIA = 33;
-  public static final int PR_MUL = 30;
-  public static final int PR_LABEL = 53;
-  public static final int PR_EXEC = 42;
-  public static final int PR_MOD = 32;
+  public static final int PR_MEDIA = 34;
+  public static final int PR_MUL = 31;
+  public static final int PR_LABEL = 54;
+  public static final int PR_EXEC = 43;
+  public static final int PR_MOD = 33;
   public static final int LLAV_IZQ = 10;
   public static final int ID = 2;
-  public static final int PR_MEDIANA = 34;
-  public static final int PR_PRINT = 40;
+  public static final int PR_MEDIANA = 35;
+  public static final int PR_PRINT = 41;
   public static final int EOF = 0;
-  public static final int PR_PROGRAM = 22;
+  public static final int PR_PROGRAM = 23;
   public static final int DECIMAL = 4;
   public static final int error = 1;
   public static final int PRUEBA = 5;
-  public static final int COMA = 19;
-  public static final int PR_HISTOGRAM = 46;
-  public static final int MAYOR_QUE = 16;
-  public static final int PR_GRAPHPIE = 43;
+  public static final int COMA = 20;
+  public static final int MENOS = 16;
+  public static final int PR_HISTOGRAM = 47;
+  public static final int MAYOR_QUE = 17;
+  public static final int PR_GRAPHPIE = 44;
   public static final int PAR_IZQ = 8;
-  public static final int PR_GRAPHLINE = 45;
-  public static final int PR_CHAR = 26;
-  public static final int PR_END = 23;
-  public static final int PR_SUM = 28;
-  public static final int PR_GRAPHBAR = 44;
-  public static final int PR_ARR = 27;
-  public static final int PUNTO = 21;
-  public static final int PR_MAX = 37;
+  public static final int PR_GRAPHLINE = 46;
+  public static final int PR_CHAR = 27;
+  public static final int PR_END = 24;
+  public static final int PR_SUM = 29;
+  public static final int PR_GRAPHBAR = 45;
+  public static final int PR_ARR = 28;
+  public static final int PUNTO = 22;
+  public static final int PR_MAX = 38;
   public static final int COR_IZQ = 12;
-  public static final int PR_EJEY = 49;
-  public static final int PR_EJEX = 48;
-  public static final int PTCOMA = 18;
+  public static final int PR_VAR = 25;
+  public static final int PR_EJEY = 50;
+  public static final int PR_EJEX = 49;
+  public static final int PTCOMA = 19;
   public static final int STRING = 7;
   public static final int LLAV_DER = 11;
-  public static final int MENOR_QUE = 17;
-  public static final int PR_DOUBLE = 25;
-  public static final int PR_CONSOLE = 39;
-  public static final int PR_RES = 29;
+  public static final int MENOR_QUE = 18;
+  public static final int PR_DOUBLE = 26;
+  public static final int PR_CONSOLE = 40;
+  public static final int PR_RES = 30;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -79,6 +80,7 @@ public class sym {
   "COR_DER",
   "ARROBA",
   "IGUAL",
+  "MENOS",
   "MAYOR_QUE",
   "MENOR_QUE",
   "PTCOMA",
@@ -87,7 +89,7 @@ public class sym {
   "PUNTO",
   "PR_PROGRAM",
   "PR_END",
-  "PR_VOID",
+  "PR_VAR",
   "PR_DOUBLE",
   "PR_CHAR",
   "PR_ARR",

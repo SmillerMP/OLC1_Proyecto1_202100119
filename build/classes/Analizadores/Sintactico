@@ -66,6 +66,7 @@ terminal String COR_IZQ ;
 terminal String COR_DER;
 terminal String ARROBA;
 terminal String IGUAL;
+terminal String MENOS;
 terminal String MAYOR_QUE;
 terminal String MENOR_QUE;
 terminal String PTCOMA;
@@ -78,7 +79,7 @@ terminal String PUNTO;
 // Reservadas
 terminal String PR_PROGRAM;
 terminal String PR_END;
-terminal String PR_VOID;
+terminal String PR_VAR;
 terminal String PR_DOUBLE;
 terminal String PR_CHAR;
 terminal String PR_ARR;
@@ -111,9 +112,27 @@ terminal String PR_LABEL;
 
 // No terminales
 non terminal ini;
+non terminal variables;
+non terminal tiposVariables;
+non terminal valores;
 
 
 start with ini; 
 
-ini::= ;
+ini::= variables;
 
+
+valores::=
+    STRING
+    | DECIMAL
+;
+
+tiposVariables::=
+    PR_CHAR 
+    | PR_DOUBLE
+;
+
+variables::= 
+    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
+    | PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS ID PR_END PTCOMA
+;
