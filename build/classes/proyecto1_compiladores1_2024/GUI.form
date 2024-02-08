@@ -173,7 +173,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu Nerd Font Propo" size="18" style="1"/>
+              <Font name="Ubuntu Nerd Font Propo Med" size="18" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ca" green="c9" red="a5" type="rgb"/>
@@ -209,7 +209,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu Nerd Font Propo" size="18" style="1"/>
+              <Font name="Ubuntu Nerd Font Propo Med" size="18" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ca" green="c9" red="a5" type="rgb"/>

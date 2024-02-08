@@ -15,6 +15,10 @@ public class Proyecto1_Compiladores1_2024 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        GUI interfazGrafica = new GUI();
+        interfazGrafica.setVisible(true);
+        
     }
     
 }
