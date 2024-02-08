@@ -1,0 +1,119 @@
+
+package Analizadores; 
+import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.util.List;
+import Clases.Errores;
+import java.util.HashMap;
+
+parser code 
+{:
+    /**
+     * Método al que se llama automáticamente ante algún error sintactico.
+     **/ 
+    public static int indent = 0;
+    public static String traduccion = "";
+
+    HashMap<Object, Object> mapa_globales = new HashMap<>();
+
+    // Guarda el error Sintactico
+    public void syntax_error(Symbol s){ 
+        System.out.println("Error Sintáctico en la Línea " + (s.left) + " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+        //System.out.println("------------------------ Fin de Errores ----------------------------"); 
+        listaErrores.add(new Errores("Sintáctico", "Error de sintaxis detectado. Se detectó: " + s.value, s.left + "", s.right + ""));
+        //proyecto1_compi1.GUI.jTextArea2.setText("Error Sintáctico en la Línea " + (s.left) + " Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
+
+    } 
+
+
+    /**
+     * Método al que se llama automáticamente ante algún error sintáctico 
+     * en el que ya no es posible una recuperación de errores.
+     **/ 
+    // Reporta error sintactico inrecuperable
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error síntactico irrecuperable en la Línea " + (s.left)+ " Columna "+s.right+". Componente " + s.value + " no reconocido."); 
+
+    }  
+    
+
+    public List<String> salidas = new ArrayList<String>();
+
+    //Lista de errores
+    public ArrayList<Errores> listaErrores = new ArrayList();
+
+    public ArrayList<Errores> getErrores(){
+        return listaErrores;
+    }
+:} 
+
+// Expresiones regulares
+terminal String ID;
+terminal String ENTERO;
+terminal String DECIMAL;
+terminal String PRUEBA;
+terminal String CHAR;
+terminal String STRING;
+
+
+
+// Simbolos
+terminal String PAR_IZQ;
+terminal String PAR_DER;
+terminal String LLAV_IZQ;
+terminal String LLAV_DER;
+terminal String COR_IZQ ;
+terminal String COR_DER;
+terminal String ARROBA;
+terminal String IGUAL;
+terminal String MAYOR_QUE;
+terminal String MENOR_QUE;
+terminal String PTCOMA;
+terminal String COMA;
+terminal String DOSPUNTOS;
+terminal String PUNTO;
+
+
+
+// Reservadas
+terminal String PR_PROGRAM;
+terminal String PR_END;
+terminal String PR_VOID;
+terminal String PR_DOUBLE;
+terminal String PR_CHAR;
+terminal String PR_ARR;
+terminal String PR_SUM;
+terminal String PR_RES;
+terminal String PR_MUL;
+terminal String PR_DIV;
+terminal String PR_MOD;
+terminal String PR_MEDIA;
+terminal String PR_MEDIANA;
+terminal String PR_MODA;
+terminal String PR_VARIANZA;
+terminal String PR_MAX;
+terminal String PR_MIN;
+terminal String PR_CONSOLE;
+terminal String PR_PRINT;
+terminal String PR_COLUMN;
+terminal String PR_EXEC;
+terminal String PR_GRAPHPIE;
+terminal String PR_GRAPHBAR;
+terminal String PR_GRAPHLINE;
+terminal String PR_HISTOGRAM;
+terminal String PR_TITULO;
+terminal String PR_EJEX;
+terminal String PR_EJEY;
+terminal String PR_TITULOX;
+terminal String PR_TITULOY;
+terminal String PR_VALUES;
+terminal String PR_LABEL;
+
+// No terminales
+non terminal ini;
+
+
+start with ini; 
+
+ini::= ;
+

@@ -63,10 +63,15 @@ COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 "exec"      {listaTokens.add(new Tokens(yytext(), "PR_EXEC", yyline+"", yychar+""));        return new Symbol(sym.PR_EXEC, yyline, yychar, yytext()); }
 "graphPie"  {listaTokens.add(new Tokens(yytext(), "PR_GRAPHPIE", yyline+"", yychar+""));    return new Symbol(sym.PR_GRAPHPIE, yyline, yychar, yytext()); }
 "graphBar"  {listaTokens.add(new Tokens(yytext(), "PR_GRAPHBAR", yyline+"", yychar+""));    return new Symbol(sym.PR_GRAPHBAR, yyline, yychar, yytext()); }
-"arr"       {listaTokens.add(new Tokens(yytext(), "PR_ARR", yyline+"", yychar+""));         return new Symbol(sym.PR_ARR, yyline, yychar, yytext()); }
-"arr"       {listaTokens.add(new Tokens(yytext(), "PR_ARR", yyline+"", yychar+""));         return new Symbol(sym.PR_ARR, yyline, yychar, yytext()); }
-
-
+"graphLine" {listaTokens.add(new Tokens(yytext(), "PR_GRAPHLINE", yyline+"", yychar+""));   return new Symbol(sym.PR_GRAPHLINE, yyline, yychar, yytext()); }
+"Histogram" {listaTokens.add(new Tokens(yytext(), "PR_HISTOGRAM", yyline+"", yychar+""));   return new Symbol(sym.PR_HISTOGRAM, yyline, yychar, yytext()); }
+"titulo"    {listaTokens.add(new Tokens(yytext(), "PR_TITULO", yyline+"", yychar+""));      return new Symbol(sym.PR_TITULO, yyline, yychar, yytext()); }
+"ejeX"      {listaTokens.add(new Tokens(yytext(), "PR_EJEX", yyline+"", yychar+""));        return new Symbol(sym.PR_EJEX, yyline, yychar, yytext()); }
+"ejeY"      {listaTokens.add(new Tokens(yytext(), "PR_EJEY", yyline+"", yychar+""));        return new Symbol(sym.PR_EJEY, yyline, yychar, yytext()); }
+"tituloX"   {listaTokens.add(new Tokens(yytext(), "PR_TITULOX", yyline+"", yychar+""));     return new Symbol(sym.PR_TITULOX, yyline, yychar, yytext()); }
+"tituloY"   {listaTokens.add(new Tokens(yytext(), "PR_TITULOY", yyline+"", yychar+""));     return new Symbol(sym.PR_TITULOY, yyline, yychar, yytext()); }
+"values"    {listaTokens.add(new Tokens(yytext(), "PR_VALUES", yyline+"", yychar+""));      return new Symbol(sym.PR_VALUES, yyline, yychar, yytext()); }
+"label"     {listaTokens.add(new Tokens(yytext(), "PR_LABEL", yyline+"", yychar+""));       return new Symbol(sym.PR_LABEL, yyline, yychar, yytext()); }
 
 
 
@@ -84,22 +89,9 @@ COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 ","         {listaTokens.add(new Tokens(yytext(), "COMA", yyline+"", yychar+""));          return new Symbol(sym.COMA, yyline, yychar, yytext()); }
 ":"         {listaTokens.add(new Tokens(yytext(), "DOSPUNTOS", yyline+"", yychar+""));     return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext()); }
 "."         {listaTokens.add(new Tokens(yytext(), "PUNTO", yyline+"", yychar+""));         return new Symbol(sym.PUNTO, yyline, yychar, yytext()); }
-"+"         {listaTokens.add(new Tokens(yytext(), "MAS", yyline+"", yychar+""));           return new Symbol(sym.MAS, yyline, yychar, yytext()); }
-"-"         {listaTokens.add(new Tokens(yytext(), "MENOS", yyline+"", yychar+""));         return new Symbol(sym.MENOS, yyline, yychar, yytext()); }
-"*"         {listaTokens.add(new Tokens(yytext(), "POR", yyline+"", yychar+""));           return new Symbol(sym.POR, yyline, yychar, yytext()); }
-"/"         {listaTokens.add(new Tokens(yytext(), "DIV", yyline+"", yychar+""));           return new Symbol(sym.DIV, yyline, yychar, yytext()); }
-\"          {listaTokens.add(new Tokens(yytext(), "COMILLA_DOBLE", yyline+"", yychar+""));         return new Symbol(sym.COMILLA_DOBLE, yyline, yychar, yytext()); }
-"\'"        {listaTokens.add(new Tokens(yytext(), "COMILLA_SIMPLE", yyline+"", yychar+""));        return new Symbol(sym.COMILLA_SIMPLE, yyline, yychar, yytext()); }
-"=="        {listaTokens.add(new Tokens(yytext(), "IGUALIGUAL", yyline+"", yychar+""));    return new Symbol(sym.IGUALIGUAL, yyline, yychar, yytext()); }
-">="        {listaTokens.add(new Tokens(yytext(), "MAYOR_IGUAL", yyline+"", yychar+""));   return new Symbol(sym.MAYOR_IGUAL, yyline, yychar, yytext()); }
-"<="        {listaTokens.add(new Tokens(yytext(), "MENOR_IGUAL", yyline+"", yychar+""));   return new Symbol(sym.MENOR_IGUAL, yyline, yychar, yytext()); }
-"!="        {listaTokens.add(new Tokens(yytext(), "DISTINTO", yyline+"", yychar+""));      return new Symbol(sym.DISTINTO, yyline, yychar, yytext()); }
-"&&"        {listaTokens.add(new Tokens(yytext(), "AND", yyline+"", yychar+""));           return new Symbol(sym.AND, yyline, yychar, yytext()); }
-"||"        {listaTokens.add(new Tokens(yytext(), "OR", yyline+"", yychar+""));            return new Symbol(sym.OR, yyline, yychar, yytext()); }
-"!"         {listaTokens.add(new Tokens(yytext(), "NOT", yyline+"", yychar+""));      return new Symbol(sym.NOT, yyline, yychar, yytext()); }
-"$"         {listaTokens.add(new Tokens(yytext(), "DOLLAR", yyline+"", yychar+""));     return new Symbol(sym.DOLLAR, yyline, yychar, yytext()); }
 
 
+                                                                                                    
 \n {yychar=1;}
 {BLANCOS} {} 
 {ENTERO}    {listaTokens.add(new Tokens(yytext(), "ENTERO", yyline+"", yychar+""));        return new Symbol(sym.ENTERO,yyline,yychar, yytext());} 
