@@ -49,8 +49,7 @@ parser code
 
 // Expresiones regulares
 terminal String ID;
-terminal String ENTERO;
-terminal String DECIMAL;
+terminal String DOUBLE;
 terminal String PRUEBA;
 terminal String CHAR;
 terminal String STRING;
@@ -112,27 +111,58 @@ terminal String PR_LABEL;
 
 // No terminales
 non terminal ini;
-non terminal variables;
+non terminal declaraciones;
 non terminal tiposVariables;
 non terminal valores;
+non terminal valoresArreglo;
+non terminal operaciones;
+non terminal valoresOperaciones;
+
 
 
 start with ini; 
 
-ini::= variables;
+ini::= declaraciones;
 
 
 valores::=
     STRING
-    | DECIMAL
+    | DOUBLE
+    | ID
 ;
 
 tiposVariables::=
-    PR_CHAR 
+    PR_CHAR COR_IZQ COR_DER
     | PR_DOUBLE
 ;
 
-variables::= 
-    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
-    | PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS ID PR_END PTCOMA
+valoresArreglo::=
+    valoresArreglo COMA operaciones
+    | valoresArreglo COMA DOUBLE
+    | valoresArreglo COMA STRING
+    | valoresArreglo COMA ID
+    | STRING
+    | DOUBLE
+    | ID
+    | operaciones
+;
+
+
+operaciones::=
+    | PR_SUM PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+    | PR_RES PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+    | PR_MUL PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+    | PR_DIV PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+    | PR_MOD PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+;
+
+valoresOperaciones::=
+    operaciones
+    | DOUBLE
+;
+
+declaraciones::= 
+    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS operaciones PR_END PTCOMA
+    | PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
+    | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
 ;

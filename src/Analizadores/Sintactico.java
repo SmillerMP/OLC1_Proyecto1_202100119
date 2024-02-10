@@ -35,9 +35,15 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\010\000\002\002\004\000\002\002\003\000\002\005" +
-    "\003\000\002\005\003\000\002\004\003\000\002\004\003" +
-    "\000\002\003\015\000\002\003\015" });
+    "\000\032\000\002\002\004\000\002\002\003\000\002\005" +
+    "\003\000\002\005\003\000\002\005\003\000\002\004\005" +
+    "\000\002\004\003\000\002\006\005\000\002\006\005\000" +
+    "\002\006\005\000\002\006\005\000\002\006\003\000\002" +
+    "\006\003\000\002\006\003\000\002\006\003\000\002\007" +
+    "\002\000\002\007\010\000\002\007\010\000\002\007\010" +
+    "\000\002\007\010\000\002\007\010\000\002\010\003\000" +
+    "\002\010\003\000\002\003\015\000\002\003\015\000\002" +
+    "\003\020" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -45,17 +51,61 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\026\000\004\033\005\001\002\000\004\002\030\001" +
-    "\002\000\004\027\007\001\002\000\004\002\000\001\002" +
-    "\000\006\034\012\035\011\001\002\000\004\027\013\001" +
-    "\002\000\004\027\ufffd\001\002\000\004\027\ufffc\001\002" +
-    "\000\004\027\014\001\002\000\004\004\015\001\002\000" +
-    "\004\024\016\001\002\000\004\022\017\001\002\000\010" +
-    "\004\020\006\023\011\021\001\002\000\004\032\026\001" +
-    "\002\000\004\032\uffff\001\002\000\004\032\024\001\002" +
-    "\000\004\032\ufffe\001\002\000\004\025\025\001\002\000" +
-    "\004\002\ufffb\001\002\000\004\025\027\001\002\000\004" +
-    "\002\ufffa\001\002\000\004\002\001\001\002" });
+    "\000\120\000\006\032\007\035\006\001\002\000\004\002" +
+    "\000\001\002\000\004\002\122\001\002\000\004\026\074" +
+    "\001\002\000\004\026\010\001\002\000\006\033\012\034" +
+    "\013\001\002\000\004\026\016\001\002\000\004\026\ufffb" +
+    "\001\002\000\004\015\014\001\002\000\004\016\015\001" +
+    "\002\000\004\026\ufffc\001\002\000\004\026\017\001\002" +
+    "\000\004\004\020\001\002\000\004\023\021\001\002\000" +
+    "\004\021\022\001\002\000\024\004\030\005\026\010\025" +
+    "\031\ufff2\036\032\037\033\040\027\041\024\042\034\001" +
+    "\002\000\004\031\072\001\002\000\004\011\065\001\002" +
+    "\000\004\031\uffff\001\002\000\004\031\ufffe\001\002\000" +
+    "\004\011\060\001\002\000\004\031\ufffd\001\002\000\004" +
+    "\031\056\001\002\000\004\011\051\001\002\000\004\011" +
+    "\044\001\002\000\004\011\035\001\002\000\020\005\036" +
+    "\025\ufff2\036\032\037\033\040\027\041\024\042\034\001" +
+    "\002\000\006\012\uffeb\025\uffeb\001\002\000\004\025\041" +
+    "\001\002\000\006\012\uffec\025\uffec\001\002\000\020\005" +
+    "\036\012\ufff2\036\032\037\033\040\027\041\024\042\034" +
+    "\001\002\000\004\012\043\001\002\000\012\012\uffed\016" +
+    "\uffed\025\uffed\031\uffed\001\002\000\020\005\036\025\ufff2" +
+    "\036\032\037\033\040\027\041\024\042\034\001\002\000" +
+    "\004\025\046\001\002\000\020\005\036\012\ufff2\036\032" +
+    "\037\033\040\027\041\024\042\034\001\002\000\004\012" +
+    "\050\001\002\000\012\012\ufff0\016\ufff0\025\ufff0\031\ufff0" +
+    "\001\002\000\020\005\036\025\ufff2\036\032\037\033\040" +
+    "\027\041\024\042\034\001\002\000\004\025\053\001\002" +
+    "\000\020\005\036\012\ufff2\036\032\037\033\040\027\041" +
+    "\024\042\034\001\002\000\004\012\055\001\002\000\012" +
+    "\012\ufff1\016\ufff1\025\ufff1\031\ufff1\001\002\000\004\024" +
+    "\057\001\002\000\004\002\uffea\001\002\000\020\005\036" +
+    "\025\ufff2\036\032\037\033\040\027\041\024\042\034\001" +
+    "\002\000\004\025\062\001\002\000\020\005\036\012\ufff2" +
+    "\036\032\037\033\040\027\041\024\042\034\001\002\000" +
+    "\004\012\064\001\002\000\012\012\uffef\016\uffef\025\uffef" +
+    "\031\uffef\001\002\000\020\005\036\025\ufff2\036\032\037" +
+    "\033\040\027\041\024\042\034\001\002\000\004\025\067" +
+    "\001\002\000\020\005\036\012\ufff2\036\032\037\033\040" +
+    "\027\041\024\042\034\001\002\000\004\012\071\001\002" +
+    "\000\012\012\uffee\016\uffee\025\uffee\031\uffee\001\002\000" +
+    "\004\024\073\001\002\000\004\002\uffe9\001\002\000\006" +
+    "\033\012\034\013\001\002\000\004\026\076\001\002\000" +
+    "\004\026\077\001\002\000\004\017\100\001\002\000\004" +
+    "\004\101\001\002\000\004\023\102\001\002\000\004\021" +
+    "\103\001\002\000\004\015\104\001\002\000\026\004\110" +
+    "\005\107\010\106\016\ufff2\025\ufff2\036\032\037\033\040" +
+    "\027\041\024\042\034\001\002\000\006\016\113\025\112" +
+    "\001\002\000\006\016\ufff6\025\ufff6\001\002\000\006\016" +
+    "\ufff5\025\ufff5\001\002\000\006\016\ufff4\025\ufff4\001\002" +
+    "\000\006\016\ufff3\025\ufff3\001\002\000\026\004\120\005" +
+    "\117\010\116\016\ufff2\025\ufff2\036\032\037\033\040\027" +
+    "\041\024\042\034\001\002\000\004\031\114\001\002\000" +
+    "\004\024\115\001\002\000\004\002\uffe8\001\002\000\006" +
+    "\016\ufff8\025\ufff8\001\002\000\006\016\ufff9\025\ufff9\001" +
+    "\002\000\006\016\ufff7\025\ufff7\001\002\000\006\016\ufffa" +
+    "\025\ufffa\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -63,14 +113,36 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\026\000\006\002\003\003\005\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\004\007" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\000\120\000\006\002\004\003\003\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\005\021\001\001\000\002\001" +
+    "\000\004\004\010\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001" });
+    "\002\001\001\000\006\005\022\007\030\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\006\007\037\010\036\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\006\007\037\010\041\001" +
+    "\001\000\002\001\001\000\002\001\001\000\006\007\037" +
+    "\010\044\001\001\000\002\001\001\000\006\007\037\010" +
+    "\046\001\001\000\002\001\001\000\002\001\001\000\006" +
+    "\007\037\010\051\001\001\000\002\001\001\000\006\007" +
+    "\037\010\053\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\006\007\037\010" +
+    "\060\001\001\000\002\001\001\000\006\007\037\010\062" +
+    "\001\001\000\002\001\001\000\002\001\001\000\006\007" +
+    "\037\010\065\001\001\000\002\001\001\000\006\007\037" +
+    "\010\067\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\004\074\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\006\006\104\007\110\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\007\120\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -187,7 +259,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // ini ::= variables 
+          case 1: // ini ::= declaraciones 
             {
               Object RESULT =null;
 
@@ -205,7 +277,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // valores ::= DECIMAL 
+          case 3: // valores ::= DOUBLE 
             {
               Object RESULT =null;
 
@@ -214,7 +286,25 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // tiposVariables ::= PR_CHAR 
+          case 4: // valores ::= ID 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 5: // tiposVariables ::= PR_CHAR COR_IZQ COR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("tiposVariables",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 6: // tiposVariables ::= PR_DOUBLE 
             {
               Object RESULT =null;
 
@@ -223,29 +313,173 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // tiposVariables ::= PR_DOUBLE 
+          case 7: // valoresArreglo ::= valoresArreglo COMA operaciones 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("tiposVariables",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // variables ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA 
+          case 8: // valoresArreglo ::= valoresArreglo COMA DOUBLE 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("variables",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-10)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // variables ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS ID PR_END PTCOMA 
+          case 9: // valoresArreglo ::= valoresArreglo COMA STRING 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("variables",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-10)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 10: // valoresArreglo ::= valoresArreglo COMA ID 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 11: // valoresArreglo ::= STRING 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 12: // valoresArreglo ::= DOUBLE 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 13: // valoresArreglo ::= ID 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 14: // valoresArreglo ::= operaciones 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 15: // operaciones ::= 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("operaciones",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 16: // operaciones ::= PR_SUM PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("operaciones",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 17: // operaciones ::= PR_RES PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("operaciones",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 18: // operaciones ::= PR_MUL PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("operaciones",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 19: // operaciones ::= PR_DIV PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("operaciones",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 20: // operaciones ::= PR_MOD PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("operaciones",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 21: // valoresOperaciones ::= operaciones 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresOperaciones",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 22: // valoresOperaciones ::= DOUBLE 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresOperaciones",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 23: // declaraciones ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS operaciones PR_END PTCOMA 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("declaraciones",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-10)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 24: // declaraciones ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("declaraciones",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-10)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 25: // declaraciones ::= PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("declaraciones",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-13)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 

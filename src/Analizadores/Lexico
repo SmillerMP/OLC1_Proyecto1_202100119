@@ -28,12 +28,11 @@ import Clases.Tokens;
 	yychar = 1; 
 %init} 
 
-BLANCOS = [ \r\t]+
-ENTERO  = [0-9]+   
-DECIMAL = [0-9]+(\.[0-9]+)?
+BLANCOS = [ \r\t]+   
+DOUBLE = [0-9]+(\.[0-9]+)?
 LETRA   = [a-zA-ZÑñ]
-ID      = {LETRA}({LETRA}|{ENTERO}|"_")*
-STRING = \"(([^\"\\]?|\\.)*)\"
+ID      = {LETRA}({LETRA}|{DOUBLE}|"_")*
+STRING = "(.*?)"
 CHAR = \'(([^\"\\]?|\\.))\'
 COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 
@@ -91,12 +90,10 @@ COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 ":"         {listaTokens.add(new Tokens(yytext(), "DOSPUNTOS", yyline+"", yychar+""));     return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext()); }
 "."         {listaTokens.add(new Tokens(yytext(), "PUNTO", yyline+"", yychar+""));         return new Symbol(sym.PUNTO, yyline, yychar, yytext()); }
 
-
                                                                                                     
 \n {yychar=1;}
 {BLANCOS} {} 
-{ENTERO}    {listaTokens.add(new Tokens(yytext(), "ENTERO", yyline+"", yychar+""));        return new Symbol(sym.ENTERO,yyline,yychar, yytext());} 
-{DECIMAL}   {listaTokens.add(new Tokens(yytext(), "DECIMAL", yyline+"", yychar+""));       return new Symbol(sym.DECIMAL,yyline,yychar, yytext());} 
+{DOUBLE}   {listaTokens.add(new Tokens(yytext(), "DOUBLE", yyline+"", yychar+""));          return new Symbol(sym.DOUBLE,yyline,yychar, yytext());} 
 {ID}        {listaTokens.add(new Tokens(yytext(), "ID", yyline+"", yychar+""));            return new Symbol(sym.ID,yyline,yychar, yytext());} 
 {CHAR}     {listaTokens.add(new Tokens(yytext(), "CHAR", yyline+"", yychar+""));         return new Symbol(sym.CHAR,yyline,yychar, yytext());} 
 {STRING}    {listaTokens.add(new Tokens(yytext(), "STRING", yyline+"", yychar+""));        return new Symbol(sym.STRING,yyline,yychar, yytext());} 
