@@ -117,6 +117,8 @@ non terminal valores;
 non terminal valoresArreglo;
 non terminal operaciones;
 non terminal valoresOperaciones;
+non terminal funcionesEstadisticas;
+non terminal valoresArregloFunc;
 
 
 
@@ -126,9 +128,10 @@ ini::= declaraciones;
 
 
 valores::=
-    STRING
-    | DOUBLE
+     DOUBLE
     | ID
+    | operaciones
+    | funcionesEstadisticas
 ;
 
 tiposVariables::=
@@ -137,7 +140,8 @@ tiposVariables::=
 ;
 
 valoresArreglo::=
-    valoresArreglo COMA operaciones
+    valoresArreglo COMA funcionesEstadisticas
+    |valoresArreglo COMA operaciones
     | valoresArreglo COMA DOUBLE
     | valoresArreglo COMA STRING
     | valoresArreglo COMA ID
@@ -145,6 +149,7 @@ valoresArreglo::=
     | DOUBLE
     | ID
     | operaciones
+    | funcionesEstadisticas
 ;
 
 
@@ -158,11 +163,33 @@ operaciones::=
 
 valoresOperaciones::=
     operaciones
+    | funcionesEstadisticas
     | DOUBLE
+    | ID
 ;
 
+valoresArregloFunc::=
+     valoresArregloFunc COMA operaciones
+    | valoresArregloFunc COMA DOUBLE
+    | valoresArregloFunc COMA ID
+    | DOUBLE
+    | ARROBA ID
+    | ID
+    | operaciones
+;
+
+funcionesEstadisticas::=
+    PR_MEDIA PAR_IZQ valoresArregloFunc PAR_DER
+    | PR_MEDIANA PAR_IZQ valoresArregloFunc PAR_DER
+    | PR_MODA PAR_IZQ valoresArregloFunc PAR_DER
+    | PR_VARIANZA PAR_IZQ valoresArregloFunc PAR_DER
+    | PR_MAX PAR_IZQ valoresArregloFunc PAR_DER
+    | PR_MIN PAR_IZQ valoresArregloFunc PAR_DER
+;
+
+
 declaraciones::= 
-    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS operaciones PR_END PTCOMA
-    | PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
+    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
+    | PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS STRING PR_END PTCOMA
     | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
 ;

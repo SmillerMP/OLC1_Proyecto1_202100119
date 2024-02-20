@@ -99,9 +99,8 @@ COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 {STRING}    {listaTokens.add(new Tokens(yytext(), "STRING", yyline+"", yychar+""));        return new Symbol(sym.STRING,yyline,yychar, yytext());} 
 {COM_MULT}    {} 
 
-
 . {
-    //System.out.println("Este es un error lexico: "+yytext()+ ", en la linea: "+yyline+", en la columna: "+yychar);
+    System.out.println("Este es un error lexico: "+yytext()+ ", en la linea: "+yyline+", en la columna: "+yychar);
     //listaErrores.add(new Errores("Lexico", "Caracter no encontrado: "+ yytext(), yyline+"", yychar+""));
 }
 

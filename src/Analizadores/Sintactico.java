@@ -35,15 +35,20 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\032\000\002\002\004\000\002\002\003\000\002\005" +
-    "\003\000\002\005\003\000\002\005\003\000\002\004\005" +
-    "\000\002\004\003\000\002\006\005\000\002\006\005\000" +
-    "\002\006\005\000\002\006\005\000\002\006\003\000\002" +
-    "\006\003\000\002\006\003\000\002\006\003\000\002\007" +
-    "\002\000\002\007\010\000\002\007\010\000\002\007\010" +
-    "\000\002\007\010\000\002\007\010\000\002\010\003\000" +
-    "\002\010\003\000\002\003\015\000\002\003\015\000\002" +
-    "\003\020" });
+    "\000\054\000\002\002\004\000\002\002\003\000\002\005" +
+    "\003\000\002\005\003\000\002\005\003\000\002\005\003" +
+    "\000\002\004\005\000\002\004\003\000\002\006\005\000" +
+    "\002\006\005\000\002\006\005\000\002\006\005\000\002" +
+    "\006\005\000\002\006\003\000\002\006\003\000\002\006" +
+    "\003\000\002\006\003\000\002\006\003\000\002\007\002" +
+    "\000\002\007\010\000\002\007\010\000\002\007\010\000" +
+    "\002\007\010\000\002\007\010\000\002\010\003\000\002" +
+    "\010\003\000\002\010\003\000\002\010\003\000\002\012" +
+    "\005\000\002\012\005\000\002\012\005\000\002\012\003" +
+    "\000\002\012\004\000\002\012\003\000\002\012\003\000" +
+    "\002\011\006\000\002\011\006\000\002\011\006\000\002" +
+    "\011\006\000\002\011\006\000\002\011\006\000\002\003" +
+    "\015\000\002\003\015\000\002\003\020" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -51,61 +56,107 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\120\000\006\032\007\035\006\001\002\000\004\002" +
-    "\000\001\002\000\004\002\122\001\002\000\004\026\074" +
-    "\001\002\000\004\026\010\001\002\000\006\033\012\034" +
-    "\013\001\002\000\004\026\016\001\002\000\004\026\ufffb" +
-    "\001\002\000\004\015\014\001\002\000\004\016\015\001" +
-    "\002\000\004\026\ufffc\001\002\000\004\026\017\001\002" +
+    "\000\166\000\006\032\007\035\006\001\002\000\004\002" +
+    "\000\001\002\000\004\002\170\001\002\000\004\026\140" +
+    "\001\002\000\004\026\010\001\002\000\006\033\013\034" +
+    "\012\001\002\000\004\026\016\001\002\000\004\015\014" +
+    "\001\002\000\004\026\ufffa\001\002\000\004\016\015\001" +
+    "\002\000\004\026\ufffb\001\002\000\004\026\017\001\002" +
     "\000\004\004\020\001\002\000\004\023\021\001\002\000" +
-    "\004\021\022\001\002\000\024\004\030\005\026\010\025" +
-    "\031\ufff2\036\032\037\033\040\027\041\024\042\034\001" +
-    "\002\000\004\031\072\001\002\000\004\011\065\001\002" +
-    "\000\004\031\uffff\001\002\000\004\031\ufffe\001\002\000" +
-    "\004\011\060\001\002\000\004\031\ufffd\001\002\000\004" +
-    "\031\056\001\002\000\004\011\051\001\002\000\004\011" +
-    "\044\001\002\000\004\011\035\001\002\000\020\005\036" +
-    "\025\ufff2\036\032\037\033\040\027\041\024\042\034\001" +
-    "\002\000\006\012\uffeb\025\uffeb\001\002\000\004\025\041" +
-    "\001\002\000\006\012\uffec\025\uffec\001\002\000\020\005" +
-    "\036\012\ufff2\036\032\037\033\040\027\041\024\042\034" +
-    "\001\002\000\004\012\043\001\002\000\012\012\uffed\016" +
-    "\uffed\025\uffed\031\uffed\001\002\000\020\005\036\025\ufff2" +
-    "\036\032\037\033\040\027\041\024\042\034\001\002\000" +
-    "\004\025\046\001\002\000\020\005\036\012\ufff2\036\032" +
-    "\037\033\040\027\041\024\042\034\001\002\000\004\012" +
-    "\050\001\002\000\012\012\ufff0\016\ufff0\025\ufff0\031\ufff0" +
-    "\001\002\000\020\005\036\025\ufff2\036\032\037\033\040" +
-    "\027\041\024\042\034\001\002\000\004\025\053\001\002" +
-    "\000\020\005\036\012\ufff2\036\032\037\033\040\027\041" +
-    "\024\042\034\001\002\000\004\012\055\001\002\000\012" +
-    "\012\ufff1\016\ufff1\025\ufff1\031\ufff1\001\002\000\004\024" +
-    "\057\001\002\000\004\002\uffea\001\002\000\020\005\036" +
-    "\025\ufff2\036\032\037\033\040\027\041\024\042\034\001" +
-    "\002\000\004\025\062\001\002\000\020\005\036\012\ufff2" +
-    "\036\032\037\033\040\027\041\024\042\034\001\002\000" +
-    "\004\012\064\001\002\000\012\012\uffef\016\uffef\025\uffef" +
-    "\031\uffef\001\002\000\020\005\036\025\ufff2\036\032\037" +
-    "\033\040\027\041\024\042\034\001\002\000\004\025\067" +
-    "\001\002\000\020\005\036\012\ufff2\036\032\037\033\040" +
-    "\027\041\024\042\034\001\002\000\004\012\071\001\002" +
-    "\000\012\012\uffee\016\uffee\025\uffee\031\uffee\001\002\000" +
-    "\004\024\073\001\002\000\004\002\uffe9\001\002\000\006" +
-    "\033\012\034\013\001\002\000\004\026\076\001\002\000" +
-    "\004\026\077\001\002\000\004\017\100\001\002\000\004" +
-    "\004\101\001\002\000\004\023\102\001\002\000\004\021" +
-    "\103\001\002\000\004\015\104\001\002\000\026\004\110" +
-    "\005\107\010\106\016\ufff2\025\ufff2\036\032\037\033\040" +
-    "\027\041\024\042\034\001\002\000\006\016\113\025\112" +
-    "\001\002\000\006\016\ufff6\025\ufff6\001\002\000\006\016" +
-    "\ufff5\025\ufff5\001\002\000\006\016\ufff4\025\ufff4\001\002" +
-    "\000\006\016\ufff3\025\ufff3\001\002\000\026\004\120\005" +
-    "\117\010\116\016\ufff2\025\ufff2\036\032\037\033\040\027" +
-    "\041\024\042\034\001\002\000\004\031\114\001\002\000" +
-    "\004\024\115\001\002\000\004\002\uffe8\001\002\000\006" +
-    "\016\ufff8\025\ufff8\001\002\000\006\016\ufff9\025\ufff9\001" +
-    "\002\000\006\016\ufff7\025\ufff7\001\002\000\006\016\ufffa" +
-    "\025\ufffa\001\002\000\004\002\001\001\002" });
+    "\004\021\022\001\002\000\040\004\034\005\031\010\030" +
+    "\031\uffef\036\036\037\040\040\032\041\025\042\043\043" +
+    "\024\044\027\045\041\046\026\047\042\050\033\001\002" +
+    "\000\004\031\136\001\002\000\004\011\133\001\002\000" +
+    "\004\011\126\001\002\000\004\011\123\001\002\000\004" +
+    "\011\120\001\002\000\004\031\116\001\002\000\004\031" +
+    "\uffff\001\002\000\004\011\111\001\002\000\004\011\106" +
+    "\001\002\000\004\031\ufffe\001\002\000\004\031\ufffd\001" +
+    "\002\000\004\011\101\001\002\000\004\031\ufffc\001\002" +
+    "\000\004\011\074\001\002\000\004\011\071\001\002\000" +
+    "\004\011\055\001\002\000\004\011\044\001\002\000\036" +
+    "\004\047\005\046\025\uffef\036\036\037\040\040\032\041" +
+    "\025\042\043\043\024\044\027\045\041\046\026\047\042" +
+    "\050\033\001\002\000\004\025\052\001\002\000\006\012" +
+    "\uffe7\025\uffe7\001\002\000\006\012\uffe6\025\uffe6\001\002" +
+    "\000\006\012\uffe9\025\uffe9\001\002\000\006\012\uffe8\025" +
+    "\uffe8\001\002\000\036\004\047\005\046\012\uffef\036\036" +
+    "\037\040\040\032\041\025\042\043\043\024\044\027\045" +
+    "\041\046\026\047\042\050\033\001\002\000\004\012\054" +
+    "\001\002\000\012\012\uffea\016\uffea\025\uffea\031\uffea\001" +
+    "\002\000\026\004\060\005\056\012\uffef\017\057\025\uffef" +
+    "\036\036\037\040\040\032\041\025\042\043\001\002\000" +
+    "\006\012\uffe2\025\uffe2\001\002\000\004\004\070\001\002" +
+    "\000\006\012\uffe0\025\uffe0\001\002\000\006\012\uffdf\025" +
+    "\uffdf\001\002\000\006\012\064\025\063\001\002\000\024" +
+    "\004\065\005\066\012\uffef\025\uffef\036\036\037\040\040" +
+    "\032\041\025\042\043\001\002\000\012\012\uffda\016\uffda" +
+    "\025\uffda\031\uffda\001\002\000\006\012\uffe3\025\uffe3\001" +
+    "\002\000\006\012\uffe4\025\uffe4\001\002\000\006\012\uffe5" +
+    "\025\uffe5\001\002\000\006\012\uffe1\025\uffe1\001\002\000" +
+    "\026\004\060\005\056\012\uffef\017\057\025\uffef\036\036" +
+    "\037\040\040\032\041\025\042\043\001\002\000\006\012" +
+    "\073\025\063\001\002\000\012\012\uffdc\016\uffdc\025\uffdc" +
+    "\031\uffdc\001\002\000\036\004\047\005\046\025\uffef\036" +
+    "\036\037\040\040\032\041\025\042\043\043\024\044\027" +
+    "\045\041\046\026\047\042\050\033\001\002\000\004\025" +
+    "\076\001\002\000\036\004\047\005\046\012\uffef\036\036" +
+    "\037\040\040\032\041\025\042\043\043\024\044\027\045" +
+    "\041\046\026\047\042\050\033\001\002\000\004\012\100" +
+    "\001\002\000\012\012\uffed\016\uffed\025\uffed\031\uffed\001" +
+    "\002\000\036\004\047\005\046\025\uffef\036\036\037\040" +
+    "\040\032\041\025\042\043\043\024\044\027\045\041\046" +
+    "\026\047\042\050\033\001\002\000\004\025\103\001\002" +
+    "\000\036\004\047\005\046\012\uffef\036\036\037\040\040" +
+    "\032\041\025\042\043\043\024\044\027\045\041\046\026" +
+    "\047\042\050\033\001\002\000\004\012\105\001\002\000" +
+    "\012\012\uffee\016\uffee\025\uffee\031\uffee\001\002\000\026" +
+    "\004\060\005\056\012\uffef\017\057\025\uffef\036\036\037" +
+    "\040\040\032\041\025\042\043\001\002\000\006\012\110" +
+    "\025\063\001\002\000\012\012\uffd9\016\uffd9\025\uffd9\031" +
+    "\uffd9\001\002\000\036\004\047\005\046\025\uffef\036\036" +
+    "\037\040\040\032\041\025\042\043\043\024\044\027\045" +
+    "\041\046\026\047\042\050\033\001\002\000\004\025\113" +
+    "\001\002\000\036\004\047\005\046\012\uffef\036\036\037" +
+    "\040\040\032\041\025\042\043\043\024\044\027\045\041" +
+    "\046\026\047\042\050\033\001\002\000\004\012\115\001" +
+    "\002\000\012\012\uffec\016\uffec\025\uffec\031\uffec\001\002" +
+    "\000\004\024\117\001\002\000\004\002\uffd7\001\002\000" +
+    "\026\004\060\005\056\012\uffef\017\057\025\uffef\036\036" +
+    "\037\040\040\032\041\025\042\043\001\002\000\006\012" +
+    "\122\025\063\001\002\000\012\012\uffdd\016\uffdd\025\uffdd" +
+    "\031\uffdd\001\002\000\026\004\060\005\056\012\uffef\017" +
+    "\057\025\uffef\036\036\037\040\040\032\041\025\042\043" +
+    "\001\002\000\006\012\125\025\063\001\002\000\012\012" +
+    "\uffdb\016\uffdb\025\uffdb\031\uffdb\001\002\000\036\004\047" +
+    "\005\046\025\uffef\036\036\037\040\040\032\041\025\042" +
+    "\043\043\024\044\027\045\041\046\026\047\042\050\033" +
+    "\001\002\000\004\025\130\001\002\000\036\004\047\005" +
+    "\046\012\uffef\036\036\037\040\040\032\041\025\042\043" +
+    "\043\024\044\027\045\041\046\026\047\042\050\033\001" +
+    "\002\000\004\012\132\001\002\000\012\012\uffeb\016\uffeb" +
+    "\025\uffeb\031\uffeb\001\002\000\026\004\060\005\056\012" +
+    "\uffef\017\057\025\uffef\036\036\037\040\040\032\041\025" +
+    "\042\043\001\002\000\006\012\135\025\063\001\002\000" +
+    "\012\012\uffde\016\uffde\025\uffde\031\uffde\001\002\000\004" +
+    "\024\137\001\002\000\004\002\uffd8\001\002\000\006\033" +
+    "\013\034\012\001\002\000\004\026\142\001\002\000\004" +
+    "\026\143\001\002\000\004\017\144\001\002\000\004\004" +
+    "\145\001\002\000\004\023\146\001\002\000\004\021\147" +
+    "\001\002\000\004\015\150\001\002\000\042\004\154\005" +
+    "\153\010\152\016\uffef\025\uffef\036\036\037\040\040\032" +
+    "\041\025\042\043\043\024\044\027\045\041\046\026\047" +
+    "\042\050\033\001\002\000\006\016\160\025\157\001\002" +
+    "\000\006\016\ufff4\025\ufff4\001\002\000\006\016\ufff3\025" +
+    "\ufff3\001\002\000\006\016\ufff2\025\ufff2\001\002\000\006" +
+    "\016\ufff1\025\ufff1\001\002\000\006\016\ufff0\025\ufff0\001" +
+    "\002\000\042\004\165\005\164\010\163\016\uffef\025\uffef" +
+    "\036\036\037\040\040\032\041\025\042\043\043\024\044" +
+    "\027\045\041\046\026\047\042\050\033\001\002\000\004" +
+    "\031\161\001\002\000\004\024\162\001\002\000\004\002" +
+    "\uffd6\001\002\000\006\016\ufff6\025\ufff6\001\002\000\006" +
+    "\016\ufff7\025\ufff7\001\002\000\006\016\ufff5\025\ufff5\001" +
+    "\002\000\006\016\ufff8\025\ufff8\001\002\000\006\016\ufff9" +
+    "\025\ufff9\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -113,36 +164,51 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\120\000\006\002\004\003\003\001\001\000\002\001" +
+    "\000\166\000\006\002\004\003\003\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\004\004\010\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\006\005\022\007\030\001\001\000\002" +
+    "\002\001\001\000\010\005\022\007\034\011\036\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\006\007\037\010\036\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\006\007\037\010\041\001" +
-    "\001\000\002\001\001\000\002\001\001\000\006\007\037" +
-    "\010\044\001\001\000\002\001\001\000\006\007\037\010" +
-    "\046\001\001\000\002\001\001\000\002\001\001\000\006" +
-    "\007\037\010\051\001\001\000\002\001\001\000\006\007" +
-    "\037\010\053\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\007\037\010" +
-    "\060\001\001\000\002\001\001\000\006\007\037\010\062" +
+    "\002\001\001\000\010\007\047\010\044\011\050\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\010\007\047\010\052" +
+    "\011\050\001\001\000\002\001\001\000\002\001\001\000" +
+    "\006\007\060\012\061\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\007\066\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\007\060\012\071\001\001\000\002\001\001" +
+    "\000\002\001\001\000\010\007\047\010\074\011\050\001" +
+    "\001\000\002\001\001\000\010\007\047\010\076\011\050" +
+    "\001\001\000\002\001\001\000\002\001\001\000\010\007" +
+    "\047\010\101\011\050\001\001\000\002\001\001\000\010" +
+    "\007\047\010\103\011\050\001\001\000\002\001\001\000" +
+    "\002\001\001\000\006\007\060\012\106\001\001\000\002" +
+    "\001\001\000\002\001\001\000\010\007\047\010\111\011" +
+    "\050\001\001\000\002\001\001\000\010\007\047\010\113" +
+    "\011\050\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\006\007\060\012\120" +
     "\001\001\000\002\001\001\000\002\001\001\000\006\007" +
-    "\037\010\065\001\001\000\002\001\001\000\006\007\037" +
-    "\010\067\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\004\074\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\006\006\104\007\110\001\001\000\002\001" +
+    "\060\012\123\001\001\000\002\001\001\000\002\001\001" +
+    "\000\010\007\047\010\126\011\050\001\001\000\002\001" +
+    "\001\000\010\007\047\010\130\011\050\001\001\000\002" +
+    "\001\001\000\002\001\001\000\006\007\060\012\133\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\007\120\001\001\000\002\001" +
+    "\000\002\001\001\000\004\004\140\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001" });
+    "\010\006\150\007\154\011\155\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\006\007\165\011\166" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -268,7 +334,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // valores ::= STRING 
+          case 2: // valores ::= DOUBLE 
             {
               Object RESULT =null;
 
@@ -277,7 +343,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // valores ::= DOUBLE 
+          case 3: // valores ::= ID 
             {
               Object RESULT =null;
 
@@ -286,7 +352,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // valores ::= ID 
+          case 4: // valores ::= operaciones 
             {
               Object RESULT =null;
 
@@ -295,7 +361,16 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // tiposVariables ::= PR_CHAR COR_IZQ COR_DER 
+          case 5: // valores ::= funcionesEstadisticas 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 6: // tiposVariables ::= PR_CHAR COR_IZQ COR_DER 
             {
               Object RESULT =null;
 
@@ -304,7 +379,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // tiposVariables ::= PR_DOUBLE 
+          case 7: // tiposVariables ::= PR_DOUBLE 
             {
               Object RESULT =null;
 
@@ -313,7 +388,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // valoresArreglo ::= valoresArreglo COMA operaciones 
+          case 8: // valoresArreglo ::= valoresArreglo COMA funcionesEstadisticas 
             {
               Object RESULT =null;
 
@@ -322,7 +397,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // valoresArreglo ::= valoresArreglo COMA DOUBLE 
+          case 9: // valoresArreglo ::= valoresArreglo COMA operaciones 
             {
               Object RESULT =null;
 
@@ -331,7 +406,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // valoresArreglo ::= valoresArreglo COMA STRING 
+          case 10: // valoresArreglo ::= valoresArreglo COMA DOUBLE 
             {
               Object RESULT =null;
 
@@ -340,7 +415,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // valoresArreglo ::= valoresArreglo COMA ID 
+          case 11: // valoresArreglo ::= valoresArreglo COMA STRING 
             {
               Object RESULT =null;
 
@@ -349,7 +424,16 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // valoresArreglo ::= STRING 
+          case 12: // valoresArreglo ::= valoresArreglo COMA ID 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 13: // valoresArreglo ::= STRING 
             {
               Object RESULT =null;
 
@@ -358,7 +442,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // valoresArreglo ::= DOUBLE 
+          case 14: // valoresArreglo ::= DOUBLE 
             {
               Object RESULT =null;
 
@@ -367,7 +451,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // valoresArreglo ::= ID 
+          case 15: // valoresArreglo ::= ID 
             {
               Object RESULT =null;
 
@@ -376,7 +460,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // valoresArreglo ::= operaciones 
+          case 16: // valoresArreglo ::= operaciones 
             {
               Object RESULT =null;
 
@@ -385,7 +469,16 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // operaciones ::= 
+          case 17: // valoresArreglo ::= funcionesEstadisticas 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArreglo",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 18: // operaciones ::= 
             {
               Object RESULT =null;
 
@@ -394,7 +487,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // operaciones ::= PR_SUM PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+          case 19: // operaciones ::= PR_SUM PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
             {
               Object RESULT =null;
 
@@ -403,7 +496,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // operaciones ::= PR_RES PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+          case 20: // operaciones ::= PR_RES PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
             {
               Object RESULT =null;
 
@@ -412,7 +505,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // operaciones ::= PR_MUL PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+          case 21: // operaciones ::= PR_MUL PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
             {
               Object RESULT =null;
 
@@ -421,7 +514,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // operaciones ::= PR_DIV PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+          case 22: // operaciones ::= PR_DIV PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
             {
               Object RESULT =null;
 
@@ -430,7 +523,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // operaciones ::= PR_MOD PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+          case 23: // operaciones ::= PR_MOD PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
             {
               Object RESULT =null;
 
@@ -439,7 +532,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // valoresOperaciones ::= operaciones 
+          case 24: // valoresOperaciones ::= operaciones 
             {
               Object RESULT =null;
 
@@ -448,7 +541,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // valoresOperaciones ::= DOUBLE 
+          case 25: // valoresOperaciones ::= funcionesEstadisticas 
             {
               Object RESULT =null;
 
@@ -457,7 +550,142 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // declaraciones ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS operaciones PR_END PTCOMA 
+          case 26: // valoresOperaciones ::= DOUBLE 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresOperaciones",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 27: // valoresOperaciones ::= ID 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresOperaciones",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 28: // valoresArregloFunc ::= valoresArregloFunc COMA operaciones 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArregloFunc",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 29: // valoresArregloFunc ::= valoresArregloFunc COMA DOUBLE 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArregloFunc",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 30: // valoresArregloFunc ::= valoresArregloFunc COMA ID 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArregloFunc",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 31: // valoresArregloFunc ::= DOUBLE 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArregloFunc",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 32: // valoresArregloFunc ::= ARROBA ID 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArregloFunc",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 33: // valoresArregloFunc ::= ID 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArregloFunc",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 34: // valoresArregloFunc ::= operaciones 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresArregloFunc",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 35: // funcionesEstadisticas ::= PR_MEDIA PAR_IZQ valoresArregloFunc PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("funcionesEstadisticas",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 36: // funcionesEstadisticas ::= PR_MEDIANA PAR_IZQ valoresArregloFunc PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("funcionesEstadisticas",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 37: // funcionesEstadisticas ::= PR_MODA PAR_IZQ valoresArregloFunc PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("funcionesEstadisticas",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 38: // funcionesEstadisticas ::= PR_VARIANZA PAR_IZQ valoresArregloFunc PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("funcionesEstadisticas",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 39: // funcionesEstadisticas ::= PR_MAX PAR_IZQ valoresArregloFunc PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("funcionesEstadisticas",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 40: // funcionesEstadisticas ::= PR_MIN PAR_IZQ valoresArregloFunc PAR_DER 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("funcionesEstadisticas",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 41: // declaraciones ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA 
             {
               Object RESULT =null;
 
@@ -466,7 +694,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // declaraciones ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA 
+          case 42: // declaraciones ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS STRING PR_END PTCOMA 
             {
               Object RESULT =null;
 
@@ -475,7 +703,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // declaraciones ::= PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA 
+          case 43: // declaraciones ::= PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA 
             {
               Object RESULT =null;
 
