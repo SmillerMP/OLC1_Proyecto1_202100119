@@ -55,7 +55,6 @@ terminal String CHAR;
 terminal String STRING;
 
 
-
 // Simbolos
 terminal String PAR_IZQ;
 terminal String PAR_DER;
@@ -111,7 +110,8 @@ terminal String PR_LABEL;
 
 // No terminales
 non terminal ini;
-non terminal declaraciones;
+non terminal instruccion;
+non terminal instrucciones;
 non terminal tiposVariables;
 non terminal valores;
 non terminal valoresArreglo;
@@ -124,12 +124,17 @@ non terminal valoresArregloFunc;
 
 start with ini; 
 
-ini::= declaraciones;
+ini::= instrucciones
+    instruccion instrucciones
+    | instruccion
+    | error instrucciones
+;
 
 
 valores::=
      DOUBLE
     | ID
+    | STRING
     | operaciones
     | funcionesEstadisticas
 ;
@@ -179,7 +184,13 @@ valoresArregloFunc::=
 ;
 
 funcionesEstadisticas::=
-    PR_MEDIA PAR_IZQ valoresArregloFunc PAR_DER
+    PR_MEDIA PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
+    | PR_MEDIANA PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
+    | PR_MODA PAR_IZQ COR_IZQ  valoresArregloFunc COR_DER PAR_DER
+    | PR_VARIANZA PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
+    | PR_MAX PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
+    | PR_MIN PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
+    | PR_MEDIA PAR_IZQ valoresArregloFunc PAR_DER
     | PR_MEDIANA PAR_IZQ valoresArregloFunc PAR_DER
     | PR_MODA PAR_IZQ valoresArregloFunc PAR_DER
     | PR_VARIANZA PAR_IZQ valoresArregloFunc PAR_DER
@@ -188,8 +199,9 @@ funcionesEstadisticas::=
 ;
 
 
-declaraciones::= 
+instruccion::= 
     PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
-    | PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS STRING PR_END PTCOMA
     | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE 
 ;

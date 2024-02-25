@@ -34,7 +34,7 @@ public class Proyecto1_Compiladores1_2024 {
         // TODO code application logic here
         
         String Texto = """
-                       var:double:: med2 <- mediana( arreglo ) end;
+                       console::print = "hola", numero, 15, "adios" end;
                        """;
 
         Analizadores.Sintactico parser;
