@@ -9,71 +9,66 @@ package Analizadores;
 public class sym {
   /* terminals */
   public static final int PAR_DER = 8;
-  public static final int DOSPUNTOS = 20;
-  public static final int CHAR = 5;
-  public static final int PR_COLUMN = 41;
-  public static final int PR_TITULO = 47;
-  public static final int PR_MODA = 35;
+  public static final int DOSPUNTOS = 18;
+  public static final int PR_COLUMN = 38;
+  public static final int PR_TITULO = 44;
+  public static final int PR_MODA = 32;
   public static final int DOUBLE = 3;
-  public static final int COR_DER = 12;
-  public static final int PR_TITULOY = 51;
-  public static final int PR_DIV = 31;
-  public static final int PR_TITULOX = 50;
-  public static final int PR_VARIANZA = 36;
-  public static final int PR_VALUES = 52;
-  public static final int PR_MIN = 38;
-  public static final int IGUAL = 14;
-  public static final int ARROBA = 13;
-  public static final int PR_MEDIA = 33;
-  public static final int PR_MUL = 30;
-  public static final int PR_LABEL = 53;
-  public static final int PR_EXEC = 42;
-  public static final int PR_MOD = 32;
-  public static final int LLAV_IZQ = 9;
+  public static final int COR_DER = 10;
+  public static final int PR_TITULOY = 48;
+  public static final int PR_DIV = 28;
+  public static final int PR_TITULOX = 47;
+  public static final int PR_VARIANZA = 33;
+  public static final int PR_VALUES = 49;
+  public static final int PR_MIN = 35;
+  public static final int IGUAL = 12;
+  public static final int ARROBA = 11;
+  public static final int PR_MEDIA = 30;
+  public static final int PR_MUL = 27;
+  public static final int PR_LABEL = 50;
+  public static final int PR_EXEC = 39;
+  public static final int PR_MOD = 29;
   public static final int ID = 2;
-  public static final int PR_MEDIANA = 34;
-  public static final int PR_PRINT = 40;
+  public static final int PR_MEDIANA = 31;
+  public static final int PR_PRINT = 37;
   public static final int EOF = 0;
-  public static final int PR_PROGRAM = 22;
+  public static final int PR_PROGRAM = 19;
+  public static final int COM_SIMPLE = 5;
   public static final int error = 1;
-  public static final int PRUEBA = 4;
-  public static final int COMA = 19;
-  public static final int MENOS = 15;
-  public static final int PR_HISTOGRAM = 46;
-  public static final int MAYOR_QUE = 16;
-  public static final int PR_GRAPHPIE = 43;
+  public static final int COMA = 17;
+  public static final int MENOS = 13;
+  public static final int PR_HISTOGRAM = 43;
+  public static final int MAYOR_QUE = 14;
+  public static final int PR_GRAPHPIE = 40;
   public static final int PAR_IZQ = 7;
-  public static final int PR_GRAPHLINE = 45;
-  public static final int PR_CHAR = 26;
-  public static final int PR_END = 23;
-  public static final int PR_SUM = 28;
-  public static final int PR_GRAPHBAR = 44;
-  public static final int PR_ARR = 27;
-  public static final int PUNTO = 21;
-  public static final int PR_MAX = 37;
-  public static final int COR_IZQ = 11;
-  public static final int PR_VAR = 24;
-  public static final int PR_EJEY = 49;
-  public static final int PR_EJEX = 48;
-  public static final int PTCOMA = 18;
-  public static final int STRING = 6;
-  public static final int LLAV_DER = 10;
-  public static final int MENOR_QUE = 17;
-  public static final int PR_DOUBLE = 25;
-  public static final int PR_CONSOLE = 39;
-  public static final int PR_RES = 29;
+  public static final int PR_GRAPHLINE = 42;
+  public static final int PR_CHAR = 23;
+  public static final int PR_END = 20;
+  public static final int PR_SUM = 25;
+  public static final int PR_GRAPHBAR = 41;
+  public static final int PR_ARR = 24;
+  public static final int COM_MULTI = 6;
+  public static final int PR_MAX = 34;
+  public static final int COR_IZQ = 9;
+  public static final int PR_VAR = 21;
+  public static final int PR_EJEY = 46;
+  public static final int PR_EJEX = 45;
+  public static final int PTCOMA = 16;
+  public static final int STRING = 4;
+  public static final int MENOR_QUE = 15;
+  public static final int PR_DOUBLE = 22;
+  public static final int PR_CONSOLE = 36;
+  public static final int PR_RES = 26;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "ID",
   "DOUBLE",
-  "PRUEBA",
-  "CHAR",
   "STRING",
+  "COM_SIMPLE",
+  "COM_MULTI",
   "PAR_IZQ",
   "PAR_DER",
-  "LLAV_IZQ",
-  "LLAV_DER",
   "COR_IZQ",
   "COR_DER",
   "ARROBA",
@@ -84,7 +79,6 @@ public class sym {
   "PTCOMA",
   "COMA",
   "DOSPUNTOS",
-  "PUNTO",
   "PR_PROGRAM",
   "PR_END",
   "PR_VAR",

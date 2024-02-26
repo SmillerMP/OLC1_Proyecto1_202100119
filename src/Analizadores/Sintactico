@@ -50,16 +50,14 @@ parser code
 // Expresiones regulares
 terminal String ID;
 terminal String DOUBLE;
-terminal String PRUEBA;
-terminal String CHAR;
 terminal String STRING;
+terminal String COM_SIMPLE;
+terminal String COM_MULTI;
 
 
 // Simbolos
 terminal String PAR_IZQ;
 terminal String PAR_DER;
-terminal String LLAV_IZQ;
-terminal String LLAV_DER;
 terminal String COR_IZQ ;
 terminal String COR_DER;
 terminal String ARROBA;
@@ -70,7 +68,6 @@ terminal String MENOR_QUE;
 terminal String PTCOMA;
 terminal String COMA;
 terminal String DOSPUNTOS;
-terminal String PUNTO;
 
 
 
@@ -110,6 +107,7 @@ terminal String PR_LABEL;
 
 // No terminales
 non terminal ini;
+non terminal codigo;
 non terminal instruccion;
 non terminal instrucciones;
 non terminal tiposVariables;
@@ -118,18 +116,43 @@ non terminal valoresArreglo;
 non terminal operaciones;
 non terminal valoresOperaciones;
 non terminal funcionesEstadisticas;
-non terminal valoresArregloFunc;
+non terminal GraficaLineas;
+non terminal GraficaBarras;
+non terminal GraficaPie;
+non terminal GraficaHistograma;
+non terminal comentarios;
 
 
 
 start with ini; 
 
-ini::= instrucciones
+ini::= codigo;
+
+codigo::=
+    codigo comentarios
+    | codigo PR_PROGRAM instrucciones PR_END PR_PROGRAM 
+    | PR_PROGRAM instrucciones PR_END PR_PROGRAM
+    | comentarios
+;
+
+instrucciones::=
     instruccion instrucciones
     | instruccion
     | error instrucciones
 ;
 
+instruccion::= 
+    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
+    | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE valoresArreglo  PR_END PTCOMA
+    | GraficaLineas
+    | GraficaBarras
+    | GraficaPie
+    | GraficaHistograma
+    | comentarios
+;   
 
 valores::=
      DOUBLE
@@ -154,6 +177,7 @@ valoresArreglo::=
     | DOUBLE
     | ID
     | operaciones
+    | ARROBA ID
     | funcionesEstadisticas
 ;
 
@@ -173,35 +197,65 @@ valoresOperaciones::=
     | ID
 ;
 
-valoresArregloFunc::=
-     valoresArregloFunc COMA operaciones
-    | valoresArregloFunc COMA DOUBLE
-    | valoresArregloFunc COMA ID
-    | DOUBLE
-    | ARROBA ID
-    | ID
-    | operaciones
-;
 
 funcionesEstadisticas::=
-    PR_MEDIA PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
-    | PR_MEDIANA PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
-    | PR_MODA PAR_IZQ COR_IZQ  valoresArregloFunc COR_DER PAR_DER
-    | PR_VARIANZA PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
-    | PR_MAX PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
-    | PR_MIN PAR_IZQ COR_IZQ valoresArregloFunc COR_DER PAR_DER
-    | PR_MEDIA PAR_IZQ valoresArregloFunc PAR_DER
-    | PR_MEDIANA PAR_IZQ valoresArregloFunc PAR_DER
-    | PR_MODA PAR_IZQ valoresArregloFunc PAR_DER
-    | PR_VARIANZA PAR_IZQ valoresArregloFunc PAR_DER
-    | PR_MAX PAR_IZQ valoresArregloFunc PAR_DER
-    | PR_MIN PAR_IZQ valoresArregloFunc PAR_DER
+    PR_MEDIA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
+    | PR_MEDIANA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
+    | PR_MODA PAR_IZQ COR_IZQ  valoresArreglo COR_DER PAR_DER
+    | PR_VARIANZA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
+    | PR_MAX PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
+    | PR_MIN PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
+    | PR_MEDIA PAR_IZQ valoresArreglo PAR_DER
+    | PR_MEDIANA PAR_IZQ valoresArreglo PAR_DER
+    | PR_MODA PAR_IZQ valoresArreglo PAR_DER
+    | PR_VARIANZA PAR_IZQ valoresArreglo PAR_DER
+    | PR_MAX PAR_IZQ valoresArreglo PAR_DER
+    | PR_MIN PAR_IZQ valoresArreglo PAR_DER
+;
+
+GraficaLineas::=
+    PR_GRAPHLINE PAR_IZQ
+    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    PR_EXEC PR_GRAPHLINE PR_END PTCOMA
+    PAR_DER PR_END PTCOMA 
 ;
 
 
-instruccion::= 
-    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
-    | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
-    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA
-    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE 
+GraficaBarras::=
+    PR_GRAPHBAR PAR_IZQ
+    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    PR_EXEC PR_GRAPHBAR PR_END PTCOMA
+    PAR_DER PR_END PTCOMA 
 ;
+
+GraficaPie::=
+    PR_GRAPHPIE PAR_IZQ
+    PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    PR_EXEC PR_GRAPHPIE PR_END PTCOMA
+    PAR_DER PR_END PTCOMA 
+;
+
+
+GraficaHistograma::=
+    PR_HISTOGRAM PAR_IZQ
+    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    PR_EXEC PR_HISTOGRAM PR_END PTCOMA
+    PAR_DER PR_END PTCOMA 
+;
+
+comentarios::=
+    COM_SIMPLE 
+    | COM_MULTI
+;
+

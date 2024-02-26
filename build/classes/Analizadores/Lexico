@@ -33,8 +33,8 @@ DOUBLE = [0-9]+(\.[0-9]+)?
 LETRA   = [a-zA-ZÑñ]
 ID      = {LETRA}({LETRA}|{DOUBLE}|"_")*
 STRING = \"(([^\"\\]?|\\.)*)\"
-CHAR = \'(([^\"\\]?|\\.))\'
-COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
+COM_SIMPLE = "!"[^\n]*\n
+COM_MULTI = <![^!]*!> 
 
 
 
@@ -76,8 +76,6 @@ COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 
 "("         {listaTokens.add(new Tokens(yytext(), "PAR_IZQ", yyline+"", yychar+""));       return new Symbol(sym.PAR_IZQ, yyline, yychar, yytext()); }
 ")"         {listaTokens.add(new Tokens(yytext(), "PAR_DER", yyline+"", yychar+""));       return new Symbol(sym.PAR_DER, yyline, yychar, yytext()); }
-"{"         {listaTokens.add(new Tokens(yytext(), "LLAV_IZQ", yyline+"", yychar+""));      return new Symbol(sym.LLAV_IZQ, yyline, yychar, yytext()); }
-"}"         {listaTokens.add(new Tokens(yytext(), "LLAV_DER", yyline+"", yychar+""));      return new Symbol(sym.LLAV_DER, yyline, yychar, yytext()); }
 "["         {listaTokens.add(new Tokens(yytext(), "COR_IZQ", yyline+"", yychar+""));       return new Symbol(sym.COR_IZQ, yyline, yychar, yytext()); }
 "]"         {listaTokens.add(new Tokens(yytext(), "COR_DER", yyline+"", yychar+""));       return new Symbol(sym.COR_DER, yyline, yychar, yytext()); }
 "@"         {listaTokens.add(new Tokens(yytext(), "ARROBA", yyline+"", yychar+""));        return new Symbol(sym.ARROBA, yyline, yychar, yytext()); }
@@ -88,17 +86,16 @@ COM_MULT = [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 ";"         {listaTokens.add(new Tokens(yytext(), "PTCOMA", yyline+"", yychar+""));        return new Symbol(sym.PTCOMA, yyline, yychar, yytext()); }
 ","         {listaTokens.add(new Tokens(yytext(), "COMA", yyline+"", yychar+""));          return new Symbol(sym.COMA, yyline, yychar, yytext()); }
 ":"         {listaTokens.add(new Tokens(yytext(), "DOSPUNTOS", yyline+"", yychar+""));     return new Symbol(sym.DOSPUNTOS, yyline, yychar, yytext()); }
-"."         {listaTokens.add(new Tokens(yytext(), "PUNTO", yyline+"", yychar+""));         return new Symbol(sym.PUNTO, yyline, yychar, yytext()); }
 
-                                                                                                    
+              
+                                                                                 
 \n {yychar=1;}
 {BLANCOS} {} 
 {DOUBLE}   {listaTokens.add(new Tokens(yytext(), "DOUBLE", yyline+"", yychar+""));          return new Symbol(sym.DOUBLE,yyline,yychar, yytext());} 
 {ID}        {listaTokens.add(new Tokens(yytext(), "ID", yyline+"", yychar+""));            return new Symbol(sym.ID,yyline,yychar, yytext());} 
-{CHAR}     {listaTokens.add(new Tokens(yytext(), "CHAR", yyline+"", yychar+""));         return new Symbol(sym.CHAR,yyline,yychar, yytext());} 
 {STRING}    {listaTokens.add(new Tokens(yytext(), "STRING", yyline+"", yychar+""));        return new Symbol(sym.STRING,yyline,yychar, yytext());} 
-{COM_MULT}    {} 
-
+{COM_SIMPLE}    {listaTokens.add(new Tokens(yytext(), "COM_SIMPLE", yyline+"", yychar+""));        return new Symbol(sym.COM_SIMPLE,yyline,yychar, yytext());} 
+{COM_MULTI}    {listaTokens.add(new Tokens(yytext(), "COM_MULTI", yyline+"", yychar+""));        return new Symbol(sym.COM_MULTI,yyline,yychar, yytext());}  
 . {
     System.out.println("Este es un error lexico: "+yytext()+ ", en la linea: "+yyline+", en la columna: "+yychar);
     //listaErrores.add(new Errores("Lexico", "Caracter no encontrado: "+ yytext(), yyline+"", yychar+""));

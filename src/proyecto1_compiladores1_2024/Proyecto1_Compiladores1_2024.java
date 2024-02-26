@@ -34,7 +34,26 @@ public class Proyecto1_Compiladores1_2024 {
         // TODO code application logic here
         
         String Texto = """
-                       console::print = "hola", numero, 15, "adios" end;
+                       !djfldjlfdlf
+                       
+                       PROGRAM
+                        
+                       !hola este es un coment
+                       graphLine(
+                       titulo::char[] = "Estudiantes" end;
+                       ejeX::char[] = ["1 Parcial", "2 parcial", "Final"] end;
+                       ejeY::double = [50, 30, 70] end;
+                       tituloX::char[] = "Actividades" end;
+                       tituloY::char[] = "Notas" end;
+                       EXEC graphLine end;
+                       ) end;
+                     
+                                    
+                       END PROGRAM
+                       
+                       ! como estas 
+                       ! hola esta es una prueba 2
+                       
                        """;
 
         Analizadores.Sintactico parser;
