@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -18,10 +19,12 @@ import java.util.ArrayList;
  */
 public class Funciones {
     
+    // Busca en el hashmap la lista correspondiente a la clave
     public static ArrayList busquedaLista(Object key) {
         return (ArrayList<Object>) Sintactico.variablesDeclaradas.get(key);
     }
 
+    // Funcion para copiar el ArrayList original
     public static ArrayList copiaLista(){
         
         ArrayList<Object> copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp); 
@@ -30,15 +33,106 @@ public class Funciones {
     }
     
     public static double estadisticas(ArrayList arreglo, String funcion){
+        ArrayList<Double> listaTemp = new ArrayList<>(); 
+        for (Object numero : arreglo) {
+            listaTemp.add(Double.parseDouble(numero.toString()));
+        }
+        
         if (funcion.equals("MEDIA")) {
             double suma = 0;
-            for (Object numero : arreglo) {
-                suma += Double.parseDouble(numero.toString());
+            for (double numero : listaTemp) {
+                suma += numero;
             }
             
-            double media = (double) suma / arreglo.size();
+            double media = (double) suma / listaTemp.size();
             return media;
-        }
+           
+        } else if (funcion.equals("MEDIANA")){
+            double resultado = 0;
+            
+            Collections.sort(listaTemp);
+            //System.err.println(listaTemp);
+            //System.err.println(listaTemp.size());
+            int tamanoLista = listaTemp.size();
+            
+            if ((tamanoLista % 2) == 0) {
+                // Realiza la operacion para cuando el arreglo es par
+                double operar = ((listaTemp.get((tamanoLista/2)-1)) + (listaTemp.get(tamanoLista/2) )) / 2;
+                //System.err.println(operar);
+                resultado = operar;
+            } else {
+                //System.err.println(listaTemp.get(tamanoLista/2));
+                resultado = listaTemp.get(tamanoLista/2);
+            }
+            
+            return resultado;
+            
+        // Funcion para la Moda
+        } else if (funcion.equals("MODA")){
+            int repeticion = 0;
+            int cantidadRepeticon = 0;
+            double queDato = 0;
+            double datoEtregar = 0;
+            
+            Collections.sort(listaTemp);
+            
+            for (double numero : listaTemp) {
+                if (numero == queDato){                   
+                    repeticion++;
+                } else {
+                    repeticion = 1;
+                    queDato = numero;
+                }
+                
+                if(repeticion > cantidadRepeticon) {
+                    cantidadRepeticon = repeticion;
+                    datoEtregar = numero;
+                }          
+            }
+            return datoEtregar;
+        
+        } else if (funcion.equals("VARIANZA")) {
+            double suma = 0;
+            double resultado = 0;
+            for (double numero : listaTemp) {
+                suma += numero;
+            }
+            double media = (double) suma / listaTemp.size();
+            
+            //System.err.println("media--> "+ media);
+            //System.err.println("tamano--> "+ listaTemp.size());
+            
+            for (double numero : listaTemp) {
+                
+                double operacion = Math.pow((numero - media),2);
+                //System.out.println(operacion);
+                resultado += operacion;
+            } 
+            
+            return resultado/(listaTemp.size() - 1);
+            
+        // Funcion para numero mayor    
+        } else if (funcion.equals("MAX")){
+            double resultado = 0;
+            boolean primero = true;
+            for (double numero : listaTemp){
+                if (numero > resultado || primero == true)
+                    resultado = numero;
+                    primero = false;
+            }
+            
+            return resultado;
+        } else if (funcion.equals("MIN")){
+            double resultado = 0;
+            boolean primero = true;
+            for (double numero : listaTemp){
+                if (numero < resultado || primero == true)
+                    resultado = numero;
+                    primero = false;
+            }
+            
+            return resultado;
+        } 
         return 0;
     }
     
@@ -71,14 +165,6 @@ public class Funciones {
         
     }
     
-    public static String convertToString(Object valor) {
-        try {
-            String texto = String.valueOf(valor);
-            return texto;
-        } catch (Exception e) {
-            return null; 
-        } 
-    }
     
     public static void reporteTokens() {
         File carpeta = new File("./Reportes");

@@ -126,7 +126,7 @@ non terminal GraficaPie;
 non terminal GraficaHistograma;
 non terminal comentarios;
 
-
+precedence left MENOS;
 
 start with ini; 
 
@@ -159,11 +159,12 @@ instruccion::=
 ;   
 
 valores::=
-     DOUBLE:val                         {: RESULT=val; //System.out.println(val);:}
+    MENOS DOUBLE:val                    {: RESULT="-"+val; //System.out.println(val);:}
+    | DOUBLE:val                        {: RESULT=val; //System.out.println(val);:}
     | ID:val                            {: RESULT=variablesDeclaradas.get(val); //System.out.println(val);:}
     | STRING:val                        {: RESULT=val; //System.out.println(val);:}
-    | operaciones:val                   {: RESULT=val; System.out.println(val);:}
-    | funcionesEstadisticas:val         {: RESULT=val; System.out.println(val);:}
+    | operaciones:val                   {: RESULT=val; //System.out.println(val);:}
+    | funcionesEstadisticas:val         {: RESULT=val; //System.out.println(val);:}
 ;
 
 tiposVariables::=
@@ -172,17 +173,19 @@ tiposVariables::=
 ;
 
 valoresArreglo::=
-    valoresArreglo COMA funcionesEstadisticas       
-    |valoresArreglo:rec COMA operaciones:val            {:listaDatosTemp.add(val);:}    
+    valoresArreglo COMA funcionesEstadisticas:val       {:listaDatosTemp.add(val);:}
+    |valoresArreglo:rec COMA operaciones:val            {:listaDatosTemp.add(val);:}
+    | valoresArreglo:rec COMA MENOS DOUBLE:val          {:listaDatosTemp.add("-"+val);:} 
     | valoresArreglo:rec COMA DOUBLE:val                {:listaDatosTemp.add(val);:} 
     | valoresArreglo:rec COMA STRING:val                {:listaDatosTemp.add(val);:} 
     | valoresArreglo:rec COMA ID:val                    {:listaDatosTemp.add(variablesDeclaradas.get(val));:} 
     | STRING:val                                        {:listaDatosTemp.add(val);:} 
+    | MENOS DOUBLE:val                                  {:listaDatosTemp.add("-"+val);:} 
     | DOUBLE:val                                        {:listaDatosTemp.add(val);:} 
     | ID:val                                            {:listaDatosTemp.add(variablesDeclaradas.get(val));:}      
     | operaciones:val                                   {:listaDatosTemp.add(val);:} 
     | ARROBA ID:val                                     {:listaDatosTemp.add(variablesDeclaradas.get(val));:}                      
-    | funcionesEstadisticas
+    | funcionesEstadisticas:val                         {:listaDatosTemp.add(val);:}
 ;
 
 
@@ -196,7 +199,8 @@ operaciones::=
 
 valoresOperaciones::=
     operaciones:val                 {:RESULT=val;:} 
-    | funcionesEstadisticas
+    | funcionesEstadisticas:val     {:RESULT=val;:}
+    | MENOS DOUBLE:val              {:RESULT="-"+val;:}
     | DOUBLE:val                    {:RESULT=val;:} 
     | ID:val                        {:RESULT=variablesDeclaradas.get(val); //System.out.println(variablesDeclaradas.get(val));:}      
 ;
@@ -204,17 +208,17 @@ valoresOperaciones::=
 
 funcionesEstadisticas::=
     PR_MEDIA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER             {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "MEDIA");:}
-    | PR_MEDIANA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
-    | PR_MODA PAR_IZQ COR_IZQ  valoresArreglo COR_DER PAR_DER
-    | PR_VARIANZA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
-    | PR_MAX PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
-    | PR_MIN PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
+    | PR_MEDIANA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER         {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "MEDIANA");:}
+    | PR_MODA PAR_IZQ COR_IZQ  valoresArreglo COR_DER PAR_DER           {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "MODA");:}    
+    | PR_VARIANZA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER        {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "VARIANZA");:} 
+    | PR_MAX PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER             {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "MAX");:}
+    | PR_MIN PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER             {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "MIN");:}
     | PR_MEDIA PAR_IZQ ARROBA ID:val PAR_DER                            {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MEDIA");:}
-    | PR_MEDIANA PAR_IZQ ARROBA ID  PAR_DER
-    | PR_MODA PAR_IZQ ARROBA ID  PAR_DER
-    | PR_VARIANZA PAR_IZQ ARROBA ID  PAR_DER
-    | PR_MAX PAR_IZQ ARROBA ID  PAR_DER
-    | PR_MIN PAR_IZQ ARROBA ID  PAR_DER
+    | PR_MEDIANA PAR_IZQ ARROBA ID:val  PAR_DER                         {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MEDIANA");:}
+    | PR_MODA PAR_IZQ ARROBA ID:val PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MODA");:}
+    | PR_VARIANZA PAR_IZQ ARROBA ID:val  PAR_DER                        {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "VARIANZA");:}
+    | PR_MAX PAR_IZQ ARROBA ID:val  PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MAX");:}
+    | PR_MIN PAR_IZQ ARROBA ID:val  PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MIN");:}
 ;
 
 GraficaLineas::=
