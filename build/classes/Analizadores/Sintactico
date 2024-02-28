@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Clases.Errores;
 import java.util.HashMap;
+import proyecto1_compiladores1_2024.Funciones;
 
 parser code 
 {:
@@ -14,7 +15,7 @@ parser code
     public static int indent = 0;
     public static String traduccion = "";
 
-    HashMap<Object, Object> mapa_globales = new HashMap<>();
+    public static HashMap<Object, Object> variablesDeclaradas = new HashMap<>();
 
     // Guarda el error Sintactico
     public void syntax_error(Symbol s){ 
@@ -142,8 +143,8 @@ instrucciones::=
 ;
 
 instruccion::= 
-    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA
-    | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   {:variablesDeclaradas.put(clave, valor);System.out.println(clave);:}
+    | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo:val COR_DER PR_END PTCOMA {:System.out.println(val);:}
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE valoresArreglo  PR_END PTCOMA
@@ -155,11 +156,11 @@ instruccion::=
 ;   
 
 valores::=
-     DOUBLE
-    | ID
-    | STRING
-    | operaciones
-    | funcionesEstadisticas
+     DOUBLE:val                         {: RESULT=val; System.out.println(val);:}
+    | ID:val                            {: RESULT=variablesDeclaradas.get(val); System.out.println(val);:}
+    | STRING:val                        {: RESULT=val; //System.out.println(val);:}
+    | operaciones:val                   {: RESULT=val; System.out.println(val);:}
+    | funcionesEstadisticas:val         
 ;
 
 tiposVariables::=
@@ -168,33 +169,33 @@ tiposVariables::=
 ;
 
 valoresArreglo::=
-    valoresArreglo COMA funcionesEstadisticas
-    |valoresArreglo COMA operaciones
-    | valoresArreglo COMA DOUBLE
-    | valoresArreglo COMA STRING
-    | valoresArreglo COMA ID
-    | STRING
-    | DOUBLE
-    | ID
-    | operaciones
+    valoresArreglo COMA funcionesEstadisticas       
+    |valoresArreglo COMA operaciones                
+    | valoresArreglo:rec COMA DOUBLE:val                {:RESULT=rec + ", " + val; System.out.println(rec);:}
+    | valoresArreglo:rec COMA STRING:val                {:RESULT=rec + ", " + val; System.out.println(rec);:}
+    | valoresArreglo:rec COMA ID:val                    {:RESULT=rec + val; System.out.println(val);:}
+    | STRING:val                                        {:RESULT=val; System.out.println(val);:}
+    | DOUBLE:val                                        {:RESULT=val; //System.out.println(val);:}
+    | ID:val                                            {:RESULT=val; System.out.println(val);:}
+    | operaciones:val                                   {:RESULT=val; System.out.println(val);:}
     | ARROBA ID
     | funcionesEstadisticas
 ;
 
 
 operaciones::=
-    | PR_SUM PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
-    | PR_RES PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
-    | PR_MUL PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
-    | PR_DIV PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
-    | PR_MOD PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+    | PR_SUM PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "SUM");:}    
+    | PR_RES PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "RES");:}    
+    | PR_MUL PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "MUL");:}    
+    | PR_DIV PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "DIV");:}    
+    | PR_MOD PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "MOD");:}    
 ;
 
 valoresOperaciones::=
-    operaciones
+    operaciones:val                 {:RESULT=val;:} 
     | funcionesEstadisticas
-    | DOUBLE
-    | ID
+    | DOUBLE:val                    {:RESULT=val;:} 
+    | ID:val                        {:RESULT=val;:}        
 ;
 
 

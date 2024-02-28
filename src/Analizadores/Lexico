@@ -34,7 +34,7 @@ LETRA   = [a-zA-ZÑñ]
 ID      = {LETRA}({LETRA}|{DOUBLE}|"_")*
 STRING = \"(([^\"\\]?|\\.)*)\"
 COM_SIMPLE = "!"[^\n]*\n
-COM_MULTI = <![^!]*!> 
+COM_MULTI = "<!" [^<>]* ( <! [^<>]* )* "!>"
 
 
 
