@@ -14,8 +14,11 @@ parser code
      **/ 
     public static int indent = 0;
     public static String traduccion = "";
+    public static Object[] objetosTemp = new Object[10];
 
-    public static HashMap<Object, Object> variablesDeclaradas = new HashMap<>();
+
+    public static HashMap<Object, Object> variablesDeclaradas = new HashMap<>(); 
+    public static ArrayList<Object> listaDatosTemp = new ArrayList<>();
 
     // Guarda el error Sintactico
     public void syntax_error(Symbol s){ 
@@ -143,9 +146,9 @@ instrucciones::=
 ;
 
 instruccion::= 
-    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   {:variablesDeclaradas.put(clave, valor);System.out.println(clave);:}
-    | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo:val COR_DER PR_END PTCOMA {:System.out.println(val);:}
-    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA
+    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   {:variablesDeclaradas.put(clave, valor);:}
+    | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID:clave MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA {:variablesDeclaradas.put(clave, Funciones.copiaLista());:}
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT {://limpio:} IGUAL valoresArreglo PR_END PTCOMA   {://limpio:} 
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE valoresArreglo  PR_END PTCOMA
     | GraficaLineas
@@ -156,11 +159,11 @@ instruccion::=
 ;   
 
 valores::=
-     DOUBLE:val                         {: RESULT=val; System.out.println(val);:}
-    | ID:val                            {: RESULT=variablesDeclaradas.get(val); System.out.println(val);:}
+     DOUBLE:val                         {: RESULT=val; //System.out.println(val);:}
+    | ID:val                            {: RESULT=variablesDeclaradas.get(val); //System.out.println(val);:}
     | STRING:val                        {: RESULT=val; //System.out.println(val);:}
     | operaciones:val                   {: RESULT=val; System.out.println(val);:}
-    | funcionesEstadisticas:val         
+    | funcionesEstadisticas:val         {: RESULT=val; System.out.println(val);:}
 ;
 
 tiposVariables::=
@@ -170,48 +173,48 @@ tiposVariables::=
 
 valoresArreglo::=
     valoresArreglo COMA funcionesEstadisticas       
-    |valoresArreglo COMA operaciones                
-    | valoresArreglo:rec COMA DOUBLE:val                {:RESULT=rec + ", " + val; System.out.println(rec);:}
-    | valoresArreglo:rec COMA STRING:val                {:RESULT=rec + ", " + val; System.out.println(rec);:}
-    | valoresArreglo:rec COMA ID:val                    {:RESULT=rec + val; System.out.println(val);:}
-    | STRING:val                                        {:RESULT=val; System.out.println(val);:}
-    | DOUBLE:val                                        {:RESULT=val; //System.out.println(val);:}
-    | ID:val                                            {:RESULT=val; System.out.println(val);:}
-    | operaciones:val                                   {:RESULT=val; System.out.println(val);:}
-    | ARROBA ID
+    |valoresArreglo:rec COMA operaciones:val            {:listaDatosTemp.add(val);:}    
+    | valoresArreglo:rec COMA DOUBLE:val                {:listaDatosTemp.add(val);:} 
+    | valoresArreglo:rec COMA STRING:val                {:listaDatosTemp.add(val);:} 
+    | valoresArreglo:rec COMA ID:val                    {:listaDatosTemp.add(variablesDeclaradas.get(val));:} 
+    | STRING:val                                        {:listaDatosTemp.add(val);:} 
+    | DOUBLE:val                                        {:listaDatosTemp.add(val);:} 
+    | ID:val                                            {:listaDatosTemp.add(variablesDeclaradas.get(val));:}      
+    | operaciones:val                                   {:listaDatosTemp.add(val);:} 
+    | ARROBA ID:val                                     {:listaDatosTemp.add(variablesDeclaradas.get(val));:}                      
     | funcionesEstadisticas
 ;
 
 
 operaciones::=
-    | PR_SUM PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "SUM");:}    
-    | PR_RES PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "RES");:}    
-    | PR_MUL PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "MUL");:}    
-    | PR_DIV PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "DIV");:}    
-    | PR_MOD PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1.toString(), val2.toString(), "MOD");:}    
+    | PR_SUM PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1, val2, "SUM");:}    
+    | PR_RES PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1, val2, "RES");:}    
+    | PR_MUL PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1, val2, "MUL");:}    
+    | PR_DIV PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1, val2, "DIV");:}    
+    | PR_MOD PAR_IZQ valoresOperaciones:val1 COMA valoresOperaciones:val2 PAR_DER       {:RESULT=Funciones.operaciones(val1, val2, "MOD");:}    
 ;
 
 valoresOperaciones::=
     operaciones:val                 {:RESULT=val;:} 
     | funcionesEstadisticas
     | DOUBLE:val                    {:RESULT=val;:} 
-    | ID:val                        {:RESULT=val;:}        
+    | ID:val                        {:RESULT=variablesDeclaradas.get(val); //System.out.println(variablesDeclaradas.get(val));:}      
 ;
 
 
 funcionesEstadisticas::=
-    PR_MEDIA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
+    PR_MEDIA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER             {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "MEDIA");:}
     | PR_MEDIANA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
     | PR_MODA PAR_IZQ COR_IZQ  valoresArreglo COR_DER PAR_DER
     | PR_VARIANZA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
     | PR_MAX PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
     | PR_MIN PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER
-    | PR_MEDIA PAR_IZQ valoresArreglo PAR_DER
-    | PR_MEDIANA PAR_IZQ valoresArreglo PAR_DER
-    | PR_MODA PAR_IZQ valoresArreglo PAR_DER
-    | PR_VARIANZA PAR_IZQ valoresArreglo PAR_DER
-    | PR_MAX PAR_IZQ valoresArreglo PAR_DER
-    | PR_MIN PAR_IZQ valoresArreglo PAR_DER
+    | PR_MEDIA PAR_IZQ ARROBA ID:val PAR_DER                            {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MEDIA");:}
+    | PR_MEDIANA PAR_IZQ ARROBA ID  PAR_DER
+    | PR_MODA PAR_IZQ ARROBA ID  PAR_DER
+    | PR_VARIANZA PAR_IZQ ARROBA ID  PAR_DER
+    | PR_MAX PAR_IZQ ARROBA ID  PAR_DER
+    | PR_MIN PAR_IZQ ARROBA ID  PAR_DER
 ;
 
 GraficaLineas::=

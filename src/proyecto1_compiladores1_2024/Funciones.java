@@ -10,6 +10,7 @@ import Analizadores.Sintactico;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,12 +18,38 @@ import java.io.PrintWriter;
  */
 public class Funciones {
     
+    public static ArrayList busquedaLista(Object key) {
+        return (ArrayList<Object>) Sintactico.variablesDeclaradas.get(key);
+    }
+
+    public static ArrayList copiaLista(){
+        
+        ArrayList<Object> copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp); 
+        Sintactico.listaDatosTemp.clear();
+        return copiaListaDatosTemp;
+    }
+    
+    public static double estadisticas(ArrayList arreglo, String funcion){
+        if (funcion.equals("MEDIA")) {
+            double suma = 0;
+            for (Object numero : arreglo) {
+                suma += Double.parseDouble(numero.toString());
+            }
+            
+            double media = (double) suma / arreglo.size();
+            return media;
+        }
+        return 0;
+    }
     
     
-    public static int operaciones(String valor1, String valor2, String operacion) {
+    public static double operaciones(Object valor1, Object valor2, String operacion) {
+        
+        //System.err.println(valor1 + " | " + valor2);
+        
         try {
-            int val1 = Integer.parseInt(valor1);
-            int val2 = Integer.parseInt(valor2);
+            double val1 = Double.parseDouble(valor1.toString());
+            double val2 = Double.parseDouble(valor2.toString());
             
             if (operacion.equals("SUM")) {
                 return val1 + val2;
