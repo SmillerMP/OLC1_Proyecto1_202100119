@@ -14,27 +14,22 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
 /**
  *
  * @author samuel
  */
 public class Funciones {
     
-    public static void ImprimirColumnaArreglo(ArrayList arreglo, Object nombre) {
-        ArrayList<Double> listaTemp = new ArrayList<>(); 
-        for (Object numero : arreglo) {
-            listaTemp.add(Double.parseDouble(numero.toString()));
-        }
-        
+    public static void ImprimirColumnaArreglo(ArrayList arreglo, Object nombre) {        
         String TextoSalida = "";
         
         TextoSalida += "---------------- \n" + nombre.toString() + "\n---------------- \n";
         
-        for (Object dato : listaTemp) {
+        for (Object dato : arreglo) {
             TextoSalida += dato.toString() + "\n";
         }
         
-        TextoSalida += "\n";
         System.out.println(TextoSalida);
     }
     
@@ -49,7 +44,6 @@ public class Funciones {
             TextoSalida += dato.toString() + "\n";
         }
         
-        TextoSalida += "\n";
         System.out.println(TextoSalida);
     }
     

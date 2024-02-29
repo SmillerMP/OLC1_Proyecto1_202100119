@@ -26,6 +26,7 @@ import java.util.Collections;
 
 
 
+
 public class Proyecto1_Compiladores1_2024 {
     /**
      * @param args the command line arguments
@@ -43,55 +44,52 @@ public class Proyecto1_Compiladores1_2024 {
 
                         PROGRAM
 
-                        ! Ejemplos
-                        var:double:: b <- 5 end;
-                        var:double:: a <- 3 end;
-                        var:double:: numero <- 2.5 end;
-                        var:double:: variable <- 7 end;
-                        var:char[]:: cadena <- "cadena" end;
-                        var:double:: copia <- numero end; ! copia tiene el valor 2.5
+                       ! Variables
+                       	var:double:: notaAprobar <- 61 end;
+                       	var:char[]:: labelAprobar <- "Nota Minima" end;
+                       	
+                       	! Arreglos
+                       	arr:double:: @notas <- [notaAprobar, MUL(75, 0.45), DIV(SUM(80,20), RES(75,25))] end;
+                       	arr:char[]:: @labels <- [labelAprobar, "P1", "P2"] end;
+                       	
+                       	!Prints
+                       	var:char[]:: titulo1 <- "Titulo histograma" end;
+                       	console::column = "test" -> [10, 15.5, 61.1] end;
+                       	console::column = "Notas" -> @notas end;
+                       	console::column = titulo1 -> @labels end;
+                       	
+                       	console::print = "Media", "Mediana", "Moda", "Varianza", "Max", "Min" end;
+                        console::print = Media(@notas), Mediana(@notas), Moda(@notas), Varianza(@notas), Max(@notas), Min(@notas) end;
+                        console::print = "Hola Mundo", MOD(10, 9), notaAprobar, labelAprobar end;
+
+                        <! FELICIDADES
+                                Lo de arriba ya es medio proyecto
+                                Tu puedes !>
                         
-
-                        ! Operaciones
-                        var:double:: suma <- SUM(5, 2) end;
-                        var:double:: resta <- RES(3, 2) end;
-                        var:double:: multi <- MUL(4, numero) end; ! Funciona con variables
-                        var:double:: division <- DIV(1, variable) end;
-                        var:double:: modulo <- MOD(5, 4) end;
-
-                        var:double:: suma2 <- MUL( SUM(7,multi) , RES(7, DIV(25,5) )) end;
-
-                        arr:double::@darray <- [1, 2, 3, 4, 5] end; 
-                        arr:double::@carray <- [numero, copia, 7] end;
-                        arr:double:: @impresion <- [33,-6,2,45,3,6,8,2,0,4,-5,2,6] end;
-
-                        arr:double::@test2 <- [ SUM(7,3), DIV(25,5)] end; 
-                        var:double:: med1 <- Media([1, 2, SUM(3, b), 4, a]) end;
-                        var:double:: med2 <- Media( @darray ) end;
-
-                        arr:double::@arreglo <- [Media([1, 2, SUM(3, b), 4, a]), Media(@darray)] end;
-                        var:double:: mitad <- DIV( SUM(Media(@arreglo), Media(@darray) ), 2) end;
-
-                        var:double:: max1 <- Max( @darray ) end;
-                        var:double:: min1 <- Min( @darray ) end;
+                                              	
+                        var:double:: gb1 <- 61 end;
+                        var:char[]:: gbt <- "Datos" end;
                         
-                        var:double:: min2 <- Min([33,-6,2,45,3,6,8,2,0,4,-5,2,6]) end;
-                        var:double:: max2 <- Max([33,-6,2,45,3,6,8,2,0,4,-5,2,6]) end;
-                        var:double:: mediana1 <- Mediana([33,-6,2,45,3,6,8,2,0,4,-5,2,6]) end;
-                        var:double:: mediana2 <- Mediana([55,6,8,2,555,4,-5,2]) end;
+                       graphBar(
+                            !grafica 1
+                            tituloX::char[] = "Actividades" end;
+                            tituloY::char[] = gbt end;
+                            titulo::char[] = "Estudiantes" end;
+                            ejeX::char[] = ["1 Parcial", "2 parcial", "Final"] end;
+                            ejeY::double = [gb1, 30, 70] end;
+                            EXEC graphBar end;
+                        ) end;     
                        
-                        console::print = "hola", numero, 15, "adios" end;
-                       
-                        
-                        var:char[]:: tituloFinal <- "Enteros" end;
-                        console::column = tituloFinal -> @impresion end;
-                        
-                       
-                        var:double:: testMedia <- Media([33,-6,2,45,3,6,8,2,0,4,-5,2,6]) end;    
-                        var:double:: testModa <- Moda([33,-6,2,45,3,6,8,2,0,4,1,1,-5,2,6]) end;  
-                        var:double:: Varianzaaassss <- Varianza([33,-6,2,45,3,6,8,2,0,4,1,1,-5,2,6]) end;                     
-                                    
-                        console::print = 1, 2, SUM(3,5), Media(@arreglo) end; 
+                       graphPie(
+                                <! FELICIDADES
+                                La de pie es facil !>
+
+                                label::char[] = ["Uno", "Dos", "Tres"] end;
+                                titulo::char[] = "Ejemplo Gráfica de Pie" end;
+                                values::double = [50, 30, 20] end;
+                                EXEC graphPie end;
+                        ) end;       
+                                   
                                             
                                                                                                     
 

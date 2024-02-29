@@ -17,8 +17,8 @@ parser code
     public static Object[] objetosTemp = new Object[10];
 
     public static HashMap<Object, Object> variablesDeclaradas = new HashMap<>(); 
+    public static HashMap<Object, Object> datosGraficas = new HashMap<>();
     public static ArrayList<Object> listaDatosTemp = new ArrayList<>();
-    public static ArrayList<Object> listaPrint = new ArrayList<>();
 
     // Guarda el error Sintactico
     public void syntax_error(Symbol s){ 
@@ -125,6 +125,8 @@ non terminal GraficaBarras;
 non terminal GraficaPie;
 non terminal GraficaHistograma;
 non terminal comentarios;
+non terminal intruccionGrafica;
+non terminal instruccionesGraficas;
 
 precedence left MENOS;
 
@@ -148,7 +150,7 @@ instrucciones::=
 instruccion::= 
     PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   {:variablesDeclaradas.put(clave, valor);:}
     | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID:clave MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA {:variablesDeclaradas.put(clave, Funciones.copiaLista());:}
-    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA   {:Funciones.ImprimirConsola();:} 
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA  {:Funciones.ImprimirConsola();:} 
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA   {:Funciones.ImprimirColumna(nombre);:} 
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE ARROBA ID:val PR_END PTCOMA   {:Funciones.ImprimirColumnaArreglo(Funciones.busquedaLista(val), nombre);:} 
     | GraficaLineas
@@ -223,11 +225,7 @@ funcionesEstadisticas::=
 
 GraficaLineas::=
     PR_GRAPHLINE PAR_IZQ
-    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
-    PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
-    PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
-    PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
-    PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    instruccionesGraficas
     PR_EXEC PR_GRAPHLINE PR_END PTCOMA
     PAR_DER PR_END PTCOMA 
 ;
@@ -235,20 +233,14 @@ GraficaLineas::=
 
 GraficaBarras::=
     PR_GRAPHBAR PAR_IZQ
-    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
-    PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
-    PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
-    PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
-    PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    instruccionesGraficas
     PR_EXEC PR_GRAPHBAR PR_END PTCOMA
     PAR_DER PR_END PTCOMA 
 ;
 
 GraficaPie::=
     PR_GRAPHPIE PAR_IZQ
-    PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
-    PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
-    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+    instruccionesGraficas
     PR_EXEC PR_GRAPHPIE PR_END PTCOMA
     PAR_DER PR_END PTCOMA 
 ;
@@ -256,10 +248,34 @@ GraficaPie::=
 
 GraficaHistograma::=
     PR_HISTOGRAM PAR_IZQ
-    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
-    PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
+    instruccionesGraficas
     PR_EXEC PR_HISTOGRAM PR_END PTCOMA
     PAR_DER PR_END PTCOMA 
+;
+
+// Instrucciones para las graficas  
+intruccionGrafica::=
+    PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING:val PR_END PTCOMA                                {:datosGraficas.put("titulo", val);:}
+    | PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                  {:datosGraficas.put("titulo", variablesDeclaradas.get(val));:}
+    | PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA            {:datosGraficas.put("ejeX", Funciones.copiaLista());:}
+    | PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ARROBA ID:val PR_END PTCOMA                             {:datosGraficas.put("ejeX", variablesDeclaradas.get(val));:}
+    | PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA                          {:datosGraficas.put("ejeY", Funciones.copiaLista());:}
+    | PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL ARROBA ID:val PR_END PTCOMA                                           {:datosGraficas.put("ejeY", variablesDeclaradas.get(val));:}
+    | PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING:val PR_END PTCOMA                             {:datosGraficas.put("tituloX", val);:}                                
+    | PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                 {:datosGraficas.put("tituloX", variablesDeclaradas.get(val));:} 
+    | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING:val PR_END PTCOMA                             {:datosGraficas.put("tituloY", val);:} 
+    | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                 {:datosGraficas.put("tituloY", variablesDeclaradas.get(val));:}            
+    | PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA           {:datosGraficas.put("label", Funciones.copiaLista());:}
+    | PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA                        {:datosGraficas.put("values", Funciones.copiaLista());:}
+    | PR_VALUES DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA          {:datosGraficas.put("values", Funciones.copiaLista());:}     
+    | PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL ARROBA ID:val PR_END PTCOMA                                         {:datosGraficas.put("values", variablesDeclaradas.get(val));:}                                
+    | comentarios
+
+;
+
+instruccionesGraficas::=
+    intruccionGrafica instruccionesGraficas
+    | intruccionGrafica
 ;
 
 comentarios::=
