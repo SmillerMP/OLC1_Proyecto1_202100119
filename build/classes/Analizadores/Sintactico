@@ -16,9 +16,9 @@ parser code
     public static String traduccion = "";
     public static Object[] objetosTemp = new Object[10];
 
-
     public static HashMap<Object, Object> variablesDeclaradas = new HashMap<>(); 
     public static ArrayList<Object> listaDatosTemp = new ArrayList<>();
+    public static ArrayList<Object> listaPrint = new ArrayList<>();
 
     // Guarda el error Sintactico
     public void syntax_error(Symbol s){ 
@@ -148,9 +148,9 @@ instrucciones::=
 instruccion::= 
     PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   {:variablesDeclaradas.put(clave, valor);:}
     | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID:clave MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA {:variablesDeclaradas.put(clave, Funciones.copiaLista());:}
-    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT {://limpio:} IGUAL valoresArreglo PR_END PTCOMA   {://limpio:} 
-    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA
-    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores MENOS MAYOR_QUE valoresArreglo  PR_END PTCOMA
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA   {:Funciones.ImprimirConsola();:} 
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA   {:Funciones.ImprimirColumna(nombre);:} 
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE ARROBA ID:val PR_END PTCOMA   {:Funciones.ImprimirColumnaArreglo(Funciones.busquedaLista(val), nombre);:} 
     | GraficaLineas
     | GraficaBarras
     | GraficaPie
@@ -177,9 +177,9 @@ valoresArreglo::=
     |valoresArreglo:rec COMA operaciones:val            {:listaDatosTemp.add(val);:}
     | valoresArreglo:rec COMA MENOS DOUBLE:val          {:listaDatosTemp.add("-"+val);:} 
     | valoresArreglo:rec COMA DOUBLE:val                {:listaDatosTemp.add(val);:} 
-    | valoresArreglo:rec COMA STRING:val                {:listaDatosTemp.add(val);:} 
+    | valoresArreglo:rec COMA STRING:val                {:listaDatosTemp.add(val); //System.out.println(val.toString());:} 
     | valoresArreglo:rec COMA ID:val                    {:listaDatosTemp.add(variablesDeclaradas.get(val));:} 
-    | STRING:val                                        {:listaDatosTemp.add(val);:} 
+    | STRING:val                                        {:listaDatosTemp.add(val); //System.out.println(val);:} 
     | MENOS DOUBLE:val                                  {:listaDatosTemp.add("-"+val);:} 
     | DOUBLE:val                                        {:listaDatosTemp.add(val);:} 
     | ID:val                                            {:listaDatosTemp.add(variablesDeclaradas.get(val));:}      

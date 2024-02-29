@@ -50,6 +50,7 @@ public class Proyecto1_Compiladores1_2024 {
                         var:double:: variable <- 7 end;
                         var:char[]:: cadena <- "cadena" end;
                         var:double:: copia <- numero end; ! copia tiene el valor 2.5
+                        
 
                         ! Operaciones
                         var:double:: suma <- SUM(5, 2) end;
@@ -62,6 +63,7 @@ public class Proyecto1_Compiladores1_2024 {
 
                         arr:double::@darray <- [1, 2, 3, 4, 5] end; 
                         arr:double::@carray <- [numero, copia, 7] end;
+                        arr:double:: @impresion <- [33,-6,2,45,3,6,8,2,0,4,-5,2,6] end;
 
                         arr:double::@test2 <- [ SUM(7,3), DIV(25,5)] end; 
                         var:double:: med1 <- Media([1, 2, SUM(3, b), 4, a]) end;
@@ -78,10 +80,19 @@ public class Proyecto1_Compiladores1_2024 {
                         var:double:: mediana1 <- Mediana([33,-6,2,45,3,6,8,2,0,4,-5,2,6]) end;
                         var:double:: mediana2 <- Mediana([55,6,8,2,555,4,-5,2]) end;
                        
+                        console::print = "hola", numero, 15, "adios" end;
+                       
+                        
+                        var:char[]:: tituloFinal <- "Enteros" end;
+                        console::column = tituloFinal -> @impresion end;
+                        
+                       
                         var:double:: testMedia <- Media([33,-6,2,45,3,6,8,2,0,4,-5,2,6]) end;    
                         var:double:: testModa <- Moda([33,-6,2,45,3,6,8,2,0,4,1,1,-5,2,6]) end;  
                         var:double:: Varianzaaassss <- Varianza([33,-6,2,45,3,6,8,2,0,4,1,1,-5,2,6]) end;                     
-                                                             
+                                    
+                        console::print = 1, 2, SUM(3,5), Media(@arreglo) end; 
+                                            
                                                                                                     
 
 
