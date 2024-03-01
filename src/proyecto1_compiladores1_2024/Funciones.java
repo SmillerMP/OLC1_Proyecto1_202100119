@@ -83,103 +83,110 @@ public class Funciones {
     public static double estadisticas(ArrayList arreglo, String funcion){
         ArrayList<Double> listaTemp = new ArrayList<>(); 
         for (Object numero : arreglo) {
-            listaTemp.add(Double.parseDouble(numero.toString()));
+            listaTemp.add(Double.valueOf(numero.toString()));
         }
         
-        if (funcion.equals("MEDIA")) {
-            double suma = 0;
-            for (double numero : listaTemp) {
-                suma += numero;
-            }
-            
-            double media = (double) suma / listaTemp.size();
-            return media;
-           
-        } else if (funcion.equals("MEDIANA")){
-            double resultado = 0;
-            
-            Collections.sort(listaTemp);
-            //System.err.println(listaTemp);
-            //System.err.println(listaTemp.size());
-            int tamanoLista = listaTemp.size();
-            
-            if ((tamanoLista % 2) == 0) {
-                // Realiza la operacion para cuando el arreglo es par
-                double operar = ((listaTemp.get((tamanoLista/2)-1)) + (listaTemp.get(tamanoLista/2) )) / 2;
-                //System.err.println(operar);
-                resultado = operar;
-            } else {
-                //System.err.println(listaTemp.get(tamanoLista/2));
-                resultado = listaTemp.get(tamanoLista/2);
-            }
-            
-            return resultado;
-            
-        // Funcion para la Moda
-        } else if (funcion.equals("MODA")){
-            int repeticion = 0;
-            int cantidadRepeticon = 0;
-            double queDato = 0;
-            double datoEtregar = 0;
-            
-            Collections.sort(listaTemp);
-            
-            for (double numero : listaTemp) {
-                if (numero == queDato){                   
-                    repeticion++;
-                } else {
-                    repeticion = 1;
-                    queDato = numero;
+        switch (funcion) {
+            case "MEDIA" -> {
+                double suma = 0;
+                for (double numero : listaTemp) {
+                    suma += numero;
                 }
                 
-                if(repeticion > cantidadRepeticon) {
-                    cantidadRepeticon = repeticion;
-                    datoEtregar = numero;
-                }          
+                double media = (double) suma / listaTemp.size();
+                return media;                
             }
-            return datoEtregar;
-        
-        } else if (funcion.equals("VARIANZA")) {
-            double suma = 0;
-            double resultado = 0;
-            for (double numero : listaTemp) {
-                suma += numero;
-            }
-            double media = (double) suma / listaTemp.size();
             
-            //System.err.println("media--> "+ media);
-            //System.err.println("tamano--> "+ listaTemp.size());
-            
-            for (double numero : listaTemp) {
+            case "MEDIANA" -> {
+                double resultado = 0;
                 
-                double operacion = Math.pow((numero - media),2);
-                //System.out.println(operacion);
-                resultado += operacion;
-            } 
-            
-            return resultado/(listaTemp.size() - 1);
-            
-        // Funcion para numero mayor    
-        } else if (funcion.equals("MAX")){
-            double resultado = 0;
-            boolean primero = true;
-            for (double numero : listaTemp){
-                if (numero > resultado || primero == true)
-                    resultado = numero;
-                    primero = false;
+                Collections.sort(listaTemp);
+                //System.err.println(listaTemp);
+                //System.err.println(listaTemp.size());
+                int tamanoLista = listaTemp.size();
+                
+                if ((tamanoLista % 2) == 0) {
+                    // Realiza la operacion para cuando el arreglo es par
+                    double operar = ((listaTemp.get((tamanoLista/2)-1)) + (listaTemp.get(tamanoLista/2) )) / 2;
+                    //System.err.println(operar);
+                    resultado = operar;
+                } else {
+                    //System.err.println(listaTemp.get(tamanoLista/2));
+                    resultado = listaTemp.get(tamanoLista/2);
+                }
+                
+                return resultado;               
             }
             
-            return resultado;
-        } else if (funcion.equals("MIN")){
-            double resultado = 0;
-            boolean primero = true;
-            for (double numero : listaTemp){
-                if (numero < resultado || primero == true)
-                    resultado = numero;
-                    primero = false;
+            case "MODA" -> {
+                int repeticion = 0;
+                int cantidadRepeticon = 0;
+                double queDato = 0;
+                double datoEtregar = 0;
+                
+                Collections.sort(listaTemp);
+                
+                for (double numero : listaTemp) {
+                    if (numero == queDato){
+                        repeticion++;
+                    } else {
+                        repeticion = 1;
+                        queDato = numero;
+                    }
+                    
+                    if(repeticion > cantidadRepeticon) {
+                        cantidadRepeticon = repeticion;
+                        datoEtregar = numero;
+                    }
+                }
+                return datoEtregar;
             }
             
-            return resultado;
+            case "VARIANZA" -> {
+                double suma = 0;
+                double resultado = 0;
+                for (double numero : listaTemp) {
+                    suma += numero;
+                }
+                double media = (double) suma / listaTemp.size();
+                
+                //System.err.println("media--> "+ media);
+                //System.err.println("tamano--> "+ listaTemp.size());
+                
+                for (double numero : listaTemp) {
+                    
+                    double operacion = Math.pow((numero - media),2);
+                    //System.out.println(operacion);
+                    resultado += operacion;
+                }
+                
+                return resultado/(listaTemp.size() - 1);
+            }
+            
+            case "MAX" -> {
+                double resultado = 0;
+                boolean primero = true;
+                for (double numero : listaTemp){
+                    if (numero > resultado || primero == true)
+                        resultado = numero;
+                    primero = false;
+                }
+                
+                return resultado;
+            }
+            case "MIN" -> {
+                double resultado = 0;
+                boolean primero = true;
+                for (double numero : listaTemp){
+                    if (numero < resultado || primero == true)
+                        resultado = numero;
+                    primero = false;
+                }              
+                return resultado;
+            }
+            
+            default -> {
+            }
         } 
         return 0;
     }
@@ -193,18 +200,23 @@ public class Funciones {
             double val1 = Double.parseDouble(valor1.toString());
             double val2 = Double.parseDouble(valor2.toString());
             
-            if (operacion.equals("SUM")) {
-                return val1 + val2;
-            } else if (operacion.equals("RES")) {
-                return val1 - val2;
-            } else if (operacion.equals("MUL")) {
-                return val1 * val2;
-            } else if (operacion.equals("DIV")) {
-                return val1 / val2;
-            } else if (operacion.equals("MOD")) {
-                return val1 % val2;
-            } else {
-                throw new IllegalArgumentException("Operación no válida: " + operacion);
+            switch (operacion) {
+                case "SUM" -> {
+                    return val1 + val2;
+                }
+                case "RES" -> {
+                    return val1 - val2;
+                }
+                case "MUL" -> {
+                    return val1 * val2;
+                }
+                case "DIV" -> {
+                    return val1 / val2;
+                }
+                case "MOD" -> {
+                    return val1 % val2;
+                }
+                default -> throw new IllegalArgumentException("Operación no válida: " + operacion);
             }
             
         } catch (Exception e) {

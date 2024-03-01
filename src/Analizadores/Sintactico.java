@@ -1345,7 +1345,7 @@ class CUP$Sintactico$actions {
           case 63: // GraficaLineas ::= PR_GRAPHLINE PAR_IZQ instruccionesGraficas PR_EXEC PR_GRAPHLINE PR_END PTCOMA PAR_DER PR_END PTCOMA 
             {
               Object RESULT =null;
-
+		Graficas.graficaLineas();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("GraficaLineas",10, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-9)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1372,7 +1372,7 @@ class CUP$Sintactico$actions {
           case 66: // GraficaHistograma ::= PR_HISTOGRAM PAR_IZQ instruccionesGraficas PR_EXEC PR_HISTOGRAM PR_END PTCOMA PAR_DER PR_END PTCOMA 
             {
               Object RESULT =null;
-
+		Graficas.histrograma();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("GraficaHistograma",13, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-9)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

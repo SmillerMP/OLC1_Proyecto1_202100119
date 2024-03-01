@@ -228,7 +228,7 @@ GraficaLineas::=
     PR_GRAPHLINE PAR_IZQ
     instruccionesGraficas
     PR_EXEC PR_GRAPHLINE PR_END PTCOMA
-    PAR_DER PR_END PTCOMA 
+    PAR_DER PR_END PTCOMA               {:Graficas.graficaLineas();:} 
 ;
 
 
@@ -251,7 +251,7 @@ GraficaHistograma::=
     PR_HISTOGRAM PAR_IZQ
     instruccionesGraficas
     PR_EXEC PR_HISTOGRAM PR_END PTCOMA
-    PAR_DER PR_END PTCOMA 
+    PAR_DER PR_END PTCOMA               {:Graficas.histrograma();:}
 ;
 
 // Instrucciones para las graficas  
