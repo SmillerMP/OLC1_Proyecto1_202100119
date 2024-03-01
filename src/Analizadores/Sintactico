@@ -6,6 +6,7 @@ import java.util.List;
 import Clases.Errores;
 import java.util.HashMap;
 import proyecto1_compiladores1_2024.Funciones;
+import proyecto1_compiladores1_2024.Graficas;
 
 parser code 
 {:
@@ -235,14 +236,14 @@ GraficaBarras::=
     PR_GRAPHBAR PAR_IZQ
     instruccionesGraficas
     PR_EXEC PR_GRAPHBAR PR_END PTCOMA
-    PAR_DER PR_END PTCOMA 
+    PAR_DER PR_END PTCOMA               {:Graficas.graficaBarras();:} 
 ;
 
 GraficaPie::=
     PR_GRAPHPIE PAR_IZQ
     instruccionesGraficas
     PR_EXEC PR_GRAPHPIE PR_END PTCOMA
-    PAR_DER PR_END PTCOMA 
+    PAR_DER PR_END PTCOMA               {:Graficas.graficaPie();:}  
 ;
 
 
@@ -265,6 +266,7 @@ intruccionGrafica::=
     | PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                 {:datosGraficas.put("tituloX", variablesDeclaradas.get(val));:} 
     | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING:val PR_END PTCOMA                             {:datosGraficas.put("tituloY", val);:} 
     | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                 {:datosGraficas.put("tituloY", variablesDeclaradas.get(val));:}            
+    | PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ARROBA ID:val PR_END PTCOMA                            {:datosGraficas.put("label", variablesDeclaradas.get(val));:}
     | PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA           {:datosGraficas.put("label", Funciones.copiaLista());:}
     | PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA                        {:datosGraficas.put("values", Funciones.copiaLista());:}
     | PR_VALUES DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA          {:datosGraficas.put("values", Funciones.copiaLista());:}     
