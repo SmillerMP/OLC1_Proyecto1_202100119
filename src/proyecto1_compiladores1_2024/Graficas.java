@@ -173,10 +173,11 @@ public class Graficas {
             System.err.println("Error al guardar la gráfica: " + e.getMessage());
         }
         
-        
-        
+        Sintactico.datosGraficas.clear(); 
     }
     
+    
+    // Manejo de grafica de Pie
     public static void graficaPie(){
                   
         String tituloGrafica = Sintactico.datosGraficas.get("titulo").toString();
@@ -239,6 +240,9 @@ public class Graficas {
             } catch (IOException e) {
                 System.err.println("Error al guardar la gráfica: " + e.getMessage());
             }
+            
+            Sintactico.datosGraficas.clear();
+
         }
     }
     
@@ -314,6 +318,8 @@ public class Graficas {
             } catch (IOException e) {
                 System.err.println("Error al guardar la gráfica: " + e.getMessage());
             }
+            
+            Sintactico.datosGraficas.clear();
         }
     }
     
@@ -390,6 +396,8 @@ public class Graficas {
             } catch (IOException e) {
                 System.err.println("Error al guardar la gráfica: " + e.getMessage());
             }
+            Sintactico.datosGraficas.clear();
+
         }
     }
 }

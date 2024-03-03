@@ -4,6 +4,9 @@
  */
 package proyecto1_compiladores1_2024;
 
+import java.io.BufferedReader;
+import java.io.StringReader;
+
 /**
  *
  * @author samuel
@@ -26,101 +29,112 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        PanelPrincipal = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Entrada_datos = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        Consola_salida = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        Grafica_salida = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        Archivo = new javax.swing.JMenu();
+        Nuevo_archivo = new javax.swing.JMenuItem();
+        Abrir_archivo = new javax.swing.JMenuItem();
+        Guardar_como = new javax.swing.JMenuItem();
+        Guardar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        Ejecutar_programa = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(44, 51, 51));
-        jPanel1.setForeground(new java.awt.Color(165, 201, 202));
-        jPanel1.setToolTipText("");
+        PanelPrincipal.setBackground(new java.awt.Color(44, 51, 51));
+        PanelPrincipal.setForeground(new java.awt.Color(165, 201, 202));
+        PanelPrincipal.setToolTipText("");
 
-        jTextArea1.setBackground(new java.awt.Color(57, 91, 100));
-        jTextArea1.setColumns(20);
-        jTextArea1.setForeground(new java.awt.Color(231, 246, 242));
-        jTextArea1.setRows(5);
-        jTextArea1.setSelectionColor(new java.awt.Color(165, 201, 202));
-        jScrollPane1.setViewportView(jTextArea1);
+        Entrada_datos.setBackground(new java.awt.Color(57, 91, 100));
+        Entrada_datos.setColumns(20);
+        Entrada_datos.setForeground(new java.awt.Color(231, 246, 242));
+        Entrada_datos.setRows(5);
+        Entrada_datos.setSelectionColor(new java.awt.Color(165, 201, 202));
+        jScrollPane1.setViewportView(Entrada_datos);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(165, 201, 202));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Entrada");
 
-        jTextArea2.setBackground(new java.awt.Color(57, 91, 100));
-        jTextArea2.setColumns(20);
-        jTextArea2.setForeground(new java.awt.Color(231, 246, 242));
-        jTextArea2.setRows(5);
-        jTextArea2.setSelectionColor(new java.awt.Color(165, 201, 202));
-        jScrollPane2.setViewportView(jTextArea2);
+        Consola_salida.setBackground(new java.awt.Color(57, 91, 100));
+        Consola_salida.setColumns(20);
+        Consola_salida.setForeground(new java.awt.Color(231, 246, 242));
+        Consola_salida.setRows(5);
+        Consola_salida.setSelectionColor(new java.awt.Color(165, 201, 202));
+        jScrollPane2.setViewportView(Consola_salida);
 
         jLabel2.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(165, 201, 202));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Consola");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+        Grafica_salida.setBackground(new java.awt.Color(44, 51, 51));
+        Grafica_salida.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graficas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14), new java.awt.Color(165, 201, 202))); // NOI18N
+        Grafica_salida.setForeground(new java.awt.Color(165, 201, 202));
+
+        javax.swing.GroupLayout Grafica_salidaLayout = new javax.swing.GroupLayout(Grafica_salida);
+        Grafica_salida.setLayout(Grafica_salidaLayout);
+        Grafica_salidaLayout.setHorizontalGroup(
+            Grafica_salidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
+        Grafica_salidaLayout.setVerticalGroup(
+            Grafica_salidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 249, Short.MAX_VALUE)
         );
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
+        PanelPrincipal.setLayout(PanelPrincipalLayout);
+        PanelPrincipalLayout.setHorizontalGroup(
+            PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                    .addComponent(Grafica_salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
+        PanelPrincipalLayout.setVerticalGroup(
+            PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addGap(18, 18, 18)
+                        .addComponent(Grafica_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addGap(24, 24, 24))
         );
 
@@ -128,35 +142,70 @@ public class GUI extends javax.swing.JFrame {
         jMenuBar1.setBorder(null);
         jMenuBar1.setForeground(new java.awt.Color(165, 201, 202));
 
-        jMenu1.setText("Archivo");
+        Archivo.setText("Archivo");
 
-        jMenuItem1.setText("Nuevo Archivo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        Nuevo_archivo.setText("Nuevo Archivo");
+        Nuevo_archivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                Nuevo_archivoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        Archivo.add(Nuevo_archivo);
 
-        jMenuItem2.setText("Abrir Archivo");
-        jMenu1.add(jMenuItem2);
+        Abrir_archivo.setText("Abrir Archivo");
+        Archivo.add(Abrir_archivo);
 
-        jMenuItem3.setText("Guardar Como");
-        jMenu1.add(jMenuItem3);
+        Guardar_como.setText("Guardar Como");
+        Guardar_como.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Guardar_comoActionPerformed(evt);
+            }
+        });
+        Archivo.add(Guardar_como);
 
-        jMenuItem4.setText("Guardar");
-        jMenu1.add(jMenuItem4);
+        Guardar.setText("Guardar");
+        Archivo.add(Guardar);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(Archivo);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Programa");
+
+        Ejecutar_programa.setText("Ejecutar");
+        Ejecutar_programa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Ejecutar_programaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Ejecutar_programa);
+
+        jMenuItem8.setText("Limpiar Consolar");
+        jMenu2.add(jMenuItem8);
+
+        jMenuItem5.setText("Borrar Documentos (!)");
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("jMenu3");
-        jMenuBar1.add(jMenu3);
+        jMenu3.setText("Reportes");
 
-        jMenu4.setText("jMenu4");
-        jMenuBar1.add(jMenu4);
+        jMenuItem9.setText("Reporte de Tokens");
+        jMenu3.add(jMenuItem9);
+
+        jMenuItem7.setText("Reporte de Errores");
+        jMenu3.add(jMenuItem7);
+
+        jMenuItem11.setText("Tabla de Simbolos");
+        jMenu3.add(jMenuItem11);
+
+        jMenuItem10.setText("Mostrar Documentacion");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem10);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -164,40 +213,73 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void Nuevo_archivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_archivoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_Nuevo_archivoActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void Guardar_comoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar_comoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Guardar_comoActionPerformed
+
+    private void Ejecutar_programaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ejecutar_programaActionPerformed
+        // TODO add your handling code here:
+        
+        //System.out.println(Entrada_datos.getText()); 
+        
+        Analizadores.Sintactico parser;
+        try {
+            parser = new Analizadores.Sintactico(new Analizadores.Lexico(new BufferedReader(new StringReader(Entrada_datos.getText()))));
+            parser.parse();        
+            Funciones.reporteTokens();            
+            
+        } catch (Exception e) {
+            System.out.println("Error fatal en compilación de entrada.");
+        }      
+        
+    }//GEN-LAST:event_Ejecutar_programaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Abrir_archivo;
+    private javax.swing.JMenu Archivo;
+    public static javax.swing.JTextArea Consola_salida;
+    private javax.swing.JMenuItem Ejecutar_programa;
+    private javax.swing.JTextArea Entrada_datos;
+    public static javax.swing.JPanel Grafica_salida;
+    private javax.swing.JMenuItem Guardar;
+    private javax.swing.JMenuItem Guardar_como;
+    private javax.swing.JMenuItem Nuevo_archivo;
+    private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
 }
