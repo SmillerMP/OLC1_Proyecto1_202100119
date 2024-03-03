@@ -7,6 +7,7 @@ package proyecto1_compiladores1_2024;
 import Clases.Tokens;
 import Clases.Errores;
 import Analizadores.Sintactico;
+import proyecto1_compiladores1_2024.GUI;
         
 import java.io.File;
 import java.io.FileWriter;
@@ -30,7 +31,10 @@ public class Funciones {
             TextoSalida += dato.toString() + "\n";
         }
         
-        System.out.println(TextoSalida);
+        //System.out.println(TextoSalida);
+        
+        GUI.texto_consola += TextoSalida;
+        GUI.texto_consola += "\n";
     }
     
     public static void ImprimirColumna(Object nombre) {
@@ -44,7 +48,9 @@ public class Funciones {
             TextoSalida += dato.toString() + "\n";
         }
         
-        System.out.println(TextoSalida);
+        //System.out.println(TextoSalida);
+        GUI.texto_consola += TextoSalida;
+        GUI.texto_consola += "\n";
     }
     
     public static void ImprimirConsola(){
@@ -63,7 +69,9 @@ public class Funciones {
         }
         
         TextoSalida += "\n";
-        System.out.println(TextoSalida);
+        //System.out.println(TextoSalida);
+        GUI.texto_consola += TextoSalida;
+        GUI.texto_consola += "\n";
 
     }
     

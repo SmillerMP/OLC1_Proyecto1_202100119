@@ -6,6 +6,7 @@ package proyecto1_compiladores1_2024;
 
 
 import Analizadores.Sintactico;
+import proyecto1_compiladores1_2024.GUI;
 import java.io.File;
 import java.io.IOException;
 
@@ -109,9 +110,9 @@ public class Graficas {
              
         String textoConsola = "";
         indice = 0;
-        textoConsola += "------------------------\n";
+        textoConsola += "\n-------------------------------\n";
         textoConsola += "| Valor | Fb | Fa | Fr |\n";
-        textoConsola += "------------------------\n";
+        textoConsola += "-------------------------------\n";
         
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
 
@@ -125,12 +126,13 @@ public class Graficas {
         
         int finalLista = HistrogramaValores.size() - 1;
         
-        textoConsola += "Tota: " + HistrogramaFrecuencia.get(finalLista) + " | " + HistrogramaFrAcumulada.get(finalLista) + " | " 
+        textoConsola += "Total: " + HistrogramaFrecuencia.get(finalLista) + " | " + HistrogramaFrAcumulada.get(finalLista) + " | " 
                 + "100.00%\n";
         
-        textoConsola += "----------------------\n";        
+        textoConsola += "-------------------------------\n\n";        
         
-        System.out.println(textoConsola);
+        //System.out.println(textoConsola);
+        GUI.texto_consola += textoConsola;
         
         JFreeChart grafica_barras = ChartFactory.createBarChart3D(
             tituloGrafica,
@@ -166,7 +168,8 @@ public class Graficas {
             grafica.delete();
             if (!grafica.exists()) {
                 ChartUtilities.saveChartAsPNG(grafica, grafica_barras, width, height);
-                System.out.println("¡Gráfica guardada en './Graficas/' como 'histograma_chart.png'!");
+                //System.out.println("¡Gráfica guardada en './Graficas/' como 'histograma_chart.png'!");
+                GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como 'histograma_chart.png'!\n";
             }
 
         } catch (IOException e) {
@@ -234,7 +237,8 @@ public class Graficas {
                 grafica.delete();
                 if (!grafica.exists()) {
                     ChartUtilities.saveChartAsPNG(grafica, grafica_circular, width, height);
-                    System.out.println("¡Gráfica guardada en './Graficas/' como 'pie_chart.png'!");
+                    //System.out.println("¡Gráfica guardada en './Graficas/' como 'pie_chart.png'!");
+                    GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como 'pie_chart.png'!\n";
                 }
                 
             } catch (IOException e) {
@@ -312,7 +316,8 @@ public class Graficas {
                 grafica.delete();
                 if (!grafica.exists()) {
                     ChartUtilities.saveChartAsPNG(grafica, grafica_barras, width, height);
-                    System.out.println("¡Gráfica guardada en './Graficas/' como 'bar_chart.png'!");
+                    //System.out.println("¡Gráfica guardada en './Graficas/' como 'bar_chart.png'!");
+                    GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como 'bar_chart.png'!\n";
                 }
                 
             } catch (IOException e) {
@@ -344,7 +349,7 @@ public class Graficas {
 
         //System.out.println(ListaDoubles.size() + " " + ListaChars.size());
         if (ListaDoubles.size() != ListaChars.size()){
-            System.err.println("Existe un error en las listas de valores, Grafica de Pie");        
+            System.err.println("Existe un error en las listas de valores, Grafica de Pie"); 
         } else {
             
             DefaultCategoryDataset datos = new DefaultCategoryDataset();
@@ -390,7 +395,8 @@ public class Graficas {
                 pieChartFile.delete();
                 if (!pieChartFile.exists()) {
                     ChartUtilities.saveChartAsPNG(pieChartFile, grafica_barras, width, height);
-                    System.out.println("¡Gráfica guardada en './Graficas/' como 'line_chart.png'!");
+                    //System.out.println("¡Gráfica guardada en './Graficas/' como 'line_chart.png'!");
+                    GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como 'line_chart.png'!\n";
                 }
                 
             } catch (IOException e) {

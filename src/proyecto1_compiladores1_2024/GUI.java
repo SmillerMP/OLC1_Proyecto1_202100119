@@ -12,12 +12,15 @@ import java.io.StringReader;
  * @author samuel
  */
 public class GUI extends javax.swing.JFrame {
+    
+    public static String texto_consola = "";
 
     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
+        Entrada_datos.setTabSize(3); // Puedes ajustar el tamaño según tus necesidades      
     }
 
     /**
@@ -73,6 +76,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Entrada");
 
+        Consola_salida.setEditable(false);
         Consola_salida.setBackground(new java.awt.Color(57, 91, 100));
         Consola_salida.setColumns(20);
         Consola_salida.setForeground(new java.awt.Color(231, 246, 242));
@@ -101,6 +105,11 @@ public class GUI extends javax.swing.JFrame {
         );
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
@@ -251,9 +260,16 @@ public class GUI extends javax.swing.JFrame {
             
         } catch (Exception e) {
             System.out.println("Error fatal en compilación de entrada.");
-        }      
+        }    
+        
+        Consola_salida.append(texto_consola);
+        
         
     }//GEN-LAST:event_Ejecutar_programaActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
