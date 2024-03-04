@@ -10,11 +10,14 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -34,8 +37,8 @@ public class GUI extends javax.swing.JFrame {
     int indexTab = 1;
     
     ArrayList<String> nombresArchivos = new ArrayList<>();
+    HashMap<Integer, String> rutasCompArchivos = new HashMap<>();
     
-
     /**
      * Creates new form GUI
      */
@@ -67,8 +70,9 @@ public class GUI extends javax.swing.JFrame {
         Archivo = new javax.swing.JMenu();
         Nuevo_archivo = new javax.swing.JMenuItem();
         Abrir_archivo = new javax.swing.JMenuItem();
-        Guardar_como = new javax.swing.JMenuItem();
         Guardar = new javax.swing.JMenuItem();
+        Guardar_como = new javax.swing.JMenuItem();
+        Eliminar_tab = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         Ejecutar_programa = new javax.swing.JMenuItem();
         limpiar_consola = new javax.swing.JMenuItem();
@@ -126,7 +130,7 @@ public class GUI extends javax.swing.JFrame {
         Entrada_datos.setSelectionColor(new java.awt.Color(165, 201, 202));
         jScrollPane4.setViewportView(Entrada_datos);
 
-        menuTabs.addTab("tab1", jScrollPane4);
+        menuTabs.addTab("Nuevo", jScrollPane4);
 
         grafica_salida.setBackground(new java.awt.Color(44, 51, 51));
         grafica_salida.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graficas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14), new java.awt.Color(165, 201, 202))); // NOI18N
@@ -183,6 +187,7 @@ public class GUI extends javax.swing.JFrame {
         );
 
         menuTabs.getAccessibleContext().setAccessibleName("Nuevo\n");
+        menuTabs.getAccessibleContext().setAccessibleDescription("");
 
         jMenuBar1.setBackground(new java.awt.Color(165, 201, 202));
         jMenuBar1.setBorder(null);
@@ -208,6 +213,14 @@ public class GUI extends javax.swing.JFrame {
         });
         Archivo.add(Abrir_archivo);
 
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
+        Archivo.add(Guardar);
+
         Guardar_como.setText("Guardar Como");
         Guardar_como.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,8 +229,13 @@ public class GUI extends javax.swing.JFrame {
         });
         Archivo.add(Guardar_como);
 
-        Guardar.setText("Guardar");
-        Archivo.add(Guardar);
+        Eliminar_tab.setText("Eliminar Tab");
+        Eliminar_tab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Eliminar_tabActionPerformed(evt);
+            }
+        });
+        Archivo.add(Eliminar_tab);
 
         jMenuBar1.add(Archivo);
 
@@ -286,6 +304,11 @@ public class GUI extends javax.swing.JFrame {
 
     private void Nuevo_archivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_archivoActionPerformed
         // TODO add your handling code here:
+        JTextArea textArea = new JTextArea();
+        textArea.setTabSize(3); // Puedes ajustar el tamaño según tus necesidades      
+        textArea.setBackground(new Color(57,91,100));
+        textArea.setForeground(new Color(231,246,242));
+        menuTabs.insertTab("Nueva Pestaña", null, textArea, null, 0); 
     }//GEN-LAST:event_Nuevo_archivoActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -294,6 +317,48 @@ public class GUI extends javax.swing.JFrame {
 
     private void Guardar_comoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar_comoActionPerformed
         // TODO add your handling code here:
+        
+        // Funcion para guardar como
+        JFileChooser fileChooser = new JFileChooser();
+        int resultado = fileChooser.showSaveDialog(null);
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            // El usuario seleccionó un archivo y hizo clic en "Guardar"
+            String rutaSeleccionada = fileChooser.getSelectedFile().getAbsolutePath();
+            String nombreArchivo = fileChooser.getSelectedFile().getName();
+            
+            File archivo = new File(rutaSeleccionada);
+        
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+                // Escribir el texto en el archivo
+                
+                int selectedIndex = menuTabs.getSelectedIndex();
+                Component selectedComponent = menuTabs.getComponentAt(selectedIndex);
+                
+                // Verificar si el componente asociado es un JScrollPane
+                if (selectedComponent instanceof JScrollPane) {
+                    JScrollPane scrollPane = (JScrollPane) selectedComponent;
+                    JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+                    writer.write(textArea.getText());
+                    rutasCompArchivos.put(selectedIndex, rutaSeleccionada);
+                    menuTabs.setTitleAt(selectedIndex, nombreArchivo);
+                    nombresArchivos.add(nombreArchivo);
+                    JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+                } else {
+                    System.out.println("No se ha seleccionado ningún tab o el componente asociado no es un JTextArea.");
+                }
+               
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error al guardar el texto en el archivo.", "Error",JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } else if (resultado == JFileChooser.CANCEL_OPTION) {
+            // El usuario canceló la operación
+            JOptionPane.showMessageDialog(null, "Se ha cancelado la carga del archivo", "Accion Interrumpida", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_Guardar_comoActionPerformed
 
     private void Ejecutar_programaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ejecutar_programaActionPerformed
@@ -420,10 +485,12 @@ public class GUI extends javax.swing.JFrame {
                 
                 nombresArchivos.add(file.getName());                
                 menuTabs.setSelectedIndex(indexTab);
+                  
+                // Añade la ruta completa a un hashmap
+                rutasCompArchivos.put(indexTab, file.getAbsolutePath());
+                        
                 indexTab++;
-                
-
-                               
+                                                      
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error, no se ha podido compilar", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -433,12 +500,77 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Abrir_archivoActionPerformed
 
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedIndex = menuTabs.getSelectedIndex();
+        // Obtener el componente asociado con el tab seleccionado
+        Component selectedComponent = menuTabs.getComponentAt(selectedIndex);
+        
+        // Verificar si el componente asociado es un JScrollPane
+        if (selectedComponent instanceof JScrollPane) {
+            JScrollPane scrollPane = (JScrollPane) selectedComponent;
+            JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+        
+            String ruta = rutasCompArchivos.get(menuTabs.getSelectedIndex());
+            int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar? \n La ruta es: " + ruta, "Cuidado", JOptionPane.YES_NO_OPTION);       
+
+            if (resp == 0) {
+                File archivo = new File(ruta);
+
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+                    // Escribir el texto en el archivo
+                    writer.write(textArea.getText());
+                    JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Error al guardar el texto en el archivo. Revise la ruta", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        
+        } else {
+            System.out.println("No se ha seleccionado ningún tab o el componente asociado no es un JTextArea.");
+        }      
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void Eliminar_tabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_tabActionPerformed
+        // TODO 
+        
+        int selectedIndex = menuTabs.getSelectedIndex();
+        String nombreTab = menuTabs.getTitleAt(selectedIndex);
+        
+        if (selectedIndex != -1) { // Asegurarse de que haya un tab seleccionado
+            // Remover el tab seleccionado
+            
+            int resp = JOptionPane.showConfirmDialog(null, "¿Estas seguro que deseas eliminar \n tab: " + nombreTab,  "Cuidado", JOptionPane.YES_NO_OPTION);       
+            if (resp == 0) {
+                
+                menuTabs.removeTabAt(selectedIndex);               
+                try {
+                    rutasCompArchivos.remove(selectedIndex);
+                    nombresArchivos.remove(nombreTab);
+                    
+                } catch (Exception e) {
+                }
+                
+                JOptionPane.showMessageDialog(null, "Tab eliminada correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Operacion cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } else {
+            System.out.println("No hay ningún tab seleccionado para eliminar.");
+        }
+    }//GEN-LAST:event_Eliminar_tabActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Abrir_archivo;
     private javax.swing.JMenu Archivo;
     public static javax.swing.JTextArea Consola_salida;
     private javax.swing.JMenuItem Ejecutar_programa;
+    private javax.swing.JMenuItem Eliminar_tab;
     private javax.swing.JTextArea Entrada_datos;
     private javax.swing.JMenuItem Guardar;
     private javax.swing.JMenuItem Guardar_como;
