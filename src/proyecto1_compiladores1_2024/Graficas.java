@@ -6,11 +6,12 @@ package proyecto1_compiladores1_2024;
 
 
 import Analizadores.Sintactico;
+import java.awt.BorderLayout;
 import proyecto1_compiladores1_2024.GUI;
 import java.io.File;
 import java.io.IOException;
 
-import java.util.HashMap;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import org.jfree.chart.ChartFactory;
@@ -22,14 +23,18 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import java.awt.Color;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.awt.Dimension;
+import org.jfree.chart.ChartPanel;
+import java.util.HashMap;
+
 
 /**
  *
  * @author samuel
  */
 public class Graficas {
+    
+    public static HashMap<String, JFreeChart> GraficasAlmacenadas = new HashMap<>();
     
     public static void histrograma(){
                   
@@ -153,29 +158,25 @@ public class Graficas {
 
         // Cambiar el color de las barras
         renderer.setSeriesPaint(0, Color.BLUE); // Cambiar el color de la primera serie a azul
-
-        // Guardar la gráfica como un archivo PNG
-        int width = 800;   /* Anchura de la imagen */
-        int height = 600;  /* Altura de la imagen */
-        try {
-            File carpeta = new File("./Graficas");
-            if (!carpeta.exists()) {
-                carpeta.mkdirs(); // Crea la carpeta y sus subcarpetas si no existen
-            }
-
-            File grafica = new File("./Graficas/histograma_chart.png");
-
-            grafica.delete();
-            if (!grafica.exists()) {
-                ChartUtilities.saveChartAsPNG(grafica, grafica_barras, width, height);
-                //System.out.println("¡Gráfica guardada en './Graficas/' como 'histograma_chart.png'!");
-                GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como 'histograma_chart.png'!\n";
-            }
-
-        } catch (IOException e) {
-            System.err.println("Error al guardar la gráfica: " + e.getMessage());
-        }
         
+        
+        if (!GUI.graficaPresente) {
+            ChartPanel panel = new ChartPanel(grafica_barras);
+            panel.setMouseWheelEnabled(true);
+
+            GUI.grafica_salida.removeAll();
+            GUI.grafica_salida.setLayout(new BorderLayout());
+            GUI.grafica_salida.add(panel, BorderLayout.CENTER);
+            GUI.grafica_salida.revalidate();
+            GUI.grafica_salida.repaint();
+            GUI.graficaPresente = true;
+            GUI.texto_inicio = "Histograma";
+        }
+
+        GraficasAlmacenadas.put("Histograma", grafica_barras);
+        
+        //Guardar la grafica como png
+        GuardarGrafica("Histrograma.png", grafica_barras);
         Sintactico.datosGraficas.clear(); 
     }
     
@@ -212,7 +213,6 @@ public class Graficas {
                 indice++;
             }
             
-            // Quita las comillas 
             
             JFreeChart grafica_circular = ChartFactory.createPieChart(
                 tituloGrafica,
@@ -221,29 +221,26 @@ public class Graficas {
                 true,
                 false
             );
+                        
             
-                    // Guardar la gráfica como un archivo PNG
-            int width = 800;   /* Anchura de la imagen */
-            int height = 600;  /* Altura de la imagen */
-            
-            try {
-                File carpeta = new File("./Graficas");
-                if (!carpeta.exists()) {
-                    carpeta.mkdirs(); // Crea la carpeta y sus subcarpetas si no existen
-                }
+            if (!GUI.graficaPresente) {
+                ChartPanel panel = new ChartPanel(grafica_circular);
+                panel.setMouseWheelEnabled(true);
 
-                File grafica = new File("./Graficas/pie_chart.png");
-
-                grafica.delete();
-                if (!grafica.exists()) {
-                    ChartUtilities.saveChartAsPNG(grafica, grafica_circular, width, height);
-                    //System.out.println("¡Gráfica guardada en './Graficas/' como 'pie_chart.png'!");
-                    GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como 'pie_chart.png'!\n";
-                }
-                
-            } catch (IOException e) {
-                System.err.println("Error al guardar la gráfica: " + e.getMessage());
+                GUI.grafica_salida.removeAll();
+                GUI.grafica_salida.setLayout(new BorderLayout());
+                GUI.grafica_salida.add(panel, BorderLayout.CENTER);
+                GUI.grafica_salida.revalidate();
+                GUI.grafica_salida.repaint();
+                GUI.graficaPresente = true;
+                GUI.texto_inicio = "Grafica_Pie";
             }
+            
+            // Alamacena los datos en un hashmap para luego usarlos
+            GraficasAlmacenadas.put("Grafica_Pie", grafica_circular);
+            
+            // Guardar la grafica como png      
+            GuardarGrafica("Grafica_Pie.png", grafica_circular);
             
             Sintactico.datosGraficas.clear();
 
@@ -301,28 +298,23 @@ public class Graficas {
                 false
             );
             
-                    // Guardar la gráfica como un archivo PNG
-            int width = 800;   /* Anchura de la imagen */
-            int height = 600;  /* Altura de la imagen */
+            if (!GUI.graficaPresente) {
+                ChartPanel panel = new ChartPanel(grafica_barras);
+                panel.setMouseWheelEnabled(true);
+
+                GUI.grafica_salida.removeAll();
+                GUI.grafica_salida.setLayout(new BorderLayout());
+                GUI.grafica_salida.add(panel, BorderLayout.CENTER);
+                GUI.grafica_salida.revalidate();
+                GUI.grafica_salida.repaint();
+                GUI.graficaPresente = true;
+                GUI.texto_inicio = "Grafica_Barras";
+            }         
             
-            try {
-                File carpeta = new File("./Graficas");
-                if (!carpeta.exists()) {
-                    carpeta.mkdirs(); // Crea la carpeta y sus subcarpetas si no existen
-                }
-
-                File grafica = new File("./Graficas/bar_chart.png");
-
-                grafica.delete();
-                if (!grafica.exists()) {
-                    ChartUtilities.saveChartAsPNG(grafica, grafica_barras, width, height);
-                    //System.out.println("¡Gráfica guardada en './Graficas/' como 'bar_chart.png'!");
-                    GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como 'bar_chart.png'!\n";
-                }
-                
-            } catch (IOException e) {
-                System.err.println("Error al guardar la gráfica: " + e.getMessage());
-            }
+            GraficasAlmacenadas.put("Grafica_Barras", grafica_barras);
+            
+            // Guardar la grafica como png
+            GuardarGrafica("Grafica_Barras.png", grafica_barras);
             
             Sintactico.datosGraficas.clear();
         }
@@ -370,7 +362,7 @@ public class Graficas {
             }
             
             
-            JFreeChart grafica_barras = ChartFactory.createLineChart(
+            JFreeChart grafica_lineas = ChartFactory.createLineChart(
                 tituloGrafica,
                 tituloX,
                 tituloY,
@@ -381,29 +373,48 @@ public class Graficas {
                 false
             );
             
-                    // Guardar la gráfica como un archivo PNG
-            int width = 800;   /* Anchura de la imagen */
-            int height = 600;  /* Altura de la imagen */
-            try {
-                File carpeta = new File("./Graficas");
-                if (!carpeta.exists()) {
-                    carpeta.mkdirs(); // Crea la carpeta y sus subcarpetas si no existen
-                }
+            
+            if (!GUI.graficaPresente) {
+                ChartPanel panel = new ChartPanel(grafica_lineas);
+                panel.setMouseWheelEnabled(true);
 
-                File pieChartFile = new File("./Graficas/line_chart.png");
-
-                pieChartFile.delete();
-                if (!pieChartFile.exists()) {
-                    ChartUtilities.saveChartAsPNG(pieChartFile, grafica_barras, width, height);
-                    //System.out.println("¡Gráfica guardada en './Graficas/' como 'line_chart.png'!");
-                    GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como 'line_chart.png'!\n";
-                }
-                
-            } catch (IOException e) {
-                System.err.println("Error al guardar la gráfica: " + e.getMessage());
+                GUI.grafica_salida.removeAll();
+                GUI.grafica_salida.setLayout(new BorderLayout());
+                GUI.grafica_salida.add(panel, BorderLayout.CENTER);
+                GUI.grafica_salida.revalidate();
+                GUI.grafica_salida.repaint();
+                GUI.graficaPresente = true;
+                GUI.texto_inicio = "Grafica_Lineas";
             }
-            Sintactico.datosGraficas.clear();
+            
+            GraficasAlmacenadas.put("Grafica_Lineas", grafica_lineas);
 
+            GuardarGrafica("Grafica_Lineas.png", grafica_lineas);
+            
+            Sintactico.datosGraficas.clear();
         }
+    }
+    
+    
+    public static void GuardarGrafica (String nombre, JFreeChart grafica){
+        try {
+            File carpeta = new File("./Graficas");
+            if (!carpeta.exists()) {
+                carpeta.mkdirs(); // Crea la carpeta y sus subcarpetas si no existen
+            }
+
+            File archivo = new File("./Graficas/" + nombre);
+
+            archivo.delete();
+            if (!archivo.exists()) {
+                ChartUtilities.saveChartAsPNG(archivo, grafica, 800, 600);
+                //System.out.println("¡Gráfica guardada en './Graficas/' como 'line_chart.png'!");
+                GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como '"+ nombre + "'!\n";
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error al guardar la gráfica: " + e.getMessage());
+        }
+        
     }
 }

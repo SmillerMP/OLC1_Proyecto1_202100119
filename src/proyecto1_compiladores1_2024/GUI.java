@@ -4,8 +4,23 @@
  */
 package proyecto1_compiladores1_2024;
 
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -14,6 +29,12 @@ import java.io.StringReader;
 public class GUI extends javax.swing.JFrame {
     
     public static String texto_consola = "";
+    public static boolean graficaPresente = false;
+    public static String texto_inicio = "";
+    int indexTab = 1;
+    
+    ArrayList<String> nombresArchivos = new ArrayList<>();
+    
 
     /**
      * Creates new form GUI
@@ -33,14 +54,15 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         PanelPrincipal = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Entrada_datos = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Consola_salida = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        Grafica_salida = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Seleccionar_grafica = new javax.swing.JComboBox<>();
+        menuTabs = new javax.swing.JTabbedPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        Entrada_datos = new javax.swing.JTextArea();
+        grafica_salida = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Archivo = new javax.swing.JMenu();
         Nuevo_archivo = new javax.swing.JMenuItem();
@@ -49,7 +71,7 @@ public class GUI extends javax.swing.JFrame {
         Guardar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         Ejecutar_programa = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        limpiar_consola = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -63,13 +85,6 @@ public class GUI extends javax.swing.JFrame {
         PanelPrincipal.setBackground(new java.awt.Color(44, 51, 51));
         PanelPrincipal.setForeground(new java.awt.Color(165, 201, 202));
         PanelPrincipal.setToolTipText("");
-
-        Entrada_datos.setBackground(new java.awt.Color(57, 91, 100));
-        Entrada_datos.setColumns(20);
-        Entrada_datos.setForeground(new java.awt.Color(231, 246, 242));
-        Entrada_datos.setRows(5);
-        Entrada_datos.setSelectionColor(new java.awt.Color(165, 201, 202));
-        jScrollPane1.setViewportView(Entrada_datos);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(165, 201, 202));
@@ -89,27 +104,44 @@ public class GUI extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Consola");
 
-        Grafica_salida.setBackground(new java.awt.Color(44, 51, 51));
-        Grafica_salida.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graficas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14), new java.awt.Color(165, 201, 202))); // NOI18N
-        Grafica_salida.setForeground(new java.awt.Color(165, 201, 202));
-
-        javax.swing.GroupLayout Grafica_salidaLayout = new javax.swing.GroupLayout(Grafica_salida);
-        Grafica_salida.setLayout(Grafica_salidaLayout);
-        Grafica_salidaLayout.setHorizontalGroup(
-            Grafica_salidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        Grafica_salidaLayout.setVerticalGroup(
-            Grafica_salidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 249, Short.MAX_VALUE)
-        );
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        Seleccionar_grafica.setBackground(new java.awt.Color(60, 63, 65));
+        Seleccionar_grafica.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
+        Seleccionar_grafica.setForeground(new java.awt.Color(165, 201, 202));
+        Seleccionar_grafica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                Seleccionar_graficaActionPerformed(evt);
             }
         });
+
+        menuTabs.setBackground(new java.awt.Color(165, 201, 202));
+        menuTabs.setForeground(new java.awt.Color(44, 51, 51));
+        menuTabs.setAutoscrolls(true);
+        menuTabs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        menuTabs.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
+
+        Entrada_datos.setBackground(new java.awt.Color(57, 91, 100));
+        Entrada_datos.setColumns(20);
+        Entrada_datos.setForeground(new java.awt.Color(231, 246, 242));
+        Entrada_datos.setRows(5);
+        Entrada_datos.setSelectionColor(new java.awt.Color(165, 201, 202));
+        jScrollPane4.setViewportView(Entrada_datos);
+
+        menuTabs.addTab("tab1", jScrollPane4);
+
+        grafica_salida.setBackground(new java.awt.Color(44, 51, 51));
+        grafica_salida.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graficas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14), new java.awt.Color(165, 201, 202))); // NOI18N
+        grafica_salida.setForeground(new java.awt.Color(165, 201, 202));
+
+        javax.swing.GroupLayout grafica_salidaLayout = new javax.swing.GroupLayout(grafica_salida);
+        grafica_salida.setLayout(grafica_salidaLayout);
+        grafica_salidaLayout.setHorizontalGroup(
+            grafica_salidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        grafica_salidaLayout.setVerticalGroup(
+            grafica_salidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 269, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
@@ -117,41 +149,48 @@ public class GUI extends javax.swing.JFrame {
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
-                .addGap(35, 35, 35)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
-                    .addComponent(Grafica_salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Seleccionar_grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2)
+                        .addComponent(grafica_salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)))
+                .addGap(27, 27, 27))
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Grafica_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(menuTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(Seleccionar_grafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(grafica_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addGap(24, 24, 24))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        menuTabs.getAccessibleContext().setAccessibleName("Nuevo\n");
 
         jMenuBar1.setBackground(new java.awt.Color(165, 201, 202));
         jMenuBar1.setBorder(null);
         jMenuBar1.setForeground(new java.awt.Color(165, 201, 202));
+        jMenuBar1.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
 
         Archivo.setText("Archivo");
+        Archivo.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
 
         Nuevo_archivo.setText("Nuevo Archivo");
         Nuevo_archivo.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +201,11 @@ public class GUI extends javax.swing.JFrame {
         Archivo.add(Nuevo_archivo);
 
         Abrir_archivo.setText("Abrir Archivo");
+        Abrir_archivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Abrir_archivoActionPerformed(evt);
+            }
+        });
         Archivo.add(Abrir_archivo);
 
         Guardar_como.setText("Guardar Como");
@@ -178,6 +222,7 @@ public class GUI extends javax.swing.JFrame {
         jMenuBar1.add(Archivo);
 
         jMenu2.setText("Programa");
+        jMenu2.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
 
         Ejecutar_programa.setText("Ejecutar");
         Ejecutar_programa.addActionListener(new java.awt.event.ActionListener() {
@@ -187,8 +232,13 @@ public class GUI extends javax.swing.JFrame {
         });
         jMenu2.add(Ejecutar_programa);
 
-        jMenuItem8.setText("Limpiar Consolar");
-        jMenu2.add(jMenuItem8);
+        limpiar_consola.setText("Limpiar Consolar");
+        limpiar_consola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiar_consolaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(limpiar_consola);
 
         jMenuItem5.setText("Borrar Documentos (!)");
         jMenu2.add(jMenuItem5);
@@ -196,6 +246,7 @@ public class GUI extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Reportes");
+        jMenu3.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
 
         jMenuItem9.setText("Reporte de Tokens");
         jMenu3.add(jMenuItem9);
@@ -222,13 +273,11 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -249,27 +298,140 @@ public class GUI extends javax.swing.JFrame {
 
     private void Ejecutar_programaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ejecutar_programaActionPerformed
         // TODO add your handling code here:
+               
+        String textoAnalizar = "";
+        int selectedIndex = menuTabs.getSelectedIndex();
+        // Obtener el componente asociado con el tab seleccionado
+        Component selectedComponent = menuTabs.getComponentAt(selectedIndex);
+        
+        // Verificar si el componente asociado es un JScrollPane
+        if (selectedComponent instanceof JScrollPane) {
+            JScrollPane scrollPane = (JScrollPane) selectedComponent;
+            JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+            textoAnalizar = textArea.getText();
+        } else {
+            System.out.println("No se ha seleccionado ningún tab o el componente asociado no es un JTextArea.");
+        }
         
         //System.out.println(Entrada_datos.getText()); 
         
+        texto_consola = "";
+        graficaPresente = false;
+        Graficas.GraficasAlmacenadas.clear();
+        Seleccionar_grafica.removeAllItems();
+        
+        
         Analizadores.Sintactico parser;
         try {
-            parser = new Analizadores.Sintactico(new Analizadores.Lexico(new BufferedReader(new StringReader(Entrada_datos.getText()))));
+            parser = new Analizadores.Sintactico(new Analizadores.Lexico(new BufferedReader(new StringReader(textoAnalizar))));
             parser.parse();        
             Funciones.reporteTokens();            
             
         } catch (Exception e) {
-            System.out.println("Error fatal en compilación de entrada.");
+            JOptionPane.showMessageDialog(null, "Error, no se ha podido compilar", "Error", JOptionPane.ERROR_MESSAGE);
+
         }    
         
         Consola_salida.append(texto_consola);
+        Consola_salida.append("\n\n ///////////////////////######## EJECUCION TERMINADA ########//////////////////////// \n\n");
+        
+        Graficas.GraficasAlmacenadas.entrySet().forEach(
+            entry -> { //System.out.println(entry.getKey() + " = " + entry.getValue()); 
+                Seleccionar_grafica.addItem(entry.getKey());         
+            });
+        
+        Seleccionar_grafica.setSelectedItem(texto_inicio);
         
         
     }//GEN-LAST:event_Ejecutar_programaActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void limpiar_consolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiar_consolaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        
+        Consola_salida.removeAll();
+        Consola_salida.setText("");
+    }//GEN-LAST:event_limpiar_consolaActionPerformed
+
+    private void Seleccionar_graficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Seleccionar_graficaActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            String opcionSeleccionada = Seleccionar_grafica.getSelectedItem().toString();
+            ChartPanel panel = new ChartPanel(Graficas.GraficasAlmacenadas.get(opcionSeleccionada));
+            panel.setMouseWheelEnabled(true);
+            panel.setPreferredSize(new Dimension(563,272));
+
+            grafica_salida.removeAll();
+            grafica_salida.setLayout(new BorderLayout());
+            grafica_salida.add(panel, BorderLayout.CENTER);
+            grafica_salida.revalidate();
+            grafica_salida.repaint();
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_Seleccionar_graficaActionPerformed
+
+    private void Abrir_archivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Abrir_archivoActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo df", "df");
+        fileChooser.setFileFilter(filter); 
+
+        int returnVal = fileChooser.showSaveDialog(null);
+        
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+            File file = fileChooser.getSelectedFile();
+            String archivoRuta = file.getPath();
+            if (!archivoRuta.toLowerCase().endsWith(".df")) {
+                file = new File(archivoRuta + ".df");
+            }
+            
+            
+            // Verifica si el nombre del archivo ya existe como un tab
+            if (nombresArchivos.contains(file.getName())) {
+                JOptionPane.showMessageDialog(null, "El archivo ya está abierto en otro tab.", "Archivo Duplicado", JOptionPane.ERROR_MESSAGE);
+                return; // Sale del método ya que no se puede abrir el archivo duplicado
+            }
+
+            
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String linea;
+                StringBuilder contenido = new StringBuilder();
+                while ((linea = br.readLine()) != null) {
+                    contenido.append(linea).append("\n");
+                }
+                br.close();
+                
+//                jTextArea1.setText(contenido.toString());               
+//                ruta = archivoSeleccionado.getAbsolutePath();
+//                nombreArchivo = archivoSeleccionado.getName();
+                
+                JTextArea textArea = new JTextArea();
+                textArea.setText(contenido.toString()); // Establece el contenido en el JTextArea
+                textArea.setTabSize(3); // Puedes ajustar el tamaño según tus necesidades      
+                textArea.setBackground(new Color(57,91,100));
+                textArea.setForeground(new Color(231,246,242));
+                        
+                JScrollPane scrollPane = new JScrollPane(textArea);
+
+                // Agrega el JScrollPane al nuevo tab con el nombre del archivo
+                menuTabs.addTab(file.getName(), scrollPane);
+                
+                nombresArchivos.add(file.getName());                
+                menuTabs.setSelectedIndex(indexTab);
+                indexTab++;
+                
+
+                               
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error, no se ha podido compilar", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Se ha cancelado la carga del archivo", "Accion Interrumpida", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_Abrir_archivoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -278,12 +440,12 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JTextArea Consola_salida;
     private javax.swing.JMenuItem Ejecutar_programa;
     private javax.swing.JTextArea Entrada_datos;
-    public static javax.swing.JPanel Grafica_salida;
     private javax.swing.JMenuItem Guardar;
     private javax.swing.JMenuItem Guardar_como;
     private javax.swing.JMenuItem Nuevo_archivo;
     private javax.swing.JPanel PanelPrincipal;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> Seleccionar_grafica;
+    public static javax.swing.JPanel grafica_salida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu2;
@@ -293,9 +455,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JMenuItem limpiar_consola;
+    private javax.swing.JTabbedPane menuTabs;
     // End of variables declaration//GEN-END:variables
 }
