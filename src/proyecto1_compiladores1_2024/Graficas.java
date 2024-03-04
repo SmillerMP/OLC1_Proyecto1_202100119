@@ -169,14 +169,15 @@ public class Graficas {
             GUI.grafica_salida.add(panel, BorderLayout.CENTER);
             GUI.grafica_salida.revalidate();
             GUI.grafica_salida.repaint();
+            GUI.grafica_salida.setPreferredSize(new Dimension(582, 293));
             GUI.graficaPresente = true;
-            GUI.texto_inicio = "Histograma";
+            GUI.texto_inicio = tituloGrafica;
         }
 
-        GraficasAlmacenadas.put("Histograma", grafica_barras);
+        GraficasAlmacenadas.put(tituloGrafica, grafica_barras);
         
         //Guardar la grafica como png
-        GuardarGrafica("Histrograma.png", grafica_barras);
+        GuardarGrafica(tituloGrafica + ".png", grafica_barras);
         Sintactico.datosGraficas.clear(); 
     }
     
@@ -232,15 +233,16 @@ public class Graficas {
                 GUI.grafica_salida.add(panel, BorderLayout.CENTER);
                 GUI.grafica_salida.revalidate();
                 GUI.grafica_salida.repaint();
+                GUI.grafica_salida.setPreferredSize(new Dimension(582, 293));
                 GUI.graficaPresente = true;
-                GUI.texto_inicio = "Grafica_Pie";
+                GUI.texto_inicio = tituloGrafica;
             }
             
             // Alamacena los datos en un hashmap para luego usarlos
-            GraficasAlmacenadas.put("Grafica_Pie", grafica_circular);
+            GraficasAlmacenadas.put(tituloGrafica, grafica_circular);
             
             // Guardar la grafica como png      
-            GuardarGrafica("Grafica_Pie.png", grafica_circular);
+            GuardarGrafica(tituloGrafica + ".png", grafica_circular);
             
             Sintactico.datosGraficas.clear();
 
@@ -307,14 +309,15 @@ public class Graficas {
                 GUI.grafica_salida.add(panel, BorderLayout.CENTER);
                 GUI.grafica_salida.revalidate();
                 GUI.grafica_salida.repaint();
+                GUI.grafica_salida.setPreferredSize(new Dimension(582, 293));
                 GUI.graficaPresente = true;
-                GUI.texto_inicio = "Grafica_Barras";
+                GUI.texto_inicio = tituloGrafica;
             }         
             
-            GraficasAlmacenadas.put("Grafica_Barras", grafica_barras);
+            GraficasAlmacenadas.put(tituloGrafica, grafica_barras);
             
             // Guardar la grafica como png
-            GuardarGrafica("Grafica_Barras.png", grafica_barras);
+            GuardarGrafica(tituloGrafica + ".png", grafica_barras);
             
             Sintactico.datosGraficas.clear();
         }
@@ -383,13 +386,14 @@ public class Graficas {
                 GUI.grafica_salida.add(panel, BorderLayout.CENTER);
                 GUI.grafica_salida.revalidate();
                 GUI.grafica_salida.repaint();
+                GUI.grafica_salida.setPreferredSize(new Dimension(582, 293));
                 GUI.graficaPresente = true;
-                GUI.texto_inicio = "Grafica_Lineas";
+                GUI.texto_inicio = tituloGrafica;
             }
             
-            GraficasAlmacenadas.put("Grafica_Lineas", grafica_lineas);
+            GraficasAlmacenadas.put(tituloGrafica, grafica_lineas);
 
-            GuardarGrafica("Grafica_Lineas.png", grafica_lineas);
+            GuardarGrafica(tituloGrafica + ".png", grafica_lineas);
             
             Sintactico.datosGraficas.clear();
         }
@@ -408,7 +412,6 @@ public class Graficas {
             archivo.delete();
             if (!archivo.exists()) {
                 ChartUtilities.saveChartAsPNG(archivo, grafica, 800, 600);
-                //System.out.println("¡Gráfica guardada en './Graficas/' como 'line_chart.png'!");
                 GUI.texto_consola += "¡Gráfica guardada en './Graficas/' como '"+ nombre + "'!\n";
             }
 

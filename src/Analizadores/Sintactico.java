@@ -9,6 +9,7 @@ import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
 import Clases.Errores;
+import Clases.Simbolos;
 import java.util.HashMap;
 import proyecto1_compiladores1_2024.Funciones;
 import proyecto1_compiladores1_2024.Graficas;
@@ -561,11 +562,18 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     public static HashMap<Object, Object> datosGraficas = new HashMap<>();
     public static ArrayList<Object> listaDatosTemp = new ArrayList<>();
 
+    //Lista de errores Sintacticos
+    public ArrayList<Errores> listaErroresSintacticos = new ArrayList();
+
+
+    //Lista Tabla de simbolos
+    public static ArrayList<Simbolos> listaSimbolos = new ArrayList();
+
     // Guarda el error Sintactico
     public void syntax_error(Symbol s){ 
         System.out.println("Error Sintáctico en la Línea " + (s.left) + " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
         //System.out.println("------------------------ Fin de Errores ----------------------------"); 
-        listaErrores.add(new Errores("Sintáctico", "Error de sintaxis detectado. Se detectó: " + s.value, s.left + "", s.right + ""));
+        listaErroresSintacticos.add(new Errores("Sintáctico", "Error de sintaxis detectado. Se detectó: " + s.value, s.left + "", s.right + ""));
         //proyecto1_compi1.GUI.jTextArea2.setText("Error Sintáctico en la Línea " + (s.left) + " Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
 
     } 
@@ -582,14 +590,6 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     }  
     
 
-    public List<String> salidas = new ArrayList<String>();
-
-    //Lista de errores
-    public ArrayList<Errores> listaErrores = new ArrayList();
-
-    public ArrayList<Errores> getErrores(){
-        return listaErrores;
-    }
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -706,13 +706,16 @@ class CUP$Sintactico$actions {
           case 9: // instruccion ::= PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS valores PR_END PTCOMA 
             {
               Object RESULT =null;
+		int TipoVarleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-8)).left;
+		int TipoVarright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-8)).right;
+		Object TipoVar = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-8)).value;
 		int claveleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).left;
 		int claveright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).right;
 		String clave = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).value;
 		int valorleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
 		int valorright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
 		Object valor = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
-		variablesDeclaradas.put(clave, valor);
+		variablesDeclaradas.put(clave, valor);   //listaSimbolos.add(new Simbolos(clave, TipoVar.toString(), valor, Integer.toString(left), Integer.toString(right)));
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("instruccion",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-10)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -817,7 +820,7 @@ class CUP$Sintactico$actions {
 		int valleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		String val = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT="-"+val; //System.out.println(val);
+		 RESULT="-"+val;;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -829,7 +832,7 @@ class CUP$Sintactico$actions {
 		int valleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		String val = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT=val; //System.out.println(val);
+		 RESULT=val; ;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -841,7 +844,7 @@ class CUP$Sintactico$actions {
 		int valleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		String val = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT=variablesDeclaradas.get(val); //System.out.println(val);
+		 RESULT=variablesDeclaradas.get(val); 
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -853,7 +856,7 @@ class CUP$Sintactico$actions {
 		int valleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		String val = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT=val; //System.out.println(val);
+		 RESULT=val; 
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -865,7 +868,7 @@ class CUP$Sintactico$actions {
 		int valleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object val = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT=val; //System.out.println(val);
+		 RESULT=val; 
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -877,7 +880,7 @@ class CUP$Sintactico$actions {
 		int valleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int valright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object val = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT=val; //System.out.println(val);
+		 RESULT=val; 
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -886,7 +889,7 @@ class CUP$Sintactico$actions {
           case 25: // tiposVariables ::= PR_CHAR COR_IZQ COR_DER 
             {
               Object RESULT =null;
-
+		 RESULT="String"; 
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("tiposVariables",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -895,7 +898,7 @@ class CUP$Sintactico$actions {
           case 26: // tiposVariables ::= PR_DOUBLE 
             {
               Object RESULT =null;
-
+		 RESULT="Double"; 
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("tiposVariables",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

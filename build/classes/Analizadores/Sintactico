@@ -4,6 +4,7 @@ import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
 import Clases.Errores;
+import Clases.Simbolos;
 import java.util.HashMap;
 import proyecto1_compiladores1_2024.Funciones;
 import proyecto1_compiladores1_2024.Graficas;
@@ -21,11 +22,18 @@ parser code
     public static HashMap<Object, Object> datosGraficas = new HashMap<>();
     public static ArrayList<Object> listaDatosTemp = new ArrayList<>();
 
+    //Lista de errores Sintacticos
+    public ArrayList<Errores> listaErroresSintacticos = new ArrayList();
+
+
+    //Lista Tabla de simbolos
+    public static ArrayList<Simbolos> listaSimbolos = new ArrayList();
+
     // Guarda el error Sintactico
     public void syntax_error(Symbol s){ 
         System.out.println("Error Sintáctico en la Línea " + (s.left) + " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
         //System.out.println("------------------------ Fin de Errores ----------------------------"); 
-        listaErrores.add(new Errores("Sintáctico", "Error de sintaxis detectado. Se detectó: " + s.value, s.left + "", s.right + ""));
+        listaErroresSintacticos.add(new Errores("Sintáctico", "Error de sintaxis detectado. Se detectó: " + s.value, s.left + "", s.right + ""));
         //proyecto1_compi1.GUI.jTextArea2.setText("Error Sintáctico en la Línea " + (s.left) + " Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
 
     } 
@@ -42,14 +50,6 @@ parser code
     }  
     
 
-    public List<String> salidas = new ArrayList<String>();
-
-    //Lista de errores
-    public ArrayList<Errores> listaErrores = new ArrayList();
-
-    public ArrayList<Errores> getErrores(){
-        return listaErrores;
-    }
 :} 
 
 // Expresiones regulares
@@ -149,7 +149,9 @@ instrucciones::=
 ;
 
 instruccion::= 
-    PR_VAR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   {:variablesDeclaradas.put(clave, valor);:}
+    PR_VAR DOSPUNTOS tiposVariables:TipoVar DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   
+    {:variablesDeclaradas.put(clave, valor);   //listaSimbolos.add(new Simbolos(clave, TipoVar.toString(), valor, Integer.toString(left), Integer.toString(right)));:}
+    
     | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID:clave MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA {:variablesDeclaradas.put(clave, Funciones.copiaLista());:}
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA  {:Funciones.ImprimirConsola();:} 
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA   {:Funciones.ImprimirColumna(nombre);:} 
@@ -162,17 +164,17 @@ instruccion::=
 ;   
 
 valores::=
-    MENOS DOUBLE:val                    {: RESULT="-"+val; //System.out.println(val);:}
-    | DOUBLE:val                        {: RESULT=val; //System.out.println(val);:}
-    | ID:val                            {: RESULT=variablesDeclaradas.get(val); //System.out.println(val);:}
-    | STRING:val                        {: RESULT=val; //System.out.println(val);:}
-    | operaciones:val                   {: RESULT=val; //System.out.println(val);:}
-    | funcionesEstadisticas:val         {: RESULT=val; //System.out.println(val);:}
+    MENOS DOUBLE:val                    {: RESULT="-"+val;;:}
+    | DOUBLE:val                        {: RESULT=val; ;:}
+    | ID:val                            {: RESULT=variablesDeclaradas.get(val); :}
+    | STRING:val                        {: RESULT=val; :}
+    | operaciones:val                   {: RESULT=val; :}
+    | funcionesEstadisticas:val         {: RESULT=val; :}
 ;
 
 tiposVariables::=
-    PR_CHAR COR_IZQ COR_DER
-    | PR_DOUBLE
+    PR_CHAR COR_IZQ COR_DER             {: RESULT="String"; :}
+    | PR_DOUBLE                         {: RESULT="Double"; :}
 ;
 
 valoresArreglo::=

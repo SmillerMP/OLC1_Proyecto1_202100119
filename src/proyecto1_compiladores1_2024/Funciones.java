@@ -265,14 +265,14 @@ public class Funciones {
                         + "    <script src='main.js'></script>\n"
                         + "</head>\n"
                         + "\n"
-                        + "<body style=\"background-color: rgb( 90, 24, 47); font-family: 'Arial', sans-serif;\">");
+                        + "<body style=\"background-color: rgb(44,51,51); font-family: 'Arial', sans-serif; color: rgb(231,246,242);\">");
 
                 NuevaLinea.println("<center><h1>Reporte de Tokens</h1></center>\n");
 
                 NuevaLinea.println("<center>");
                 NuevaLinea.println("<style type=\"text/css\">\n"
                         + "            .tg  {border-collapse:collapse;border-spacing:0;}\n"
-                        + "            .tg  {background-color: #f75120;}\n"
+                        + "            .tg  {background-color: #395b64;}\n"
                         + "            .tg td{border-color:rgb(0, 0, 0);border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;\n"
                         + "              overflow:hidden;padding:10px 5px;word-break:normal;}\n"
                         + "            .tg th{border-color:rgb(0, 0, 0);border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;\n"
@@ -377,14 +377,14 @@ public class Funciones {
                         + "    <script src='main.js'></script>\n"
                         + "</head>\n"
                         + "\n"
-                        + "<body style=\"background-color: rgb(77, 201, 218); font-family: 'Arial', sans-serif;\">");
+                        + "<body style=\"background-color: rgb(44,51,51); font-family: 'Arial', sans-serif; color: rgb(231,246,242);\">");
 
                 NuevaLinea.println("<center><h1>Reporte de Errores Lexicos</h1></center>\n");
 
                 NuevaLinea.println("<center>");
                 NuevaLinea.println("<style type=\"text/css\">\n"
                         + "            .tg  {border-collapse:collapse;border-spacing:0;}\n"
-                        + "            .tg  {background-color: #eaf5c3;}\n"
+                        + "            .tg  {background-color: #395b64;}\n"
                         + "            .tg td{border-color:rgb(0, 0, 0);border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;\n"
                         + "              overflow:hidden;padding:10px 5px;word-break:normal;}\n"
                         + "            .tg th{border-color:rgb(0, 0, 0);border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;\n"

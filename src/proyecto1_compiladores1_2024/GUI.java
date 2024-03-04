@@ -34,10 +34,8 @@ public class GUI extends javax.swing.JFrame {
     public static String texto_consola = "";
     public static boolean graficaPresente = false;
     public static String texto_inicio = "";
-    int indexTab = 1;
     
-    ArrayList<String> nombresArchivos = new ArrayList<>();
-    HashMap<Integer, String> rutasCompArchivos = new HashMap<>();
+    HashMap<String, String> rutasCompArchivos = new HashMap<>();
     
     /**
      * Creates new form GUI
@@ -130,7 +128,7 @@ public class GUI extends javax.swing.JFrame {
         Entrada_datos.setSelectionColor(new java.awt.Color(165, 201, 202));
         jScrollPane4.setViewportView(Entrada_datos);
 
-        menuTabs.addTab("Nuevo", jScrollPane4);
+        menuTabs.addTab("Nueva Pestaña", jScrollPane4);
 
         grafica_salida.setBackground(new java.awt.Color(44, 51, 51));
         grafica_salida.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graficas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14), new java.awt.Color(165, 201, 202))); // NOI18N
@@ -140,7 +138,7 @@ public class GUI extends javax.swing.JFrame {
         grafica_salida.setLayout(grafica_salidaLayout);
         grafica_salidaLayout.setHorizontalGroup(
             grafica_salidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 572, Short.MAX_VALUE)
         );
         grafica_salidaLayout.setVerticalGroup(
             grafica_salidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,37 +151,35 @@ public class GUI extends javax.swing.JFrame {
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(menuTabs, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Seleccionar_grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2)
-                        .addComponent(grafica_salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)))
-                .addGap(27, 27, 27))
+                    .addComponent(grafica_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(Seleccionar_grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(menuTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelPrincipalLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
                         .addComponent(Seleccionar_grafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(grafica_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
+                        .addGap(20, 20, 20)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         menuTabs.getAccessibleContext().setAccessibleName("Nuevo\n");
@@ -259,6 +255,11 @@ public class GUI extends javax.swing.JFrame {
         jMenu2.add(limpiar_consola);
 
         jMenuItem5.setText("Borrar Documentos (!)");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
@@ -295,7 +296,7 @@ public class GUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -340,9 +341,8 @@ public class GUI extends javax.swing.JFrame {
                     JScrollPane scrollPane = (JScrollPane) selectedComponent;
                     JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
                     writer.write(textArea.getText());
-                    rutasCompArchivos.put(selectedIndex, rutaSeleccionada);
+                    rutasCompArchivos.put(nombreArchivo, rutaSeleccionada);
                     menuTabs.setTitleAt(selectedIndex, nombreArchivo);
-                    nombresArchivos.add(nombreArchivo);
                     JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
 
                 } else {
@@ -407,6 +407,12 @@ public class GUI extends javax.swing.JFrame {
         
         Seleccionar_grafica.setSelectedItem(texto_inicio);
         
+        Funciones.reporteErrores();
+        Funciones.reporteTokens();
+        
+        Analizadores.Lexico.listaErrores.clear();
+        Analizadores.Lexico.listaTokens.clear();
+        
         
     }//GEN-LAST:event_Ejecutar_programaActionPerformed
 
@@ -451,13 +457,12 @@ public class GUI extends javax.swing.JFrame {
                 file = new File(archivoRuta + ".df");
             }
             
-            
             // Verifica si el nombre del archivo ya existe como un tab
-            if (nombresArchivos.contains(file.getName())) {
-                JOptionPane.showMessageDialog(null, "El archivo ya está abierto en otro tab.", "Archivo Duplicado", JOptionPane.ERROR_MESSAGE);
+            if (rutasCompArchivos.containsKey(file.getName())) {
+                  JOptionPane.showMessageDialog(null, "El archivo ya está abierto en otro tab.", "Archivo Duplicado", JOptionPane.ERROR_MESSAGE);
                 return; // Sale del método ya que no se puede abrir el archivo duplicado
             }
-
+            
             
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));
@@ -477,22 +482,24 @@ public class GUI extends javax.swing.JFrame {
                 textArea.setTabSize(3); // Puedes ajustar el tamaño según tus necesidades      
                 textArea.setBackground(new Color(57,91,100));
                 textArea.setForeground(new Color(231,246,242));
+                
                         
                 JScrollPane scrollPane = new JScrollPane(textArea);
 
                 // Agrega el JScrollPane al nuevo tab con el nombre del archivo
                 menuTabs.addTab(file.getName(), scrollPane);
                 
-                nombresArchivos.add(file.getName());                
-                menuTabs.setSelectedIndex(indexTab);
+                int index = menuTabs.indexOfComponent(scrollPane);
+             
+                menuTabs.setSelectedIndex(index);
                   
                 // Añade la ruta completa a un hashmap
-                rutasCompArchivos.put(indexTab, file.getAbsolutePath());
+                rutasCompArchivos.put(file.getName(), file.getAbsolutePath());
                         
-                indexTab++;
+                
                                                       
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error, no se ha podido compilar", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error, hubo un problema al cargar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             }
             
         } else {
@@ -504,6 +511,7 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int selectedIndex = menuTabs.getSelectedIndex();
+        String nombreTab = menuTabs.getTitleAt(selectedIndex);
         // Obtener el componente asociado con el tab seleccionado
         Component selectedComponent = menuTabs.getComponentAt(selectedIndex);
         
@@ -512,7 +520,7 @@ public class GUI extends javax.swing.JFrame {
             JScrollPane scrollPane = (JScrollPane) selectedComponent;
             JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
         
-            String ruta = rutasCompArchivos.get(menuTabs.getSelectedIndex());
+            String ruta = rutasCompArchivos.get(nombreTab);
             int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar? \n La ruta es: " + ruta, "Cuidado", JOptionPane.YES_NO_OPTION);       
 
             if (resp == 0) {
@@ -542,18 +550,17 @@ public class GUI extends javax.swing.JFrame {
         if (selectedIndex != -1) { // Asegurarse de que haya un tab seleccionado
             // Remover el tab seleccionado
             
-            int resp = JOptionPane.showConfirmDialog(null, "¿Estas seguro que deseas eliminar \n tab: " + nombreTab,  "Cuidado", JOptionPane.YES_NO_OPTION);       
+            int resp = JOptionPane.showConfirmDialog(null, "Estas seguro que deseas eliminar \n tab: " + nombreTab,  "Cuidado", JOptionPane.YES_NO_OPTION);       
             if (resp == 0) {
                 
                 menuTabs.removeTabAt(selectedIndex);               
                 try {
-                    rutasCompArchivos.remove(selectedIndex);
-                    nombresArchivos.remove(nombreTab);
-                    
+                    rutasCompArchivos.remove(nombreTab);                  
+                    JOptionPane.showMessageDialog(null, "Tab eliminada correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+
                 } catch (Exception e) {
                 }
                 
-                JOptionPane.showMessageDialog(null, "Tab eliminada correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Operacion cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -563,6 +570,47 @@ public class GUI extends javax.swing.JFrame {
             System.out.println("No hay ningún tab seleccionado para eliminar.");
         }
     }//GEN-LAST:event_Eliminar_tabActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar los datos? \n se eliminaran las graficas y el historial de consola", "Cuidado", JOptionPane.YES_NO_OPTION);       
+        
+        if (resp == 0) {
+            try {
+                File carpeta = new File("./Graficas");
+                if (carpeta.exists() && carpeta.isDirectory()) {
+                    File[] archivos = carpeta.listFiles();
+                    if (archivos != null) {
+                        for (File archivo : archivos) {
+                            archivo.delete();
+                        }
+                    }                          
+                    //System.out.println("Archivos eliminados correctamente.");
+                } else {
+                    //System.out.println("La carpeta Graficas no existe o no es un directorio.");
+                }
+            } catch (Exception ex) {
+                //System.err.println("Error al eliminar archivos: " + ex.getMessage());
+            }
+
+            grafica_salida.removeAll();
+            grafica_salida.revalidate();
+            grafica_salida.repaint();
+            grafica_salida.setPreferredSize(new Dimension(582, 293)); 
+
+            Consola_salida.removeAll();
+            Consola_salida.setText("");
+
+            Seleccionar_grafica.removeAllItems();
+           
+            JOptionPane.showMessageDialog(null, "Datos eliminados correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Operacion cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
