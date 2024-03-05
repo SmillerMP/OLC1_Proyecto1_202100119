@@ -12,10 +12,10 @@ public class Simbolos {
     String Nombre;
     String Tipo;
     String Valor;
-    String Linea;
-    String Columna;
+    int Linea;
+    int Columna;
 
-    public Simbolos(String Nombre, String Tipo, String Valor, String Linea, String Columna) {
+    public Simbolos(String Nombre, String Tipo, String Valor, int Linea, int Columna) {
         this.Nombre = Nombre;
         this.Tipo = Tipo;
         this.Valor = Valor;
@@ -35,12 +35,12 @@ public class Simbolos {
         return Valor;
     }
 
-    public String getLinea() {
+    public int getLinea() {
         return Linea;
     }
 
-    public String getColumna() {
+    public int getColumna() {
         return Columna;
     }
-    
+
 }

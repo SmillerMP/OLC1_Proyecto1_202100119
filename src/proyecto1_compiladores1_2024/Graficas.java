@@ -131,7 +131,7 @@ public class Graficas {
         
         int finalLista = HistrogramaValores.size() - 1;
         
-        textoConsola += "Total: " + HistrogramaFrecuencia.get(finalLista) + " | " + HistrogramaFrAcumulada.get(finalLista) + " | " 
+        textoConsola += "Total: " + HistrogramaFrAcumulada.get(finalLista) + " | " + HistrogramaFrAcumulada.get(finalLista) + " | " 
                 + "100.00%\n";
         
         textoConsola += "-------------------------------\n\n";        
