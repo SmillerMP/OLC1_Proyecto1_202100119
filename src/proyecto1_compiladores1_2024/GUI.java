@@ -4,11 +4,12 @@
  */
 package proyecto1_compiladores1_2024;
 
-
+import Clases.Simbolos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,7 +17,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -88,7 +88,7 @@ public class GUI extends javax.swing.JFrame {
         PanelPrincipal.setForeground(new java.awt.Color(165, 201, 202));
         PanelPrincipal.setToolTipText("");
 
-        jLabel1.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(165, 201, 202));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Entrada");
@@ -96,12 +96,13 @@ public class GUI extends javax.swing.JFrame {
         Consola_salida.setEditable(false);
         Consola_salida.setBackground(new java.awt.Color(57, 91, 100));
         Consola_salida.setColumns(20);
+        Consola_salida.setFont(new java.awt.Font("Hack Nerd Font", 1, 12)); // NOI18N
         Consola_salida.setForeground(new java.awt.Color(231, 246, 242));
         Consola_salida.setRows(5);
         Consola_salida.setSelectionColor(new java.awt.Color(165, 201, 202));
         jScrollPane2.setViewportView(Consola_salida);
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(165, 201, 202));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Consola");
@@ -123,6 +124,7 @@ public class GUI extends javax.swing.JFrame {
 
         Entrada_datos.setBackground(new java.awt.Color(57, 91, 100));
         Entrada_datos.setColumns(20);
+        Entrada_datos.setFont(new java.awt.Font("Hack Nerd Font Propo", 0, 12)); // NOI18N
         Entrada_datos.setForeground(new java.awt.Color(231, 246, 242));
         Entrada_datos.setRows(5);
         Entrada_datos.setSelectionColor(new java.awt.Color(165, 201, 202));
@@ -179,7 +181,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         menuTabs.getAccessibleContext().setAccessibleName("Nuevo\n");
@@ -190,9 +192,11 @@ public class GUI extends javax.swing.JFrame {
         jMenuBar1.setForeground(new java.awt.Color(165, 201, 202));
         jMenuBar1.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
 
+        Archivo.setForeground(new java.awt.Color(48, 50, 52));
         Archivo.setText("Archivo");
-        Archivo.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
+        Archivo.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 15)); // NOI18N
 
+        Nuevo_archivo.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         Nuevo_archivo.setText("Nuevo Archivo");
         Nuevo_archivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,6 +205,7 @@ public class GUI extends javax.swing.JFrame {
         });
         Archivo.add(Nuevo_archivo);
 
+        Abrir_archivo.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         Abrir_archivo.setText("Abrir Archivo");
         Abrir_archivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +214,7 @@ public class GUI extends javax.swing.JFrame {
         });
         Archivo.add(Abrir_archivo);
 
+        Guardar.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         Guardar.setText("Guardar");
         Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +223,7 @@ public class GUI extends javax.swing.JFrame {
         });
         Archivo.add(Guardar);
 
+        Guardar_como.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         Guardar_como.setText("Guardar Como");
         Guardar_como.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +232,8 @@ public class GUI extends javax.swing.JFrame {
         });
         Archivo.add(Guardar_como);
 
-        Eliminar_tab.setText("Eliminar Tab");
+        Eliminar_tab.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
+        Eliminar_tab.setText("Eliminar Pestaña");
         Eliminar_tab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Eliminar_tabActionPerformed(evt);
@@ -236,8 +244,9 @@ public class GUI extends javax.swing.JFrame {
         jMenuBar1.add(Archivo);
 
         jMenu2.setText("Programa");
-        jMenu2.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 15)); // NOI18N
 
+        Ejecutar_programa.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         Ejecutar_programa.setText("Ejecutar");
         Ejecutar_programa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,6 +255,7 @@ public class GUI extends javax.swing.JFrame {
         });
         jMenu2.add(Ejecutar_programa);
 
+        limpiar_consola.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         limpiar_consola.setText("Limpiar Consolar");
         limpiar_consola.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,6 +264,7 @@ public class GUI extends javax.swing.JFrame {
         });
         jMenu2.add(limpiar_consola);
 
+        jMenuItem5.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         jMenuItem5.setText("Borrar Documentos (!)");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,17 +276,36 @@ public class GUI extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Reportes");
-        jMenu3.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
+        jMenu3.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 15)); // NOI18N
 
+        jMenuItem9.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         jMenuItem9.setText("Reporte de Tokens");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
+        jMenuItem7.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         jMenuItem7.setText("Reporte de Errores");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
+        jMenuItem11.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         jMenuItem11.setText("Tabla de Simbolos");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem11);
 
+        jMenuItem10.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
         jMenuItem10.setText("Mostrar Documentacion");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,7 +339,11 @@ public class GUI extends javax.swing.JFrame {
         textArea.setTabSize(3); // Puedes ajustar el tamaño según tus necesidades      
         textArea.setBackground(new Color(57,91,100));
         textArea.setForeground(new Color(231,246,242));
-        menuTabs.insertTab("Nueva Pestaña", null, textArea, null, 0); 
+
+        // Crear un JScrollPane y agregar el JTextArea a él
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        
+        menuTabs.insertTab("Nueva Pestaña", null, scrollPane, null, 0); 
     }//GEN-LAST:event_Nuevo_archivoActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -398,7 +432,7 @@ public class GUI extends javax.swing.JFrame {
         }    
         
         Consola_salida.append(texto_consola);
-        Consola_salida.append("\n\n ///////////////////////######## EJECUCION TERMINADA ########//////////////////////// \n\n");
+        Consola_salida.append("\n\n //////////////////######## EJECUCION TERMINADA ########/////////////////// \n\n");
         
         Graficas.GraficasAlmacenadas.entrySet().forEach(
             entry -> { //System.out.println(entry.getKey() + " = " + entry.getValue()); 
@@ -409,9 +443,12 @@ public class GUI extends javax.swing.JFrame {
         
         Funciones.reporteErrores();
         Funciones.reporteTokens();
+        Funciones.reporteSimbolos();
+        
         
         Analizadores.Lexico.listaErrores.clear();
         Analizadores.Lexico.listaTokens.clear();
+        Analizadores.Sintactico.listaSimbolos.clear();
         
         
     }//GEN-LAST:event_Ejecutar_programaActionPerformed
@@ -482,6 +519,7 @@ public class GUI extends javax.swing.JFrame {
                 textArea.setTabSize(3); // Puedes ajustar el tamaño según tus necesidades      
                 textArea.setBackground(new Color(57,91,100));
                 textArea.setForeground(new Color(231,246,242));
+                textArea.setFont(new Font("Hack Nerd Font Propo", Font.PLAIN, 12));
                 
                         
                 JScrollPane scrollPane = new JScrollPane(textArea);
@@ -521,19 +559,24 @@ public class GUI extends javax.swing.JFrame {
             JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
         
             String ruta = rutasCompArchivos.get(nombreTab);
-            int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar? \n La ruta es: " + ruta, "Cuidado", JOptionPane.YES_NO_OPTION);       
+            
+            if (ruta != null) {
+                int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de guardar? \nLa ruta es: " + ruta, "Cuidado", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);       
 
-            if (resp == 0) {
-                File archivo = new File(ruta);
+                if (resp == 0) {
+                    File archivo = new File(ruta);
 
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
-                    // Escribir el texto en el archivo
-                    writer.write(textArea.getText());
-                    JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+                        // Escribir el texto en el archivo
+                        writer.write(textArea.getText());
+                        JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
 
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "Error al guardar el texto en el archivo. Revise la ruta", "Error",JOptionPane.ERROR_MESSAGE);
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Error al guardar el texto en el archivo. Revise la ruta", "Error",JOptionPane.ERROR_MESSAGE);
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Aun no existe un ruta asociada a esta pestaña \nSeleccione Guardar Como", "Error",JOptionPane.ERROR_MESSAGE);
             }
         
         } else {
@@ -550,13 +593,13 @@ public class GUI extends javax.swing.JFrame {
         if (selectedIndex != -1) { // Asegurarse de que haya un tab seleccionado
             // Remover el tab seleccionado
             
-            int resp = JOptionPane.showConfirmDialog(null, "Estas seguro que deseas eliminar \n tab: " + nombreTab,  "Cuidado", JOptionPane.YES_NO_OPTION);       
+            int resp = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar \nPestaña: " + nombreTab,  "Cuidado", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);       
             if (resp == 0) {
                 
                 menuTabs.removeTabAt(selectedIndex);               
                 try {
                     rutasCompArchivos.remove(nombreTab);                  
-                    JOptionPane.showMessageDialog(null, "Tab eliminada correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Pestaña eliminada correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (Exception e) {
                 }
@@ -574,11 +617,29 @@ public class GUI extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         
-        int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar los datos? \n se eliminaran las graficas y el historial de consola", "Cuidado", JOptionPane.YES_NO_OPTION);       
+        int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de que desea eliminar los datos? \nse eliminaran las graficas, reportes y el historial de consola", "Cuidado", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);       
         
         if (resp == 0) {
             try {
                 File carpeta = new File("./Graficas");
+                if (carpeta.exists() && carpeta.isDirectory()) {
+                    File[] archivos = carpeta.listFiles();
+                    if (archivos != null) {
+                        for (File archivo : archivos) {
+                            archivo.delete();
+                        }
+                    }                          
+                    //System.out.println("Archivos eliminados correctamente.");
+                } else {
+                    //System.out.println("La carpeta Graficas no existe o no es un directorio.");
+                }
+            } catch (Exception ex) {
+                //System.err.println("Error al eliminar archivos: " + ex.getMessage());
+            }
+            
+            // Elimina los reportes
+            try {
+                File carpeta = new File("./Reportes");
                 if (carpeta.exists() && carpeta.isDirectory()) {
                     File[] archivos = carpeta.listFiles();
                     if (archivos != null) {
@@ -611,6 +672,63 @@ public class GUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        String comando1 = "xdg-open ./Reportes/Tokens.html"; // Abre el administrador de archivos en el directorio actual
+        // Concatena los comandos separados por un punto y coma
+        String comando = comando1 ;
+        // Crea una instancia de ProcessBuilder
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        // Establece el comando a ejecutar con el shell
+        processBuilder.command("bash", "-c", comando);
+
+        try {
+            // Inicia el proceso
+            Process proceso = processBuilder.start();
+
+            // Espera a que el proceso termine
+            int exitCode = proceso.waitFor();
+
+            // Imprime el código de salida
+            //System.out.println("Código de salida: " + exitCode);
+        } catch (IOException | InterruptedException e) {
+            //e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No se ha podido abrir los reportes", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        String comando1 = "xdg-open ./Reportes/Errores.html"; 
+        String comando = comando1 ;
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command("bash", "-c", comando);
+
+        try {
+            // Inicia el proceso
+            Process proceso = processBuilder.start();
+            int exitCode = proceso.waitFor();       
+        } catch (IOException | InterruptedException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido abrir los reportes", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        String comando1 = "xdg-open ./Reportes/TablaSimbolos.html"; 
+        String comando = comando1 ;
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command("bash", "-c", comando);
+
+        try {
+            // Inicia el proceso
+            Process proceso = processBuilder.start();
+            int exitCode = proceso.waitFor();       
+        } catch (IOException | InterruptedException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido abrir los reportes", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

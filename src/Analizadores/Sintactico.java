@@ -715,7 +715,7 @@ class CUP$Sintactico$actions {
 		int valorleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
 		int valorright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
 		Object valor = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
-		variablesDeclaradas.put(clave, valor);   //listaSimbolos.add(new Simbolos(clave, TipoVar.toString(), valor, Integer.toString(left), Integer.toString(right)));
+		variablesDeclaradas.put(clave, valor);   listaSimbolos.add(new Simbolos(clave, "Variable " + TipoVar.toString(), valor.toString(), claveright, claveleft));
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("instruccion",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-10)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -724,10 +724,13 @@ class CUP$Sintactico$actions {
           case 10: // instruccion ::= PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA 
             {
               Object RESULT =null;
+		int TipoVarleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-11)).left;
+		int TipoVarright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-11)).right;
+		Object TipoVar = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-11)).value;
 		int claveleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-7)).left;
 		int claveright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-7)).right;
 		String clave = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-7)).value;
-		variablesDeclaradas.put(clave, Funciones.copiaLista());
+		variablesDeclaradas.put(clave, Funciones.copiaLista());  listaSimbolos.add(new Simbolos(clave, "Arreglo " + TipoVar.toString(), Funciones.textoArrelgo, claveright, claveleft));
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("instruccion",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-13)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

@@ -150,9 +150,11 @@ instrucciones::=
 
 instruccion::= 
     PR_VAR DOSPUNTOS tiposVariables:TipoVar DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   
-    {:variablesDeclaradas.put(clave, valor);   //listaSimbolos.add(new Simbolos(clave, TipoVar.toString(), valor, Integer.toString(left), Integer.toString(right)));:}
+    {:variablesDeclaradas.put(clave, valor);   listaSimbolos.add(new Simbolos(clave, "Variable " + TipoVar.toString(), valor.toString(), claveright, claveleft));:}
     
-    | PR_ARR DOSPUNTOS tiposVariables DOSPUNTOS DOSPUNTOS ARROBA ID:clave MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA {:variablesDeclaradas.put(clave, Funciones.copiaLista());:}
+    | PR_ARR DOSPUNTOS tiposVariables:TipoVar DOSPUNTOS DOSPUNTOS ARROBA ID:clave MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA 
+    {:variablesDeclaradas.put(clave, Funciones.copiaLista());  listaSimbolos.add(new Simbolos(clave, "Arreglo " + TipoVar.toString(), Funciones.textoArrelgo, claveright, claveleft));:}
+    
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA  {:Funciones.ImprimirConsola();:} 
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA   {:Funciones.ImprimirColumna(nombre);:} 
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE ARROBA ID:val PR_END PTCOMA   {:Funciones.ImprimirColumnaArreglo(Funciones.busquedaLista(val), nombre);:} 

@@ -6,6 +6,7 @@ package proyecto1_compiladores1_2024;
 
 import Clases.Tokens;
 import Clases.Errores;
+import Clases.Simbolos;
 import Analizadores.Sintactico;
 import proyecto1_compiladores1_2024.GUI;
         
@@ -21,6 +22,8 @@ import java.util.Collections;
  * @author samuel
  */
 public class Funciones {
+    
+    public static String textoArrelgo = "";
     
     public static void ImprimirColumnaArreglo(ArrayList arreglo, Object nombre) {        
         String TextoSalida = "";
@@ -82,8 +85,21 @@ public class Funciones {
 
     // Funcion para copiar el ArrayList original
     public static ArrayList copiaLista(){
-        
+        textoArrelgo = "[";
         ArrayList<Object> copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp); 
+        
+        
+        int indice = 0;
+        while (indice < copiaListaDatosTemp.size()){      
+            if (indice == copiaListaDatosTemp.size() - 1) {
+                textoArrelgo += copiaListaDatosTemp.get(indice).toString() + "]";
+                
+            } else {
+                textoArrelgo += copiaListaDatosTemp.get(indice).toString() + ", ";
+            }            
+            indice++;
+        }
+               
         Sintactico.listaDatosTemp.clear();
         return copiaListaDatosTemp;
     }
@@ -430,6 +446,121 @@ public class Funciones {
 
                         NuevaLinea.print("<th class=\"tg-0lax\">");
                         NuevaLinea.print(errorLec.getColumna());
+                        NuevaLinea.println("</th>");
+
+                        NuevaLinea.println("</tr>");
+                        
+                        indice++;
+                    }
+                }
+
+                NuevaLinea.println("</tbody>");
+                NuevaLinea.println("</table>");
+                NuevaLinea.println("</center>");
+                NuevaLinea.println("<br>\n"
+                        + "  <br>\n"
+                        + "  <br>");
+               
+
+                NuevaLinea.println("</body>\n"
+                        + "</html>");
+
+                Escribir.close();
+                //JOptionPane.showMessageDialog(null, "El Reporte se creo Satisfactoriamente", "Creacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+            }    
+        }
+    }
+    
+    public static void reporteSimbolos() {
+        File carpeta = new File("./Reportes");
+        if (!carpeta.exists()) {
+            carpeta.mkdirs(); // Crea la carpeta y sus subcarpetas si no existen
+        }
+
+        File archivo = new File("./Reportes/TablaSimbolos.html");
+
+        FileWriter Escribir;
+        PrintWriter NuevaLinea;
+        archivo.delete();
+        if (!archivo.exists()) {
+
+            try {
+
+                archivo.createNewFile();
+                Escribir = new FileWriter(archivo, true);
+
+                NuevaLinea = new PrintWriter(Escribir);
+                NuevaLinea.println("<!DOCTYPE html>\n"
+                        + "<html>\n"
+                        + "<head>\n"
+                        + "    <meta charset='utf-8'>\n"
+                        + "    <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+                        + "    <title>Tabla de Simbolos</title>\n"
+                        + "    <meta name='viewport' content='width=device-width, initial-scale=1'>\n"
+                        + "    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>\n"
+                        + "    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Arial\">\n"
+                        + "    <script src='main.js'></script>\n"
+                        + "</head>\n"
+                        + "\n"
+                        + "<body style=\"background-color: rgb(44,51,51); font-family: 'Arial', sans-serif; color: rgb(231,246,242);\">");
+
+                NuevaLinea.println("<center><h1>Tabla de Simbolos</h1></center>\n");
+
+                NuevaLinea.println("<center>");
+                NuevaLinea.println("<style type=\"text/css\">\n"
+                        + "            .tg  {border-collapse:collapse;border-spacing:0;}\n"
+                        + "            .tg  {background-color: #395b64;}\n"
+                        + "            .tg td{border-color:rgb(0, 0, 0);border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;\n"
+                        + "              overflow:hidden;padding:10px 5px;word-break:normal;}\n"
+                        + "            .tg th{border-color:rgb(0, 0, 0);border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;\n"
+                        + "              font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}\n"
+                        + "            .tg .tg-0pky{border-color:inherit;text-align:center;vertical-align:top;font-weight:bold;font-weight:800}\n"
+                        + "            .tg .tg-0lax{text-align:center;vertical-align:top}\n"
+                        + "            </style>\n"
+                        + "            <table class=\"tg\">\n"
+                        + "            <thead>\n"
+                        + "              <tr>\n"
+                        + "                <b> \n"
+                        + "                    <th class=\"tg-0pky\">#</th>\n"
+                        + "                    <th class=\"tg-0pky\">Nombre</th>\n"
+                        + "                    <th class=\"tg-0pky\">Tipo<br></th>\n"
+                        + "                    <th class=\"tg-0pky\">Valor</th>\n"
+                        + "                    <th class=\"tg-0pky\">Linea<br></th>\n"
+                        + "                    <th class=\"tg-0pky\">Columna</th>\n"
+                        + "                </b>\n"
+                        + "              </tr>\n"
+                        + "            </thead>");
+                NuevaLinea.println("<tbody>");
+                
+                int indice = 0;
+                while (indice < Analizadores.Sintactico.listaSimbolos.size()) {
+                    Simbolos simbolo = Analizadores.Sintactico.listaSimbolos.get(indice);
+                    if (simbolo != null) {
+                        NuevaLinea.println("<tr>");
+                        
+                        NuevaLinea.print("<th class=\"tg-0lax\">");
+                        NuevaLinea.print(indice + 1);
+                        NuevaLinea.println("</th>");
+
+                        NuevaLinea.print("<th class=\"tg-0lax\">");
+                        NuevaLinea.print(simbolo.getNombre());
+                        NuevaLinea.println("</th>");
+
+                        NuevaLinea.print("<th class=\"tg-0lax\">");
+                        NuevaLinea.print(simbolo.getTipo());
+                        NuevaLinea.println("</th>");
+
+                        NuevaLinea.print("<th class=\"tg-0lax\">");
+                        NuevaLinea.print(simbolo.getValor());
+                        NuevaLinea.println("</th>");
+
+                        NuevaLinea.print("<th class=\"tg-0lax\">");
+                        NuevaLinea.print(simbolo.getLinea());
+                        NuevaLinea.println("</th>");
+                        
+                        NuevaLinea.print("<th class=\"tg-0lax\">");
+                        NuevaLinea.print(simbolo.getColumna());
                         NuevaLinea.println("</th>");
 
                         NuevaLinea.println("</tr>");
