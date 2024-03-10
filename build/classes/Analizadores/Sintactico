@@ -14,10 +14,6 @@ parser code
     /**
      * Método al que se llama automáticamente ante algún error sintactico.
      **/ 
-    public static int indent = 0;
-    public static String traduccion = "";
-    public static Object[] objetosTemp = new Object[10];
-
     public static HashMap<Object, Object> variablesDeclaradas = new HashMap<>(); 
     public static HashMap<Object, Object> datosGraficas = new HashMap<>();
     public static ArrayList<Object> listaDatosTemp = new ArrayList<>();
@@ -150,14 +146,14 @@ instrucciones::=
 
 instruccion::= 
     PR_VAR DOSPUNTOS tiposVariables:TipoVar DOSPUNTOS DOSPUNTOS ID:clave MENOR_QUE MENOS valores:valor PR_END PTCOMA   
-    {:variablesDeclaradas.put(clave, valor);   listaSimbolos.add(new Simbolos(clave, "Variable " + TipoVar.toString(), valor.toString(), claveright, claveleft));:}
+    {:variablesDeclaradas.put(Funciones.nombreVariable(clave), valor);   listaSimbolos.add(new Simbolos(Funciones.nombreVariable(clave), "Variable " + TipoVar.toString(), valor.toString(), claveleft, claveright));:}
     
     | PR_ARR DOSPUNTOS tiposVariables:TipoVar DOSPUNTOS DOSPUNTOS ARROBA ID:clave MENOR_QUE MENOS COR_IZQ valoresArreglo COR_DER PR_END PTCOMA 
-    {:variablesDeclaradas.put(clave, Funciones.copiaLista());  listaSimbolos.add(new Simbolos(clave, "Arreglo " + TipoVar.toString(), Funciones.textoArrelgo, claveright, claveleft));:}
+    {:variablesDeclaradas.put(Funciones.nombreVariable(clave), Funciones.copiaLista());  listaSimbolos.add(new Simbolos(Funciones.nombreVariable(clave), "Arreglo " + TipoVar.toString(), Funciones.textoArrelgo, claveleft, claveright));:}
     
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL valoresArreglo PR_END PTCOMA  {:Funciones.ImprimirConsola();:} 
     | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE COR_IZQ valoresArreglo COR_DER PR_END PTCOMA   {:Funciones.ImprimirColumna(nombre);:} 
-    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE ARROBA ID:val PR_END PTCOMA   {:Funciones.ImprimirColumnaArreglo(Funciones.busquedaLista(val), nombre);:} 
+    | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL valores:nombre MENOS MAYOR_QUE ARROBA ID:val PR_END PTCOMA   {:Funciones.ImprimirColumnaArreglo(Funciones.busquedaLista(Funciones.nombreVariable(val)), nombre);:} 
     | GraficaLineas
     | GraficaBarras
     | GraficaPie
@@ -166,9 +162,9 @@ instruccion::=
 ;   
 
 valores::=
-    MENOS DOUBLE:val                    {: RESULT="-"+val;;:}
-    | DOUBLE:val                        {: RESULT=val; ;:}
-    | ID:val                            {: RESULT=variablesDeclaradas.get(val); :}
+    MENOS DOUBLE:val                    {: RESULT="-"+val;:}
+    | DOUBLE:val                        {: RESULT=val; :}
+    | ID:val                            {: RESULT=variablesDeclaradas.get(Funciones.nombreVariable(val)); :}
     | STRING:val                        {: RESULT=val; :}
     | operaciones:val                   {: RESULT=val; :}
     | funcionesEstadisticas:val         {: RESULT=val; :}
@@ -185,13 +181,13 @@ valoresArreglo::=
     | valoresArreglo:rec COMA MENOS DOUBLE:val          {:listaDatosTemp.add("-"+val);:} 
     | valoresArreglo:rec COMA DOUBLE:val                {:listaDatosTemp.add(val);:} 
     | valoresArreglo:rec COMA STRING:val                {:listaDatosTemp.add(val); //System.out.println(val.toString());:} 
-    | valoresArreglo:rec COMA ID:val                    {:listaDatosTemp.add(variablesDeclaradas.get(val));:} 
+    | valoresArreglo:rec COMA ID:val                    {:listaDatosTemp.add(variablesDeclaradas.get(Funciones.nombreVariable(val)));:} 
     | STRING:val                                        {:listaDatosTemp.add(val); //System.out.println(val);:} 
     | MENOS DOUBLE:val                                  {:listaDatosTemp.add("-"+val);:} 
     | DOUBLE:val                                        {:listaDatosTemp.add(val);:} 
-    | ID:val                                            {:listaDatosTemp.add(variablesDeclaradas.get(val));:}      
+    | ID:val                                            {:listaDatosTemp.add(variablesDeclaradas.get(Funciones.nombreVariable(val)));:}      
     | operaciones:val                                   {:listaDatosTemp.add(val);:} 
-    | ARROBA ID:val                                     {:listaDatosTemp.add(variablesDeclaradas.get(val));:}                      
+    | ARROBA ID:val                                     {:listaDatosTemp.add(variablesDeclaradas.get(Funciones.nombreVariable(val)));:}                      
     | funcionesEstadisticas:val                         {:listaDatosTemp.add(val);:}
 ;
 
@@ -209,7 +205,7 @@ valoresOperaciones::=
     | funcionesEstadisticas:val     {:RESULT=val;:}
     | MENOS DOUBLE:val              {:RESULT="-"+val;:}
     | DOUBLE:val                    {:RESULT=val;:} 
-    | ID:val                        {:RESULT=variablesDeclaradas.get(val); //System.out.println(variablesDeclaradas.get(val));:}      
+    | ID:val                        {:RESULT=variablesDeclaradas.get(Funciones.nombreVariable(val)); //System.out.println(variablesDeclaradas.get(val));:}      
 ;
 
 
@@ -220,12 +216,12 @@ funcionesEstadisticas::=
     | PR_VARIANZA PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER        {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "VARIANZA");:} 
     | PR_MAX PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER             {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "MAX");:}
     | PR_MIN PAR_IZQ COR_IZQ valoresArreglo COR_DER PAR_DER             {:RESULT=Funciones.estadisticas(Funciones.copiaLista(), "MIN");:}
-    | PR_MEDIA PAR_IZQ ARROBA ID:val PAR_DER                            {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MEDIA");:}
-    | PR_MEDIANA PAR_IZQ ARROBA ID:val  PAR_DER                         {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MEDIANA");:}
-    | PR_MODA PAR_IZQ ARROBA ID:val PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MODA");:}
-    | PR_VARIANZA PAR_IZQ ARROBA ID:val  PAR_DER                        {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "VARIANZA");:}
-    | PR_MAX PAR_IZQ ARROBA ID:val  PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MAX");:}
-    | PR_MIN PAR_IZQ ARROBA ID:val  PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(val), "MIN");:}
+    | PR_MEDIA PAR_IZQ ARROBA ID:val PAR_DER                            {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(Funciones.nombreVariable(val)), "MEDIA");:}
+    | PR_MEDIANA PAR_IZQ ARROBA ID:val  PAR_DER                         {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(Funciones.nombreVariable(val)), "MEDIANA");:}
+    | PR_MODA PAR_IZQ ARROBA ID:val PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(Funciones.nombreVariable(val)), "MODA");:}
+    | PR_VARIANZA PAR_IZQ ARROBA ID:val  PAR_DER                        {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(Funciones.nombreVariable(val)), "VARIANZA");:}
+    | PR_MAX PAR_IZQ ARROBA ID:val  PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(Funciones.nombreVariable(val)), "MAX");:}
+    | PR_MIN PAR_IZQ ARROBA ID:val  PAR_DER                             {:RESULT=Funciones.estadisticas(Funciones.busquedaLista(Funciones.nombreVariable(val)), "MIN");:}
 ;
 
 GraficaLineas::=
@@ -255,26 +251,25 @@ GraficaHistograma::=
     PR_HISTOGRAM PAR_IZQ
     instruccionesGraficas
     PR_EXEC PR_HISTOGRAM PR_END PTCOMA
-    PAR_DER PR_END PTCOMA               {:Graficas.histrograma();:}
+    PAR_DER PR_END PTCOMA               {:Graficas.histograma();:}
 ;
 
 // Instrucciones para las graficas  
 intruccionGrafica::=
     PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING:val PR_END PTCOMA                                {:datosGraficas.put("titulo", val);:}
-    | PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                  {:datosGraficas.put("titulo", variablesDeclaradas.get(val));:}
+    | PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                  {:datosGraficas.put("titulo", variablesDeclaradas.get(Funciones.nombreVariable(val)));:}
     | PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA            {:datosGraficas.put("ejeX", Funciones.copiaLista());:}
-    | PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ARROBA ID:val PR_END PTCOMA                             {:datosGraficas.put("ejeX", variablesDeclaradas.get(val));:}
+    | PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ARROBA ID:val PR_END PTCOMA                             {:datosGraficas.put("ejeX", variablesDeclaradas.get(Funciones.nombreVariable(val)));:}
     | PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA                          {:datosGraficas.put("ejeY", Funciones.copiaLista());:}
-    | PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL ARROBA ID:val PR_END PTCOMA                                           {:datosGraficas.put("ejeY", variablesDeclaradas.get(val));:}
+    | PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL ARROBA ID:val PR_END PTCOMA                                           {:datosGraficas.put("ejeY", variablesDeclaradas.get(Funciones.nombreVariable(val)));:}
     | PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING:val PR_END PTCOMA                             {:datosGraficas.put("tituloX", val);:}                                
-    | PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                 {:datosGraficas.put("tituloX", variablesDeclaradas.get(val));:} 
+    | PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                 {:datosGraficas.put("tituloX", variablesDeclaradas.get(Funciones.nombreVariable(val)));:} 
     | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING:val PR_END PTCOMA                             {:datosGraficas.put("tituloY", val);:} 
-    | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                 {:datosGraficas.put("tituloY", variablesDeclaradas.get(val));:}            
-    | PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ARROBA ID:val PR_END PTCOMA                            {:datosGraficas.put("label", variablesDeclaradas.get(val));:}
+    | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID:val PR_END PTCOMA                                 {:datosGraficas.put("tituloY", variablesDeclaradas.get(Funciones.nombreVariable(val)));:}            
+    | PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ARROBA ID:val PR_END PTCOMA                            {:datosGraficas.put("label", variablesDeclaradas.get(Funciones.nombreVariable(val)));:}
     | PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA           {:datosGraficas.put("label", Funciones.copiaLista());:}
-    | PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA                        {:datosGraficas.put("values", Funciones.copiaLista());:}
-    | PR_VALUES DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA          {:datosGraficas.put("values", Funciones.copiaLista());:}     
-    | PR_VALUES DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL ARROBA ID:val PR_END PTCOMA                                         {:datosGraficas.put("values", variablesDeclaradas.get(val));:}                                
+    | PR_VALUES DOSPUNTOS DOSPUNTOS tiposVariables IGUAL COR_IZQ valoresArreglo COR_DER PR_END PTCOMA                   {:datosGraficas.put("values", Funciones.copiaLista());:}
+    | PR_VALUES DOSPUNTOS DOSPUNTOS tiposVariables IGUAL ARROBA ID:val PR_END PTCOMA                                    {:datosGraficas.put("values", variablesDeclaradas.get(Funciones.nombreVariable(val)));:}                                
     | comentarios
 
 ;

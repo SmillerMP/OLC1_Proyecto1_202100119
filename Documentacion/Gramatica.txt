@@ -1,0 +1,101 @@
+ini ::= <codigo> 
+
+<codigo> ::= <codigo> <comentarios>
+        | <codigo> PR_PROGRAM <instrucciones> PR_END PR_PROGRAM
+        | PR_PROGRAM <instrucciones> PR_END PR_PROGRAM
+        | <comentarios> 
+
+<instrucciones> ::= <instruccion> <instrucciones>
+        | <instruccion>
+        | error <instrucciones> 
+
+<instruccion> ::= PR_VAR DOSPUNTOS <tiposVariables> DOSPUNTOS DOSPUNTOS ID MENOR_QUE MENOS <valores> PR_END PTCOMA
+        | PR_ARR DOSPUNTOS <tiposVariables> DOSPUNTOS DOSPUNTOS ARROBA ID MENOR_QUE MENOS COR_IZQ <valoresArreglo> COR_DER PR_END PTCOMA
+        | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_PRINT IGUAL <valoresArreglo> PR_END PTCOMA
+        | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL <valores> MENOS MAYOR_QUE COR_IZQ <valoresArreglo> COR_DER PR_END PTCOMA
+        | PR_CONSOLE DOSPUNTOS DOSPUNTOS PR_COLUMN IGUAL <valores> MENOS MAYOR_QUE ARROBA ID PR_END PTCOMA
+        | <GraficaLineas>
+        | <GraficaBarras>
+        | <GraficaPie>
+        | <GraficaHistograma>
+        | <comentarios> 
+
+<valores> ::= MENOS DOUBLE
+        | DOUBLE
+        | ID
+        | STRING
+        | <operaciones>
+        | <funcionesEstadisticas> 
+
+<tiposVariables> ::= PR_CHAR COR_IZQ COR_DER
+        | PR_DOUBLE 
+
+<valoresArreglo> ::= <valoresArreglo> COMA <funcionesEstadisticas>
+        | <valoresArreglo> COMA <operaciones>
+        | <valoresArreglo> COMA MENOS DOUBLE
+        | <valoresArreglo> COMA DOUBLE
+        | <valoresArreglo> COMA STRING
+        | <valoresArreglo> COMA ID
+        | STRING
+        | MENOS DOUBLE
+        | DOUBLE
+        | ID
+        | <operaciones>
+        | ARROBA ID
+        | <funcionesEstadisticas> 
+
+<operaciones> ::= PR_SUM PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+        | PR_RES PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+        | PR_MUL PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+        | PR_DIV PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER
+        | PR_MOD PAR_IZQ valoresOperaciones COMA valoresOperaciones PAR_DER 
+
+valoresOperaciones ::= <operaciones>
+        | <funcionesEstadisticas>
+        | MENOS DOUBLE
+        | DOUBLE
+        | ID 
+
+<funcionesEstadisticas> ::= PR_MEDIA PAR_IZQ COR_IZQ <valoresArreglo> COR_DER PAR_DER
+        | PR_MEDIANA PAR_IZQ COR_IZQ <valoresArreglo> COR_DER PAR_DER
+        | PR_MODA PAR_IZQ COR_IZQ <valoresArreglo> COR_DER PAR_DER
+        | PR_VARIANZA PAR_IZQ COR_IZQ <valoresArreglo> COR_DER PAR_DER
+        | PR_MAX PAR_IZQ COR_IZQ <valoresArreglo> COR_DER PAR_DER
+        | PR_MIN PAR_IZQ COR_IZQ <valoresArreglo> COR_DER PAR_DER
+        | PR_MEDIA PAR_IZQ ARROBA ID PAR_DER
+        | PR_MEDIANA PAR_IZQ ARROBA ID PAR_DER
+        | PR_MODA PAR_IZQ ARROBA ID PAR_DER
+        | PR_VARIANZA PAR_IZQ ARROBA ID PAR_DER
+        | PR_MAX PAR_IZQ ARROBA ID PAR_DER
+        | PR_MIN PAR_IZQ ARROBA ID PAR_DER 
+
+<GraficaLineas> ::= PR_GRAPHLINE PAR_IZQ <instruccionesGraficas> PR_EXEC PR_GRAPHLINE PR_END PTCOMA PAR_DER PR_END PTCOMA 
+
+<GraficaBarras> ::= PR_GRAPHBAR PAR_IZQ <instruccionesGraficas> PR_EXEC PR_GRAPHBAR PR_END PTCOMA PAR_DER PR_END PTCOMA 
+
+<GraficaPie> ::= PR_GRAPHPIE PAR_IZQ <instruccionesGraficas> PR_EXEC PR_GRAPHPIE PR_END PTCOMA PAR_DER PR_END PTCOMA 
+
+<GraficaHistograma> ::= PR_HISTOGRAM PAR_IZQ <instruccionesGraficas> PR_EXEC PR_HISTOGRAM PR_END PTCOMA PAR_DER PR_END PTCOMA 
+
+<intruccionGrafica> ::= PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+        | PR_TITULO DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID PR_END PTCOMA
+        | PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ <valoresArreglo> COR_DER PR_END PTCOMA
+        | PR_EJEX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ARROBA ID PR_END PTCOMA
+        | PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL COR_IZQ <valoresArreglo> COR_DER PR_END PTCOMA
+        | PR_EJEY DOSPUNTOS DOSPUNTOS PR_DOUBLE IGUAL ARROBA ID PR_END PTCOMA
+        | PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+        | PR_TITULOX DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID PR_END PTCOMA
+        | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL STRING PR_END PTCOMA
+        | PR_TITULOY DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ID PR_END PTCOMA
+        | PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL ARROBA ID PR_END PTCOMA
+        | PR_LABEL DOSPUNTOS DOSPUNTOS PR_CHAR COR_IZQ COR_DER IGUAL COR_IZQ <valoresArreglo> COR_DER PR_END PTCOMA
+        | PR_VALUES DOSPUNTOS DOSPUNTOS <tiposVariables>  IGUAL COR_IZQ <valoresArreglo> COR_DER PR_END PTCOMA
+        | PR_VALUES DOSPUNTOS DOSPUNTOS <tiposVariables>  IGUAL ARROBA ID PR_END PTCOMA
+        | <comentarios> 
+
+<instruccionesGraficas> ::= <intruccionGrafica> <instruccionesGraficas>
+        | <intruccionGrafica>
+
+<comentarios> ::= COM_SIMPLE 
+        | COM_MULTI
+

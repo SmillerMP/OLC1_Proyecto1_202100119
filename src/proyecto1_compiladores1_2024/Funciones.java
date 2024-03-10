@@ -25,6 +25,16 @@ public class Funciones {
     
     public static String textoArrelgo = "";
     
+    public static String nombreVariable(Object nombre) {
+        String nombreLower = "";
+        try {
+            nombreLower = nombre.toString().toLowerCase();
+        } catch (Exception e) {
+        }
+        
+        return nombreLower;
+    }
+    
     public static void ImprimirColumnaArreglo(ArrayList arreglo, Object nombre) {        
         String TextoSalida = "";
         
@@ -86,132 +96,146 @@ public class Funciones {
     // Funcion para copiar el ArrayList original
     public static ArrayList copiaLista(){
         textoArrelgo = "[";
-        ArrayList<Object> copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp); 
-        
-        
-        int indice = 0;
-        while (indice < copiaListaDatosTemp.size()){      
-            if (indice == copiaListaDatosTemp.size() - 1) {
-                textoArrelgo += copiaListaDatosTemp.get(indice).toString() + "]";
-                
-            } else {
-                textoArrelgo += copiaListaDatosTemp.get(indice).toString() + ", ";
-            }            
-            indice++;
-        }
-               
-        Sintactico.listaDatosTemp.clear();
+        ArrayList<Object> copiaListaDatosTemp = new ArrayList<>();
+        try {
+            copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp);           
+            int indice = 0;
+            while (indice < copiaListaDatosTemp.size()){      
+                if (indice == copiaListaDatosTemp.size() - 1) {
+                    textoArrelgo += copiaListaDatosTemp.get(indice).toString() + "]";
+
+                } else {
+                    textoArrelgo += copiaListaDatosTemp.get(indice).toString() + ", ";
+                }            
+                indice++;
+            }
+
+            Sintactico.listaDatosTemp.clear();
+        } catch (Exception e) {
+            //System.err.println(e);
+            copiaListaDatosTemp.clear();
+        }  
+  
         return copiaListaDatosTemp;
     }
     
     public static double estadisticas(ArrayList arreglo, String funcion){
         ArrayList<Double> listaTemp = new ArrayList<>(); 
         for (Object numero : arreglo) {
-            listaTemp.add(Double.valueOf(numero.toString()));
+            try {
+                listaTemp.add(Double.valueOf(numero.toString()));
+            } catch (NumberFormatException e) {
+                System.err.println(e);
+            }          
         }
         
-        switch (funcion) {
-            case "MEDIA" -> {
-                double suma = 0;
-                for (double numero : listaTemp) {
-                    suma += numero;
+        
+        try {
+            switch (funcion) {
+                case "MEDIA" -> {
+                    double suma = 0;
+                    for (double numero : listaTemp) {
+                        suma += numero;
+                    }
+
+                    double media = (double) suma / listaTemp.size();
+                    return media;                
                 }
-                
-                double media = (double) suma / listaTemp.size();
-                return media;                
-            }
-            
-            case "MEDIANA" -> {
-                double resultado = 0;
-                
-                Collections.sort(listaTemp);
-                //System.err.println(listaTemp);
-                //System.err.println(listaTemp.size());
-                int tamanoLista = listaTemp.size();
-                
-                if ((tamanoLista % 2) == 0) {
-                    // Realiza la operacion para cuando el arreglo es par
-                    double operar = ((listaTemp.get((tamanoLista/2)-1)) + (listaTemp.get(tamanoLista/2) )) / 2;
-                    //System.err.println(operar);
-                    resultado = operar;
-                } else {
-                    //System.err.println(listaTemp.get(tamanoLista/2));
-                    resultado = listaTemp.get(tamanoLista/2);
-                }
-                
-                return resultado;               
-            }
-            
-            case "MODA" -> {
-                int repeticion = 0;
-                int cantidadRepeticon = 0;
-                double queDato = 0;
-                double datoEtregar = 0;
-                
-                Collections.sort(listaTemp);
-                
-                for (double numero : listaTemp) {
-                    if (numero == queDato){
-                        repeticion++;
+
+                case "MEDIANA" -> {
+                    double resultado = 0;
+
+                    Collections.sort(listaTemp);
+                    //System.err.println(listaTemp);
+                    //System.err.println(listaTemp.size());
+                    int tamanoLista = listaTemp.size();
+
+                    if ((tamanoLista % 2) == 0) {
+                        // Realiza la operacion para cuando el arreglo es par
+                        double operar = ((listaTemp.get((tamanoLista/2)-1)) + (listaTemp.get(tamanoLista/2) )) / 2;
+                        //System.err.println(operar);
+                        resultado = operar;
                     } else {
-                        repeticion = 1;
-                        queDato = numero;
+                        //System.err.println(listaTemp.get(tamanoLista/2));
+                        resultado = listaTemp.get(tamanoLista/2);
                     }
-                    
-                    if(repeticion > cantidadRepeticon) {
-                        cantidadRepeticon = repeticion;
-                        datoEtregar = numero;
+
+                    return resultado;               
+                }
+
+                case "MODA" -> {
+                    int repeticion = 0;
+                    int cantidadRepeticon = 0;
+                    double queDato = 0;
+                    double datoEtregar = 0;
+
+                    Collections.sort(listaTemp);
+
+                    for (double numero : listaTemp) {
+                        if (numero == queDato){
+                            repeticion++;
+                        } else {
+                            repeticion = 1;
+                            queDato = numero;
+                        }
+
+                        if(repeticion > cantidadRepeticon) {
+                            cantidadRepeticon = repeticion;
+                            datoEtregar = numero;
+                        }
                     }
+                    return datoEtregar;
                 }
-                return datoEtregar;
-            }
-            
-            case "VARIANZA" -> {
-                double suma = 0;
-                double resultado = 0;
-                for (double numero : listaTemp) {
-                    suma += numero;
+
+                case "VARIANZA" -> {
+                    double suma = 0;
+                    double resultado = 0;
+                    for (double numero : listaTemp) {
+                        suma += numero;
+                    }
+                    double media = (double) suma / listaTemp.size();
+
+                    //System.err.println("media--> "+ media);
+                    //System.err.println("tamano--> "+ listaTemp.size());
+
+                    for (double numero : listaTemp) {
+
+                        double operacion = Math.pow((numero - media),2);
+                        //System.out.println(operacion);
+                        resultado += operacion;
+                    }
+
+                    return resultado/(listaTemp.size() - 1);
                 }
-                double media = (double) suma / listaTemp.size();
-                
-                //System.err.println("media--> "+ media);
-                //System.err.println("tamano--> "+ listaTemp.size());
-                
-                for (double numero : listaTemp) {
-                    
-                    double operacion = Math.pow((numero - media),2);
-                    //System.out.println(operacion);
-                    resultado += operacion;
+
+                case "MAX" -> {
+                    double resultado = 0;
+                    boolean primero = true;
+                    for (double numero : listaTemp){
+                        if (numero > resultado || primero == true)
+                            resultado = numero;
+                        primero = false;
+                    }
+
+                    return resultado;
                 }
-                
-                return resultado/(listaTemp.size() - 1);
-            }
-            
-            case "MAX" -> {
-                double resultado = 0;
-                boolean primero = true;
-                for (double numero : listaTemp){
-                    if (numero > resultado || primero == true)
-                        resultado = numero;
-                    primero = false;
+                case "MIN" -> {
+                    double resultado = 0;
+                    boolean primero = true;
+                    for (double numero : listaTemp){
+                        if (numero < resultado || primero == true)
+                            resultado = numero;
+                        primero = false;
+                    }              
+                    return resultado;
                 }
-                
-                return resultado;
+
+                default -> {
+                }
             }
-            case "MIN" -> {
-                double resultado = 0;
-                boolean primero = true;
-                for (double numero : listaTemp){
-                    if (numero < resultado || primero == true)
-                        resultado = numero;
-                    primero = false;
-                }              
-                return resultado;
-            }
-            
-            default -> {
-            }
-        } 
+        } catch (Exception e) {
+            System.err.println(e);
+        }
         return 0;
     }
     

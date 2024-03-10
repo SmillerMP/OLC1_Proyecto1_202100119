@@ -9,21 +9,7 @@ package proyecto1_compiladores1_2024;
  * @author samuel
  */
 
-
-import java.io.*;
-
-
-
-import Analizadores.Sintactico;
-import Analizadores.Lexico;
-import Clases.Errores;
-
-
-import java.io.BufferedReader;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Collections;
-
+import javax.swing.ImageIcon;
 
 public class Proyecto1_Compiladores1_2024 {
     /**
@@ -36,6 +22,9 @@ public class Proyecto1_Compiladores1_2024 {
         // TODO code application logic here
         
         GUI gui = new GUI();
+        
+        ImageIcon icon = new ImageIcon("./Bash_Logo_Colored.png");
+        gui.setIconImage(icon.getImage());
         gui.setVisible(true);
     }   
 }

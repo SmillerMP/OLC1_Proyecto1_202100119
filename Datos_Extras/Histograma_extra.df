@@ -1,0 +1,65 @@
+PROGRAM
+	! Variables
+	var:double:: notaAprobar <- 61 end;
+	var:char[]:: labelAprobar <- "Nota Minima" end;
+	var:char[]:: titulo1 <- "Titulo histograma" end;
+	
+	! Arreglos
+	arr:double:: @notas <- [notaAprobar, MUL(75, 0.45), DIV(SUM(80,20), RES(75,25))] end;
+	arr:char[]:: @labels <- [labelAprobar, "P1", "P2"] end;
+	
+	<! FELICIDADES
+		Lo de arriba ya es medio proyecto
+		Tu puedes !>
+	
+	var:double:: gb1 <- 61 end;
+	var:char[]:: gbt <- "Datos" end;
+	graphBar(
+		!grafica 1
+		tituloX::char[] = "Actividades" end;
+		tituloY::char[] = gbt end;
+		titulo::char[] = "Estudiantes" end;
+		ejeX::char[] = ["1 Parcial", "2 parcial", "Final"] end;
+		ejeY::double = [gb1, 30, 70] end;
+		EXEC graphBar end;
+	) end;
+
+	Histogram(
+		titulo::char[] = "Histograma Random"end;
+		values::char[] = [2,2,2,5,5,7,8,77,4,33,2,4,6,7,1,1,1,1,4,5,6,7,8,9,4,5,10,9,9,9,6,5,4,3,3,3,5,6,2] end;
+		EXEC Histogram end;
+	) end;
+	
+	graphPie(
+		<! FELICIDADES
+		La de pie es facil !>
+	
+		label::char[] = ["Uno", "Dos", "Tres"] end;
+		titulo::char[] = "Ejemplo Gráfica de Pie" end;
+		values::double = [50, 30, 20] end;
+		EXEC graphPie end;
+	) end;
+	
+	
+	graphLine(
+	!testing de variables en graficas
+		titulo::char[] = "Gráfica de Línea" end;
+		ejeX::char[] = @labels end;
+		ejeY::double = @notas end;
+		tituloX::char[] = "Actividades" end;
+		tituloY::char[] = "Notas" end;
+		EXEC graphLine end;
+	) end;
+	
+	Histogram(
+		titulo::char[] = titulo1 end;
+		values::char[] = [2,2,2,5,5,7,8] end;
+		EXEC Histogram end;
+	) end;
+	
+<! En las graficas los datos se declaran directamente o por medio de variables
+Buena suerte
+Deben generar todas las graficas en una ejecucion
+ !>
+
+END PROGRAM
