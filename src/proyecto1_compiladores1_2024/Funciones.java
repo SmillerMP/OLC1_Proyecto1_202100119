@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -36,58 +37,69 @@ public class Funciones {
     }
     
     public static void ImprimirColumnaArreglo(ArrayList arreglo, Object nombre) {        
-        String TextoSalida = "";
-        
-        TextoSalida += "---------------- \n" + nombre.toString() + "\n---------------- \n";
-        
-        for (Object dato : arreglo) {
-            TextoSalida += dato.toString() + "\n";
+        try {
+            String TextoSalida = "";        
+            TextoSalida += "---------------- \n" + nombre.toString() + "\n---------------- \n";
+
+            for (Object dato : arreglo) {
+                TextoSalida += dato.toString() + "\n";
+            }
+
+            //System.out.println(TextoSalida);
+
+            GUI.texto_consola += TextoSalida;
+            GUI.texto_consola += "\n";
+        } catch (Exception e) {
+            System.err.println("Hubo un error el imprimir en la columna en consola");
         }
         
-        //System.out.println(TextoSalida);
-        
-        GUI.texto_consola += TextoSalida;
-        GUI.texto_consola += "\n";
     }
     
-    public static void ImprimirColumna(Object nombre) {
-        ArrayList<Object> copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp); 
-        Sintactico.listaDatosTemp.clear();
-        String TextoSalida = "";
-        
-        TextoSalida += "---------------- \n" + nombre.toString() + "\n---------------- \n";
-        
-        for (Object dato : copiaListaDatosTemp) {
-            TextoSalida += dato.toString() + "\n";
+    public static void ImprimirColumna(Object nombre) {       
+        try {       
+            ArrayList<Object> copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp); 
+            Sintactico.listaDatosTemp.clear();
+            String TextoSalida = "";
+
+            TextoSalida += "---------------- \n" + nombre.toString() + "\n---------------- \n";
+
+            for (Object dato : copiaListaDatosTemp) {
+                TextoSalida += dato.toString() + "\n";
+            }
+
+            //System.out.println(TextoSalida);
+            GUI.texto_consola += TextoSalida;
+            GUI.texto_consola += "\n";
+        } catch (Exception e) {
+            System.err.println("Hubo un error el imprimir en la columna en consola");
         }
-        
-        //System.out.println(TextoSalida);
-        GUI.texto_consola += TextoSalida;
-        GUI.texto_consola += "\n";
     }
     
     public static void ImprimirConsola(){
-        ArrayList<Object> copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp); 
-        Sintactico.listaDatosTemp.clear();
-        String TextoSalida = "";
-        
-        TextoSalida += "! Salida: ";
-        
-        for (int i =0; i < copiaListaDatosTemp.size(); i++){
-            if (i == copiaListaDatosTemp.size() - 1) {
-                TextoSalida += copiaListaDatosTemp.get(i).toString();
-            } else {
-                TextoSalida += (copiaListaDatosTemp.get(i).toString() + ", ");
-            }
-        }
-        
-        TextoSalida += "\n";
-        //System.out.println(TextoSalida);
-        GUI.texto_consola += TextoSalida;
-        GUI.texto_consola += "\n";
+        try {
+            ArrayList<Object> copiaListaDatosTemp = new ArrayList<>(Sintactico.listaDatosTemp); 
+            Sintactico.listaDatosTemp.clear();
+            String TextoSalida = "";
 
-    }
-    
+            TextoSalida += "! Salida: ";
+
+            for (int i =0; i < copiaListaDatosTemp.size(); i++){
+                if (i == copiaListaDatosTemp.size() - 1) {
+                    TextoSalida += copiaListaDatosTemp.get(i).toString();
+                } else {
+                    TextoSalida += (copiaListaDatosTemp.get(i).toString() + ", ");
+                }
+            }
+
+            TextoSalida += "\n";
+            //System.out.println(TextoSalida);
+            GUI.texto_consola += TextoSalida;
+            GUI.texto_consola += "\n";
+        } catch (Exception e) {
+            System.err.println("Hubo un error el imprimir en consola");
+        }
+
+    } 
     // Busca en el hashmap la lista correspondiente a la clave
     public static ArrayList busquedaLista(Object key) {
         return (ArrayList<Object>) Sintactico.variablesDeclaradas.get(key);

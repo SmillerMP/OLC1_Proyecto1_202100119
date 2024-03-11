@@ -182,7 +182,7 @@ public class Graficas {
             Sintactico.datosGraficas.clear(); 
             
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println("Error al generar el histograma, revise los datos");
         }
     }
     
@@ -254,7 +254,7 @@ public class Graficas {
 
             }
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println("Error al generar la grafica de Pie, revise los datos");
         }
     }
     
@@ -332,7 +332,7 @@ public class Graficas {
                 Sintactico.datosGraficas.clear();
             }
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println("Error al generar la Grafica de Barras, revise los datos");
         }
     }
     
@@ -412,6 +412,7 @@ public class Graficas {
                 Sintactico.datosGraficas.clear();
             }
         } catch (Exception e) {
+            System.err.println("Error al generar la Grafica de Lineas, revise los datos");
         }
     }
     

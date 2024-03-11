@@ -4,7 +4,8 @@
  */
 package proyecto1_compiladores1_2024;
 
-import Clases.Simbolos;
+import java.awt.Desktop;
+import java.net.URI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -24,13 +25,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jfree.chart.ChartPanel;
-
+import javax.swing.event.*;
+import javax.swing.text.Caret;
 /**
  *
  * @author samuel
  */
 public class GUI extends javax.swing.JFrame {
-    
+      
     public static String texto_consola = "";
     public static boolean graficaPresente = false;
     public static String texto_inicio = "";
@@ -42,9 +44,10 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
-        Entrada_datos.setTabSize(3);
+        Entrada_datos.setTabSize(3); 
+        Entrada_datos.setCaretColor(new java.awt.Color(44,51,51));   
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +67,7 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         Entrada_datos = new javax.swing.JTextArea();
         grafica_salida = new javax.swing.JPanel();
+        posicion = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Archivo = new javax.swing.JMenu();
         Nuevo_archivo = new javax.swing.JMenuItem();
@@ -83,6 +87,7 @@ public class GUI extends javax.swing.JFrame {
         Manual_usuario = new javax.swing.JMenuItem();
         Manual_tecnico = new javax.swing.JMenuItem();
         Gramatica = new javax.swing.JMenuItem();
+        linkRepo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -124,6 +129,18 @@ public class GUI extends javax.swing.JFrame {
         menuTabs.setAutoscrolls(true);
         menuTabs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuTabs.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 1, 14)); // NOI18N
+        menuTabs.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int selectedIndex = menuTabs.getSelectedIndex();
+                Component selectedComponent = menuTabs.getComponentAt(selectedIndex);
+
+                if (selectedComponent instanceof JScrollPane) {
+                    JTextArea textArea = (JTextArea) ((JScrollPane) selectedComponent).getViewport().getView();
+                    textArea.addCaretListener(event -> updateCursorPositionLabel(textArea));
+                }
+            }
+        });
 
         Entrada_datos.setBackground(new java.awt.Color(57, 91, 100));
         Entrada_datos.setColumns(20);
@@ -150,21 +167,29 @@ public class GUI extends javax.swing.JFrame {
             .addGap(0, 269, Short.MAX_VALUE)
         );
 
+        posicion.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
+        posicion.setForeground(new java.awt.Color(165, 201, 202));
+        posicion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        posicion.setText("Linea: 0, Columna: 0");
+
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
         PanelPrincipalLayout.setHorizontalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrincipalLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(menuTabs, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
                 .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(grafica_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(Seleccionar_grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(posicion, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelPrincipalLayout.createSequentialGroup()
+                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(menuTabs, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(grafica_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(Seleccionar_grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         PanelPrincipalLayout.setVerticalGroup(
@@ -184,7 +209,9 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(posicion, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         menuTabs.getAccessibleContext().setAccessibleName("Nuevo\n");
@@ -340,6 +367,15 @@ public class GUI extends javax.swing.JFrame {
         });
         jMenu1.add(Gramatica);
 
+        linkRepo.setFont(new java.awt.Font("Ubuntu Nerd Font Propo Med", 0, 14)); // NOI18N
+        linkRepo.setText("Repositorio");
+        linkRepo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkRepoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(linkRepo);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -352,19 +388,37 @@ public class GUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // Método para actualizar el JLabel con la posición del cursor
+    
+    
+    private void updateCursorPositionLabel(JTextArea editor) {
+        int caretPosition = editor.getCaretPosition();
+        int lineNumber = 1;
+        int columnNumber = 1;
+
+        try {
+            lineNumber = editor.getLineOfOffset(caretPosition) + 1;
+            columnNumber = caretPosition - editor.getLineStartOffset(lineNumber - 1) + 1;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        posicion.setText("Linea: " + lineNumber + ", Columna: " + columnNumber);
+    }
     private void Nuevo_archivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nuevo_archivoActionPerformed
         // TODO add your handling code here:
         JTextArea textArea = new JTextArea();
         textArea.setTabSize(3); // Puedes ajustar el tamaño según tus necesidades      
         textArea.setBackground(new Color(57,91,100));
         textArea.setForeground(new Color(231,246,242));
+        textArea.setCaretColor(new java.awt.Color(44,51,51));
 
         // Crear un JScrollPane y agregar el JTextArea a él
         JScrollPane scrollPane = new JScrollPane(textArea);
@@ -428,7 +482,7 @@ public class GUI extends javax.swing.JFrame {
             
         } else if (resultado == JFileChooser.CANCEL_OPTION) {
             // El usuario canceló la operación
-            JOptionPane.showMessageDialog(null, "Se ha cancelado la carga del archivo", "Accion Interrumpida", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se ha cancelado la carga del archivo", "Acción Interrumpida", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_Guardar_comoActionPerformed
@@ -442,13 +496,10 @@ public class GUI extends javax.swing.JFrame {
                
         String textoAnalizar = "";
         int selectedIndex = menuTabs.getSelectedIndex();
-        // Obtener el componente asociado con el tab seleccionado
         Component selectedComponent = menuTabs.getComponentAt(selectedIndex);
-        
-        // Verificar si el componente asociado es un JScrollPane
+
         if (selectedComponent instanceof JScrollPane) {
-            JScrollPane scrollPane = (JScrollPane) selectedComponent;
-            JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+            JTextArea textArea = (JTextArea) ((JScrollPane) selectedComponent).getViewport().getView();
             textoAnalizar = textArea.getText();
         } else {
             System.out.println("No se ha seleccionado ningún tab o el componente asociado no es un JTextArea.");
@@ -475,7 +526,7 @@ public class GUI extends javax.swing.JFrame {
             
         } catch (Exception e) {
             System.err.println(e);
-            JOptionPane.showMessageDialog(null, "Error, no se ha podido compilar", "Error", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Error, no se ha podido compilar", "Error", JOptionPane.ERROR_MESSAGE);
 
         }    
         
@@ -492,6 +543,7 @@ public class GUI extends javax.swing.JFrame {
         Funciones.reporteErrores();
         Funciones.reporteTokens();
         Funciones.reporteSimbolos();
+        JOptionPane.showMessageDialog(null, "Ejecución Terminada", "Información", JOptionPane.INFORMATION_MESSAGE);
               
     }//GEN-LAST:event_Ejecutar_programaActionPerformed
 
@@ -562,6 +614,7 @@ public class GUI extends javax.swing.JFrame {
                 textArea.setBackground(new Color(57,91,100));
                 textArea.setForeground(new Color(231,246,242));
                 textArea.setFont(new Font("Hack Nerd Font Propo", Font.PLAIN, 12));
+                textArea.setCaretColor(new java.awt.Color(44,51,51));
                 
                         
                 JScrollPane scrollPane = new JScrollPane(textArea);
@@ -575,9 +628,7 @@ public class GUI extends javax.swing.JFrame {
                   
                 // Añade la ruta completa a un hashmap
                 rutasCompArchivos.put(file.getName(), file.getAbsolutePath());
-                        
-                
-                                                      
+                           
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error, hubo un problema al cargar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -648,7 +699,7 @@ public class GUI extends javax.swing.JFrame {
                 
 
             } else {
-                JOptionPane.showMessageDialog(null, "Operacion cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Operación cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
             
         } else {
@@ -709,7 +760,7 @@ public class GUI extends javax.swing.JFrame {
            
             JOptionPane.showMessageDialog(null, "Datos eliminados correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Operacion cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Operación cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
 
         }
 
@@ -804,6 +855,18 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_GramaticaActionPerformed
 
+    private void linkRepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkRepoActionPerformed
+        // TODO add your handling code here:
+        String url = "https://github.com/SmillerMP/OLC1_Proyecto1_202100119";
+        
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_linkRepoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Abrir_archivo;
@@ -834,6 +897,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JMenuItem limpiar_consola;
+    private javax.swing.JMenuItem linkRepo;
     private javax.swing.JTabbedPane menuTabs;
+    private javax.swing.JLabel posicion;
     // End of variables declaration//GEN-END:variables
 }
